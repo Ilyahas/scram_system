@@ -2,19 +2,9 @@ let express = require('express');
 let auth = require('../controllers/AuthController')
 let router = express.Router();
 let Company = require('../models/company')
+let companyController = require('../controllers/company');
 router.get('/',auth.verifyToken,auth.verifyAdmin, (req, res) => {
-    Company.find({})
-        .populate({
-            path:'owner',
-            model:'User',
-            select:'firstname lastname email'
-        })
-        .exec((err, company) => {
-            if (err) {
-                res.status(400).json(err)
-            }
-            res.status(200).json(company);
-        })
+   companyController.getListOfUnverifiedCompanies()
 })
 router.post('/', (req, res) => {
     Company.create({companyName:req.body.company})

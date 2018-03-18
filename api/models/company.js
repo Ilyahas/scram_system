@@ -19,7 +19,13 @@ let Company = new Schema({
     workers:[{
         type:Schema.Types.ObjectId,
         ref:'User'
-    }]
+    }],   
+    confirmed: {
+        type: Boolean,
+        default:false
+    },    
+    
+    
 })
 
 
