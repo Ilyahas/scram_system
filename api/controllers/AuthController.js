@@ -40,41 +40,44 @@ let generateJWT = (email) => {
 let getCongirmationToken = (email) => {
     return generateJWT(email);
 }
+
+async function signupUser(req, res, next) {
+    let userCredentials = req.body;
+    try {
+        let user = await createUser(userCredentials);
+        let email = await emailSender.sendConfirmationEmail(user);
+        console.log('here')
+        res.status(200).json({ status: 'ok' })
+    } catch (err) {
+        next(err)
+    }
+}
 function createUser(data) {
     let hashedPassword = saltHashPassword(data.password);
     let confirmationToken = getCongirmationToken(data.email)
-    return User.create({
-        nickname:data.nickname,
-        email: data.email,
-        salt: hashedPassword.salt,
-        passwordHash: hashedPassword.passwordHash,
-        confirmationToken: confirmationToken
-    })
+    data.salt = hashedPassword.salt;
+    data.passwordHash = hashedPassword.passwordHash;
+    data.confirmationToken = confirmationToken;
+    return User.create(data)
 }
-
-
 //TODO: send html form
 function sendConfirmationEmail(user) {
-    emailSender.sendConfirmationEmail(user).catch(err => {
+    return emailSender.sendConfirmationEmail(user).catch(err => {
         next(errObj.createError('can`t send mail', 400));
     })
 }
-function verifyUserConfirmation(req, res, next) {
+async function verifyUserConfirmation(req, res, next) {
     let token = req.params.token;
-    console.log(token);
-    User.findOneAndUpdate(
-        { confirmationToken: token },
-        { confirmationToken: '', confirmed: true },
-        { new: true }
-    ).then(user => {
-        req.body.user = user
-        next();
-        ///
-    }).catch(err => {
-        let error = new Error('no such user with token');
-        error.statusCode = 550;
-        //   next(user);
-    })
+    try {
+        let user = await User.findOneAndUpdate(
+            { confirmationToken: token },
+            { confirmationToken: '', confirmed: true },
+            { new: true }
+        )
+        res.status(200).json({ status: 'ok' })
+    } catch (err) {
+        next(err)
+    }
 }
 function createUserToken(req, res, next) {
     let { email, password } = req.body;
@@ -96,12 +99,12 @@ function createUserToken(req, res, next) {
                     res.status(200).json({ "token": user.tokenHash });
                 })
                 .catch(err => {
-                    next(errObj.createError('can not create token', 400))
+                    next(err)
                 })
         }
 
     }).catch(err => {
-        next(errObj.createError('no such user', 4040))
+        next(err)
     })
 }
 function verifyToken(req, res, next) {
@@ -114,7 +117,6 @@ function verifyToken(req, res, next) {
                 select: 'nickname email role '
             }
         )
-
         .exec()
         .then(data => {
             let connectionCredentials = getUserIpAndAgent(req);
@@ -133,7 +135,7 @@ function verifyAdmin(req, res, next) {
     if (req.user.role === config.userPrivilages.admin) {
         return next()
     }
-    return next(errObj.createError('don`t have access', 403))
+    return next(errObj.createError('don`t have access', 400))
 }
 let isTokenCredentialsValid = (tokenModel, reqCredentials) => {
     return tokenModel.userAgent === reqCredentials.userAgent &&
@@ -144,6 +146,10 @@ function isHashesEqual(salt, hash, password) {
     let credentialHash = hashPasswordSha512(String(password), salt);
     let isEqual = hash === credentialHash.passwordHash
     return isEqual;
+}
+//TODO: logout
+function logout(req, res, next) {
+
 }
 let generateToken = () => {
     return crypto.randomBytes(16).toString('hex');
@@ -156,9 +162,8 @@ let getUserIpAndAgent = (req) => {
     }
 }
 module.exports = {
-    createUser: createUser,
+    signupUser: signupUser,
     createUserToken: createUserToken,
-    sendConfirmationEmail: sendConfirmationEmail,
     verifyUserConfirmation: verifyUserConfirmation,
     verifyToken: verifyToken,
     verifyAdmin: verifyAdmin

@@ -257,7 +257,7 @@
                                 <!-- ======= start hero article ======= -->
                                 <table class="one-column" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing:0; border-left:1px solid #e8e7e5; border-right:1px solid #e8e7e5; border-bottom:1px solid #e8e7e5" bgcolor="#FFFFFF">
                                     <tr>
-                                        <td align="left" style="padding:0px 40px 40px 40px"><p style="color:#262626; font-size:32px; text-align:left; font-family: Verdana, Geneva, sans-serif">Hello {{name}}</p>
+                                        <td align="left" style="padding:0px 40px 40px 40px"><p style="color:#262626; font-size:32px; text-align:left; font-family: Verdana, Geneva, sans-serif">Hello {{nickname}}</p>
                                             <br style="color:#000000; font-size:16px; text-align:left; font-family: Verdana, Geneva, sans-serif; line-height:22px ">
                                             You requested for registrarion</br>
                                             Please complete your registration clicking ling below</br>

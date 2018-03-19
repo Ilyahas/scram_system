@@ -20,8 +20,7 @@ class CompanyController {
                 .exec()
             res.status(200).json(unverifiedCompanies);
         } catch (error) {
-            console.log(error)
-            next(errObj.createError('no such companies', 400))
+            next(error)
         }
     }
     async  createCompany(req, res, next) {
@@ -29,11 +28,9 @@ class CompanyController {
         try {
             data.owner = req.user.id
             let company = await Company.create(data)
-
             res.status(200).json(company)
         } catch (error) {
-            console.log(error);
-            next(errObj.createError('can`t create company', 400))
+            next(error)
         }
     }
     async submitCompany() {
