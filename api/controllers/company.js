@@ -38,6 +38,10 @@ class CompanyController {
 
 
     }
+    //TODO: submit list of companies
+    async updateCompane(){
+
+    }
     async rejectCompany() {
 
 

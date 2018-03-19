@@ -35,11 +35,10 @@ let User = new Schema({
     }
 })
 
-//TODO:pre save on unique mail
+
 
 User.methods.setConfirmationToken = ()=>{
     this.confirmationToken = this.generateJWT;
 }
 
-//User.plugin(uniqueValidator,{ message: "This email is already taken" });
 module.exports = mongoose.model('User', User);

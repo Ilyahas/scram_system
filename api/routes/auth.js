@@ -6,12 +6,12 @@ const errObj = require('../utils/parseErrors')
 const validate = require('express-joi-validation')({})
 const schemas = require('../joi/schema')
 
-const options = { joi: { convert: true, allowUnknown: false } }
+
 
 
 
 router.post('/signup',
-    validate.body(schemas.signup.body, options),
+    validate.body(schemas.signup.body),
     authController.signupUser
 )
 router.get('/confirmation/:token',
@@ -19,7 +19,7 @@ router.get('/confirmation/:token',
 )
 
 router.post('/login',
-    validate.body(schemas.auth.body, options),
+    validate.body(schemas.auth.body),
     authController.createUserToken)
 
 router.put('/reset_password', (req, res) => {

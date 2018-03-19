@@ -4,7 +4,6 @@ const Schema = mongoose.Schema
 
 
 
-//TODO: pre save validator for uniqui field
 let Company = new Schema({
     companyName:{
         type:String,

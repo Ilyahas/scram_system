@@ -60,12 +60,6 @@ function createUser(data) {
     data.confirmationToken = confirmationToken;
     return User.create(data)
 }
-//TODO: send html form
-function sendConfirmationEmail(user) {
-    return emailSender.sendConfirmationEmail(user).catch(err => {
-        next(errObj.createError('can`t send mail', 400));
-    })
-}
 async function verifyUserConfirmation(req, res, next) {
     let token = req.params.token;
     try {
