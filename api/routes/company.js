@@ -1,17 +1,28 @@
-let express = require('express');
-let auth = require('../controllers/AuthController')
-let router = express.Router();
-let Company = require('../models/company')
-let companyController = require('../controllers/company');
-router.get('/',auth.verifyToken,auth.verifyAdmin, (req, res) => {
-   companyController.getListOfUnverifiedCompanies()
-})
-router.post('/', (req, res) => {
-    Company.create({companyName:req.body.company})
-    .then(company=>{
-        res.status(200).json(company)
-    })
-})
+const express = require('express');
+const auth = require('../controllers/AuthController')
+const router = express.Router();
+const Company = require('../models/company')
+const companyController = require('../controllers/company')
+
+const validate = require('express-joi-validation')({})
+const schemas = require('../joi/schema')
+
+const options = { joi: { convert: true, allowUnknown: false } }
+
+const CmpCtrl = new companyController();
+
+router.get('/',
+    auth.verifyToken,
+    auth.verifyAdmin,
+    CmpCtrl.getListOfUnverifiedCompanies.bind(CmpCtrl))
+
+
+
+router.post('/',
+    auth.verifyToken,
+    validate.body(schemas.company.bodyCreate, options),
+    CmpCtrl.createCompany)
+
 router.put('/', (req, res) => {
     res.status(405).json({ err: 'not implemeted yet' })
 })

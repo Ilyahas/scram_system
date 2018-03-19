@@ -1,6 +1,9 @@
-let mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
-let Schema = mongoose.Schema
+const Schema = mongoose.Schema
+
+
+
 //TODO: pre save validator for uniqui field
 let Company = new Schema({
     companyName:{

@@ -1,18 +1,18 @@
-let express = require('express');
-let path = require('path');
-let favicon = require('serve-favicon');
-let logger = require('morgan');
-let cookieParser = require('cookie-parser');
-let bodyParser = require('body-parser');
-let mongoose= require('mongoose')
-let bearerToken = require('express-bearer-token');
-let helmet = require('helmet');
-let config = require('./config/config')
-let auth = require('./api/routes/auth')
-let company = require('./api/routes/company')
-let task = require('./api/routes//task')
-let user = require('./api/routes/user')
-let errHandler = require('./api/errorHandler/errorMiddleware')
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const mongoose= require('mongoose')
+const bearerToken = require('express-bearer-token');
+const helmet = require('helmet');
+const config = require('./config/config')
+const auth = require('./api/routes/auth')
+const company = require('./api/routes/company')
+const task = require('./api/routes//task')
+const user = require('./api/routes/user')
+const errHandler = require('./api/errorHandler/errorMiddleware')
 require('./api/models/company')
 require('./api/models/user')
 require('./api/models/token')
@@ -49,6 +49,9 @@ app.use('/user',user);
 
 app.use(errHandler.errHandler)
 
+app.listen( () => {
+  console.log( `server was started at 3030 port` );
+});
 
 
 module.exports = app;

@@ -44,6 +44,7 @@ function createUser(data) {
     let hashedPassword = saltHashPassword(data.password);
     let confirmationToken = getCongirmationToken(data.email)
     return User.create({
+        nickname:data.nickname,
         email: data.email,
         salt: hashedPassword.salt,
         passwordHash: hashedPassword.passwordHash,
@@ -54,8 +55,8 @@ function createUser(data) {
 
 //TODO: send html form
 function sendConfirmationEmail(user) {
-    emailSender.sendConfirmationEmail(user).catch(err=>{
-        next(errObj.createError('can`t send mail',400));
+    emailSender.sendConfirmationEmail(user).catch(err => {
+        next(errObj.createError('can`t send mail', 400));
     })
 }
 function verifyUserConfirmation(req, res, next) {
@@ -72,7 +73,7 @@ function verifyUserConfirmation(req, res, next) {
     }).catch(err => {
         let error = new Error('no such user with token');
         error.statusCode = 550;
-        next(user);
+        //   next(user);
     })
 }
 function createUserToken(req, res, next) {
@@ -92,7 +93,7 @@ function createUserToken(req, res, next) {
             })
             token.save()
                 .then(user => {
-                    res.status(200).json({"token":user.tokenHash});
+                    res.status(200).json({ "token": user.tokenHash });
                 })
                 .catch(err => {
                     next(errObj.createError('can not create token', 400))
@@ -100,33 +101,39 @@ function createUserToken(req, res, next) {
         }
 
     }).catch(err => {
-        next(errObj.createError('no such user', 505))
+        next(errObj.createError('no such user', 4040))
     })
 }
 function verifyToken(req, res, next) {
     let token = req.token
     Token.findOne({ tokenHash: token })
-        .populate({
-            path: 'userId',
-            model: 'User',
-            select: 'firstname lastname email role'
-        })
+        .populate(
+            {
+                path: 'userId',
+                model: 'User',
+                select: 'nickname email role '
+            }
+        )
+
         .exec()
         .then(data => {
             let connectionCredentials = getUserIpAndAgent(req);
             if (!isTokenCredentialsValid(data, connectionCredentials)) {
                 next(errObj.createError('access denied', 403))
             }
-            req.data.user = data.userId;
+            req.user = data.userId;
             next();
         })
         .catch(err => {
+            console.log(er)
             next(errObj.createError('can`t find such token', 400))
         })
 }
-function verifyAdmin(req,res,next){
-    if(req.data.user.role===config.userPrivilages.admin)next();
-    next(errObj.createError('don`t have acces',403))
+function verifyAdmin(req, res, next) {
+    if (req.user.role === config.userPrivilages.admin) {
+        return next()
+    }
+    return next(errObj.createError('don`t have access', 403))
 }
 let isTokenCredentialsValid = (tokenModel, reqCredentials) => {
     return tokenModel.userAgent === reqCredentials.userAgent &&
@@ -154,5 +161,5 @@ module.exports = {
     sendConfirmationEmail: sendConfirmationEmail,
     verifyUserConfirmation: verifyUserConfirmation,
     verifyToken: verifyToken,
-    verifyAdmin:verifyAdmin
+    verifyAdmin: verifyAdmin
 }
