@@ -314,10 +314,136 @@
             }
         },
         "/company/approve": {
-            "put": {}
+            "put": {
+                "tags": [
+                    "Category: Admin",
+                    "Role: Admin"
+                ],
+                "summary": "approve companies",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": "true",
+                        "schema": {
+                            "type": "Object",
+                            "properties": {
+                                "companyNames": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "description": "companies names"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
         },
         "/users": {
-            "get": {}
+            "get": {
+                "tags": [
+                    "Category: User",
+                    "Role: User"
+                ],
+                "summary": "pagination users",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "sort",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "search",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortBy",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "type": "number"
+                    },
+                    {
+                        "in": "query",
+                        "name": "perPage",
+                        "type": "number"
+                    },
+                    {
+                        "in": "query",
+                        "name": "isApproved",
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "type": "object",
+                                "requestStatus": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "requestResult": {
+                                    "type": "object",
+                                    "properties": {
+                                        "users": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "confirmed": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "nickname": {
+                                                        "type": "string"
+                                                    },
+                                                    "email": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "totalCount": {
+                                            "type": "number"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {}
+            }
         }
     }
 }
