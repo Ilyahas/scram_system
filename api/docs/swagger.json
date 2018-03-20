@@ -67,9 +67,7 @@
                             }
                         }
                     },
-                    "400": {
-                       
-                    }
+                    "400": {}
                 }
             }
         },
@@ -130,14 +128,12 @@
                             }
                         }
                     },
-                    "401": {
-                       
-                    }
+                    "401": {}
                 }
             }
         },
         "auth/confirmation/{token}": {
-            "post": {
+            "get": {
                 "tags": [
                     "Role : Guest"
                 ],
@@ -161,11 +157,167 @@
                             }
                         }
                     },
-                    "400": {
-                        
+                    "400": {}
+                }
+            }
+        },
+        "/company": {
+            "get": {
+                "tags": [
+                    "Role : Admin"
+                ],
+                "summary": "array of unverified companies",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "type": "object",
+                                "requestStatus": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "requestResult": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "workers": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "nickname": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "confirmed": {
+                                                "type": "boolean",
+                                                "default": false
+                                            },
+                                            "_id": {
+                                                "type": "string"
+                                            },
+                                            "companyName": {
+                                                "type": "string"
+                                            },
+                                            "owner": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "nickname": {
+                                                        "type": "string"
+                                                    },
+                                                    "email": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Role : User",
+                    "Create : New"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "companyName": {
+                                    "type": "string"
+                                },
+                                "workers": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "_id": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "type": "object",
+                                "requestStatus": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "requestResult": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "workers": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "_id": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "confirmed": {
+                                                "type": "boolean",
+                                                "default": false
+                                            },
+                                            "_id": {
+                                                "type": "string"
+                                            },
+                                            "companyName": {
+                                                "type": "string"
+                                            },
+                                            "owner": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "_id": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
+        },
+        "/company/approve": {
+            "put": {}
+        },
+        "/users": {
+            "get": {}
         }
     }
 }
