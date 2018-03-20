@@ -36,6 +36,9 @@ let generateJWT = (email) => {
         config.secretKey
     )
 }
+function responseJSON(res, code, requestStatus, requestResult) {
+    return res.status(code).json({ requestStatus, requestResult })
+}
 //conf token for use model
 let getCongirmationToken = (email) => {
     return generateJWT(email);
@@ -46,8 +49,7 @@ async function signupUser(req, res, next) {
     try {
         let user = await createUser(userCredentials);
         let email = await emailSender.sendConfirmationEmail(user);
-        console.log('here')
-        res.status(200).json({ status: 'ok' })
+        responseJSON(res,200,true,{})
     } catch (err) {
         next(err)
     }
@@ -68,7 +70,7 @@ async function verifyUserConfirmation(req, res, next) {
             { confirmationToken: '', confirmed: true },
             { new: true }
         )
-        res.status(200).json({ status: 'ok' })
+        responseJSON(res,200,true,{})
     } catch (err) {
         next(err)
     }
@@ -90,7 +92,7 @@ function createUserToken(req, res, next) {
             })
             token.save()
                 .then(user => {
-                    res.status(200).json({ "token": user.tokenHash });
+                    responseJSON(res,200,true,{"token": user.tokenHash })
                 })
                 .catch(err => {
                     next(err)

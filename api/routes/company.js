@@ -2,7 +2,7 @@ const express = require('express');
 const auth = require('../controllers/AuthController')
 const router = express.Router();
 const Company = require('../models/company')
-const companyController = require('../controllers/company')
+const companyController = require('../controllers/CompanyController')
 
 const validate = require('express-joi-validation')({})
 const schemas = require('../joi/schema')
@@ -23,13 +23,13 @@ router.post('/',
     validate.body(schemas.company.bodyCreate, options),
     CmpCtrl.createCompany)
 
-router.put('/',
+router.put('/approve',
     auth.verifyToken,
     auth.verifyAdmin,
     validate.body(schemas.company.bodyUpdate),
-    CmpCtrl.updateCompany)
+    CmpCtrl.approveCompanies)
 
-    
+
 router.delete('/', (req, res) => {
     res.status(405).json({ err: 'not implemeted yet' })
 })

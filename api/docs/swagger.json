@@ -1,0 +1,171 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Docs for Scrum desk",
+        "version": "1.0",
+        "title": "SD API"
+    },
+    "basePath": "/api",
+    "schemes": [
+        "http"
+    ],
+    "tags": [],
+    "securityDefinitions": {
+        "bearer": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization"
+        }
+    },
+    "paths": {
+        "auth/signup": {
+            "post": {
+                "tags": [
+                    "Role : Guest"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": "true",
+                        "schema": {
+                            "type": "Object",
+                            "properties": {
+                                "nickname": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "required": true
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "requestStatus": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "requestResult": {}
+                            }
+                        }
+                    },
+                    "400": {
+                       
+                    }
+                }
+            }
+        },
+        "auth/login": {
+            "post": {
+                "tags": [
+                    "Role : Guest"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": "true",
+                        "schema": {
+                            "type": "Object",
+                            "properties": {
+                                "email": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "required": true
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "requestStatus": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "requestResult": {
+                                    "type": "object",
+                                    "properties": {
+                                        "token": {
+                                            "type": "object",
+                                            "properties": {
+                                                "hash": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                       
+                    }
+                }
+            }
+        },
+        "auth/confirmation/{token}": {
+            "post": {
+                "tags": [
+                    "Role : Guest"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "requestStatus": {
+                                    "type": "boolean",
+                                    "default": true
+                                },
+                                "requestResult": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        
+                    }
+                }
+            }
+        }
+    }
+}

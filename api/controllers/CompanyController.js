@@ -1,8 +1,8 @@
-let Company = require('../models/company')
-
-let config = require('../../config/config')
+const Company = require('../models/company')
+const BaseController = require('./BaseController');
+const config = require('../../config/config')
 let errObj = require('../utils/parseErrors')
-class CompanyController {
+class CompanyController extends BaseController {
     async  getListOfUnverifiedCompanies(req, res, next) {
         try {
             let unverifiedCompanies = await Company
@@ -18,7 +18,7 @@ class CompanyController {
                     select: 'nickname -_id'
                 })
                 .exec()
-            res.status(200).json(unverifiedCompanies);
+            super.responseJSON(res,200,true,unverifiedCompanies)
         } catch (error) {
             next(error)
         }
@@ -28,13 +28,12 @@ class CompanyController {
         try {
             data.owner = req.user.id
             let company = await Company.create(data)
-            res.status(200).json(company)
+            super.responseJSON(res,200,true,company)
         } catch (error) {
             next(error)
         }
     }
-    //TODO: submit list of companies
-    async updateCompany(req, res, next) {
+    async approveCompanies(req, res, next) {
         try {
             //   let compArray = req.body.companyNames.;
             let criteria = {
@@ -45,7 +44,7 @@ class CompanyController {
                 { $set: { confirmed: true } },
                 { multi: true }
             )
-            res.status(200).json(approvedCompanies)
+            super.responseJSON(res,200,true,approvedCompanies)
         } catch (error) {
             next(error)
         }

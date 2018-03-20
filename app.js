@@ -7,15 +7,19 @@ const bodyParser = require('body-parser');
 const mongoose= require('mongoose')
 const bearerToken = require('express-bearer-token');
 const helmet = require('helmet');
+
 const config = require('./config/config')
 const auth = require('./api/routes/auth')
 const company = require('./api/routes/company')
 const task = require('./api/routes//task')
 const user = require('./api/routes/user')
 const errHandler = require('./api/errorHandler/errorMiddleware')
+
 require('./api/models/company')
 require('./api/models/user')
 require('./api/models/token')
+
+const apiDocs = require('./config/swagger')
 
 mongoose.connect(config.mongoUrl)
 mongoose.connection.on('connected',()=>{
@@ -41,7 +45,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+apiDocs(app)
 app.use('/auth',auth);
 app.use('/company',company);
 app.use('/task',task);
