@@ -30,9 +30,9 @@ module.exports = {
             search: Joi.string().regex(/[a-zA-Zа-яА-Я\d\-_\s]+/i),
             sortBy: Joi.string().valid(['email',
                 'nickname']),
-            page: Joi.number().interger().positive(),
-            perPage: Joi.number().interger().positive(),
-            isApproved: Joi.number().interger().valid([0, 1])
+            page: Joi.number().integer().positive(),
+            perPage: Joi.number().integer().positive(),
+            isApproved: Joi.number().integer().valid([0, 1])
         })
     },
     resetPassword: {
