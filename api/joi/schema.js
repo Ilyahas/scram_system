@@ -22,7 +22,11 @@ module.exports = {
             teamlead: Joi.objectId(),
             workers: Joi.array().items(Joi.objectId()),
             confirmed: Joi.boolean()
+        }),
+        bodyUpdate:Joi.object({
+            companyNames:Joi.array().items(Joi.string().regex(/[a-zA-Zа-яА-Я\d\-_\s]+/i))
         })
+
     },
     user: {
         query: Joi.object({

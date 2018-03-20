@@ -33,15 +33,29 @@ class CompanyController {
             next(error)
         }
     }
+    //TODO: submit list of companies
+    async updateCompany(req, res, next) {
+        try {
+            //   let compArray = req.body.companyNames.;
+            let criteria = {
+                companyName: { $in: req.body.companyNames}
+            }
+            let approvedCompanies = await Company.update(
+                criteria,
+                { $set: { confirmed: true } },
+                { multi: true }
+            )
+            res.status(200).json(approvedCompanies)
+        } catch (error) {
+            next(error)
+        }
+    }
     async submitCompany() {
 
 
 
     }
-    //TODO: submit list of companies
-    async updateCompane(){
 
-    }
     async rejectCompany() {
 
 

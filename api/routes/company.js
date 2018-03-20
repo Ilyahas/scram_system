@@ -23,9 +23,13 @@ router.post('/',
     validate.body(schemas.company.bodyCreate, options),
     CmpCtrl.createCompany)
 
-router.put('/', (req, res) => {
-    res.status(405).json({ err: 'not implemeted yet' })
-})
+router.put('/',
+    auth.verifyToken,
+    auth.verifyAdmin,
+    validate.body(schemas.company.bodyUpdate),
+    CmpCtrl.updateCompany)
+
+    
 router.delete('/', (req, res) => {
     res.status(405).json({ err: 'not implemeted yet' })
 })

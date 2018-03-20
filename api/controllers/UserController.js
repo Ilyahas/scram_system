@@ -1,7 +1,7 @@
 let User = require('../models/user')
 let config = require('../../config/config')
 
-//TODO: test this
+
 class UserController {
     async list(req, res, next) {
         let totalCount, users, query = {}
