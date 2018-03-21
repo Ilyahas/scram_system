@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Input from '../Input'
-import './Signup.scss'
+import '../Signup/Signup.scss'
 
 
-class Signup extends React.Component {
+class Login extends React.Component {
   state = {
     data: {
-      nickname: "",
       email: "",
       password: ""
     },
@@ -24,10 +23,9 @@ class Signup extends React.Component {
         <div className="App">
           <div className="Modal">
             <form onSubmit={this.props.onSubmit} className="ModalForm">
-              <Input id="name" type="text" placeholder="nickname" />
               <Input id="username" type="email" placeholder="email" />
               <Input id="password" type="password" placeholder="password" />
-              <button>Signup<i className="fa fa-fw fa-chevron-right"></i> </button>
+              <button>Login<i className="fa fa-fw fa-chevron-right"></i> </button>
             </form>
           </div>
         </div>
@@ -35,5 +33,4 @@ class Signup extends React.Component {
     )
   }
 }
-
-export default Signup;
+export default Login;
