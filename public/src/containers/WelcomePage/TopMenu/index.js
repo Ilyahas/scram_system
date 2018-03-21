@@ -1,15 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import './TopMenu.scss'
 const TopMenu = (props) => {
   return (<div>
     <nav className="Navigation">
       <ul>
         <li>
-          <button>Login</button>
+            <Link className="LinkStylinng" to='/login'>Login</Link>
         </li>
         <li>
-          <button>SignUp</button>
+          <Link className="LinkStylinng"  to='/signup'>Signup</Link>
+
         </li>
       </ul>
     </nav>

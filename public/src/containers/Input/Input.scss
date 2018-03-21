@@ -1,0 +1,70 @@
+
+// Variables
+$font: 'Lato', sans-serif;
+
+// Colors
+$cinnabar: #DD403A;
+$cosmiclatte: #FFFCE8;
+
+
+.Input{
+    display: flex;
+    flex-direction: row-reverse;
+    border-bottom: 1px solid rgba($cosmiclatte, .1);
+    padding-bottom: 3px;
+    margin-bottom: 5px;
+    input {
+		// General styles
+		outline: none;
+		border: 0;
+		color: $cosmiclatte;
+		background: transparent;
+		font-family: $font;
+		flex: 1 0 auto;
+		font-size: 14px;
+		font-weight: 300;
+		
+		// Animation triggers
+		&:focus ~ label {
+			opacity: 1;
+		}
+		
+		// Icon abstractions
+		&[type='text'] {
+			~ label {
+				&::before {
+					content: "\f007";	
+				}
+			}
+		}
+		&[type='email'] {
+			~ label {
+				&::before {
+					content: "\f1fa";
+				}
+			}
+		}
+		&[type='password'] {
+			~ label {
+				&::before {
+					content: "\f023";	
+				}
+			}
+		}
+	}
+    label {
+        font-family: FontAwesome;
+        font-size: 13px;
+        opacity: .1;
+        transition: opacity .5s ease;
+        
+        &::before {
+            align-items: center;
+            color: $cosmiclatte;
+            display: flex;
+            height: 30px;
+            justify-content: center;
+            width: 30px;
+        }
+    }
+}

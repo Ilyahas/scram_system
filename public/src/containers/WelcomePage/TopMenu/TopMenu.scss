@@ -1,7 +1,32 @@
-.Navigation{
+
+$onyx: #3E363F;
+// Variables
+$font: 'Lato', sans-serif;
+// Variables
+$font: 'Lato', sans-serif;
+.Navigation {
+  background-color:$onyx;
   display: flex;
-  display:-ms-flexbox;
+  justify-content: flex-end;
+  display: -ms-flexbox;
   display: -webkit-box;
   display: -webkit-flex;
   height: 37px;
+  ul{
+    display: flex;
+    li{
+      font-family: $font;
+      .LinkStylinng{
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 11px;
+        display: inline-block;
+        color:black;
+      }
+      .LinkStylinng:hover{
+        color:#fff;
+      }
+    }
+
+  }
 }
