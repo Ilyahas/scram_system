@@ -25,7 +25,11 @@ let Company = new Schema({
     confirmed: {
         type: Boolean,
         default:false
-    },    
+    },  
+    listOfTeams:{
+        type:Schema.Types.ObjectId,
+        ref:'Team'
+    }  
     
     
 })
