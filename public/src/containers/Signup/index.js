@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Input from '../Input'
 import './Signup.scss'
+
+
 class Signup extends React.Component {
   state = {
     data: {
@@ -19,8 +21,6 @@ class Signup extends React.Component {
   render() {
     return (
       <div className="backImg">
-
-
         <div className="App">
           <div className="Modal">
             <form onSubmit={this.props.onSubmit} className="ModalForm">
