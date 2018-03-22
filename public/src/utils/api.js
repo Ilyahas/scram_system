@@ -1,9 +1,12 @@
 import axios from 'axios'
+const host= 'http://localhost:3030';
 export default {
     user:{
-        signup:(credentials)=>
-        axios.post('/auth/signup',{credentials}).then(res=>{}),
         login:(data)=>
-        axios.post('/auth/login',{data}).then(res=>{})
+        axios.post(host+'/auth/login',{data}).then(res=>res.data),
+        signup:(credentials)=>
+        axios.post(host+'/auth/signup', {...credentials})
+        .then(res=>res.data)
+        .catch(error => error.response)
     }
 }

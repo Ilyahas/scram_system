@@ -6,10 +6,11 @@ export class Input extends Component {
       <div className="Input">
         <input
         id={this.props.name}
-        autocomplete="false"
+        autoComplete="false"
         required type={this.props.type}
-        placeholder={this.props.placeholder}></input>
-        <label for={this.props.name}></label>
+        placeholder={this.props.placeholder}
+        onChange={this.props.onChange}></input>
+        <label htmlFor={this.props.name}></label>
       </div>
     )
   }

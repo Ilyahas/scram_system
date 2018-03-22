@@ -4,8 +4,9 @@ export const userLoggedIn = (user) => ({
     type: USER_LOGGED_IN,
     user
 })
-export const userSignedup = () => ({
-    type: USER_SIGNUP
+export const userSignup = (user) => ({
+    type: USER_SIGNUP,
+    user
 })
 
 export const login = credentials => dispatch => api.user.login(credentials)
@@ -13,8 +14,11 @@ export const login = credentials => dispatch => api.user.login(credentials)
         localStorage.JWT = user.token
         dispatch(userLoggedIn(user))
     })
-export const signup = () => dispatch => api.user.signup()
-    .then(() => {
-        dispatch(userSignedup())
+export const signup = credentials => async dispatch => {
+    try {
+        let userSignUpStatus = await api.user.signup(credentials);
+        dispatch(userSignup(userSignUpStatus))
+    } catch (error) {
+        throw new Error(error)
     }
-    )
+}
