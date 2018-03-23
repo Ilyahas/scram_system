@@ -1,12 +1,53 @@
-import {USER_LOGGED_IN,USER_SIGNUP} from '../utils/types'
+import {SUCCESS_REQUEST,START_REQUEST,BAD_REQUEST,LOG_IN} from '../utils/types'
 
-export default function user(state={},action){
+const INITIAL_STATE = {
+    isLoading: true,
+    isSuccess: false,
+    isError: false,
+    isLogin: false,
+    name: "user_name",
+    email: "user_email",
+    token: 'token',
+    avatar: "avatar",
+    errorMessage: {}
+}
+
+export default function user(state = INITIAL_STATE, action) {
     switch (action.type) {
-        case USER_LOGGED_IN:
-            return action.user;
-        case USER_SIGNUP:
-            return action.user;
+        case START_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                isSuccess: false,
+                isError: false
+            }
+        }
+        case SUCCESS_REQUEST:{
+            return{
+                ...state,
+                isLoading:false,
+                isSuccess:true
+            }
+        }
+        case BAD_REQUEST: {
+            return {
+                ...state,
+                isError: true,
+                errorMessage: action.errorMessage,
+            }
+        }
+        case LOG_IN: {
+            return {
+                ...state,
+                isLoading: false,
+                isSuccess: true,
+                isLogin: true,
+                name: action.nickname,
+                email: action.email,
+                token: action.token
+            }
+        }
         default:
-            return state;
+            return state
     }
 }

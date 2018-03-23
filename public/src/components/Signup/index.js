@@ -40,6 +40,8 @@ class Signup extends React.Component {
               <Input id="name" type="text" placeholder="nickname" onChange={this.onChange} />
               <Input id="username" type="email" placeholder="email" onChange={this.onChange} />
               <Input id="password" type="password" placeholder="password" onChange={this.onChange} />
+              {this.props.errorMessage.duplicate&&
+              <p className="Allert">Such {this.props.errorMessage.duplicate} exists</p>}
               <button>Signup<i className="fa fa-fw fa-chevron-right"></i> </button>
             </form>
           </div>

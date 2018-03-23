@@ -45,6 +45,7 @@ let getCongirmationToken = (email) => {
 }
 
 async function signupUser(req, res, next) {
+    console.log(req.body);
     let userCredentials = req.body;
     try {
         let user = await createUser(userCredentials);

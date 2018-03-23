@@ -1,2 +1,4 @@
-export const USER_LOGGED_IN = 'USER_LOGGED_IN';
-export const USER_SIGNUP = 'SIGNED_UP'
+export const LOG_IN = 'LOG_IN';
+export const BAD_REQUEST = 'BAD_REQUEST';
+export const START_REQUEST = 'START_REQUEST';
+export const SUCCESS_REQUEST='SUCCESS_REQUEST'

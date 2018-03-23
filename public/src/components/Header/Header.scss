@@ -1,0 +1,28 @@
+$onyx: #3E363F;
+.Header{
+    background-color: $onyx;
+    display: flex;
+    li{
+        color: white;
+        a{
+            display: block;
+            padding: 10px;
+        }
+    }
+    li:hover{
+        color:blue;
+        cursor: pointer;
+    }
+    .MenuItems{
+        display: flex;
+        justify-content: flex-start;
+        flex: 1; 
+    }
+    .UserInfo{
+        display: flex;
+        justify-content: flex-end;
+       // flex: 1;
+    }
+    
+    
+}

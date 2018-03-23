@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
-const logger = require('morgan');
+const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose= require('mongoose')
@@ -14,7 +14,7 @@ const company = require('./api/routes/company')
 const task = require('./api/routes//task')
 const user = require('./api/routes/user')
 const errHandler = require('./api/errorHandler/errorMiddleware')
-
+const cors= require('cors')
 require('./api/models/company')
 require('./api/models/user')
 require('./api/models/token')
@@ -29,8 +29,8 @@ mongoose.connection.on('error',()=>{
   console.log('Mongoose connection error  '+ config.mongoUrl)
 })
 var app = express();
-
-app.use(helmet())
+app.use(cors())
+// app.use(helmet())
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
@@ -39,7 +39,7 @@ app.set('view engine', 'hjs');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(bearerToken());
-app.use(logger('dev'));
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
