@@ -21,6 +21,7 @@ module.exports = {
             owner: Joi.objectId(),
             teamlead: Joi.objectId(),
             workers: Joi.array().items(Joi.objectId()),
+            listOfTeams:Joi.array().items(Joi.objectId()),
             confirmed: Joi.boolean()
         }),
         bodyUpdate:Joi.object({

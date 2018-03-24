@@ -1,10 +1,12 @@
+//TODO: on hover
 .DbContainer{
     position: absolute;
-    margin-top: 25px;
+    margin-top: 26px;
     border-top: rgba(0, 0, 0, 0.05) 1px solid;
     background: #ffffff;
     box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
     color: black;
+    border-radius: 5px;
     .DbSegment{
         padding: 5px 15px;
         border-bottom: #e1e1e1 1px solid;

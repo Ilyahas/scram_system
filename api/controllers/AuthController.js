@@ -109,6 +109,7 @@ async function createUserToken(req, res, next) {
 }
 function verifyToken(req, res, next) {
     let token = req.token
+    //TODO:check if email confirmed or not
     Token.findOne({ tokenHash: token })
         .populate(
             {
