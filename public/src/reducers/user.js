@@ -1,4 +1,10 @@
-import {SUCCESS_REQUEST,START_REQUEST,BAD_REQUEST,LOG_IN} from '../utils/types'
+import {
+    SUCCESS_REQUEST
+    , START_REQUEST
+    , BAD_REQUEST
+    , LOG_IN
+    , REFRESH_TOKEN
+} from '../utils/types'
 
 const INITIAL_STATE = {
     isLoading: true,
@@ -22,11 +28,11 @@ export default function user(state = INITIAL_STATE, action) {
                 isError: false
             }
         }
-        case SUCCESS_REQUEST:{
-            return{
+        case SUCCESS_REQUEST: {
+            return {
                 ...state,
-                isLoading:false,
-                isSuccess:true
+                isLoading: false,
+                isSuccess: true
             }
         }
         case BAD_REQUEST: {
@@ -45,6 +51,12 @@ export default function user(state = INITIAL_STATE, action) {
                 name: action.nickname,
                 email: action.email,
                 token: action.token
+            }
+        }
+        case REFRESH_TOKEN:{
+            return{
+                ...state,
+                token:action.token
             }
         }
         default:

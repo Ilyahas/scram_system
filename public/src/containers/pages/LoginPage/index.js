@@ -1,10 +1,26 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import Login from '../../../components/Login'
-class LoginPage extends React.Component {
-  render () {
-    return <Login/>
+import {login} from '../../../actions/auth'
+export class LoginPage extends Component {
+  submit = data =>  this.props.login(data)
+  render() {
+    return <Login submit={this.submit} errorMessage={this.props.errorMessage}/>
+  }
+  componentWillReceiveProps = (nextProps)=>{
+      nextProps.isSuccess ? this.props.history.push('/home') :console.log('err');
   }
 }
 
-export default LoginPage;
+const mapStateToProps = (state) => ({
+    isLoading: state.user.isLoading,
+    isSuccess:state.user.isSuccess,
+    errorMessage:state.user.errorMessage
+})
+
+const mapDispatchToProps = {
+  
+}
+
+export default connect(mapStateToProps, {login})(LoginPage)

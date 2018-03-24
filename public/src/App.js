@@ -5,15 +5,17 @@ import WelcomePage from "./containers/pages/WelcomePage";
 import SignupPage from "./containers/pages/SignupPage";
 import LoginPage from "./containers/pages/LoginPage";
 import HomePage from "./containers/pages/HomePage";
-import { Route } from 'react-router-dom'
+import { Route,Switch } from 'react-router-dom'
+import GuestRoute from "../src/containers/routes/GuestRoute";
+import UserRoute from "../src/containers/routes/UserRoute";
 const App = ({location}) => {
   return (
-    <div>
-        <Route location={location} path="/" exact component={WelcomePage}> </Route>
-        <Route location={location} path="/home" exact component={HomePage}> </Route>
-        <Route location={location} path="/signup" exact component={SignupPage}></Route>
-        <Route location={location} path="/login" exact component={LoginPage}></Route>
-    </div>
+    <Switch>
+        <GuestRoute location={location} path="/" exact component={WelcomePage}></GuestRoute>
+        <UserRoute location={location} path="/home" exact component={HomePage}></UserRoute> 
+        <GuestRoute location={location} path="/signup" exact component={SignupPage}></GuestRoute>
+        <GuestRoute location={location} path="/login" exact component={LoginPage}></GuestRoute>
+    </Switch>
   )
 }
 
