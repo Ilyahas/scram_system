@@ -5,6 +5,7 @@ import {
     , LOG_IN
     , REFRESH_TOKEN
 } from '../utils/types';
+//TODO: logout action
 import api from '../utils/api'
 export const userLoggedIn = (user) => ({
     type: LOG_IN,

@@ -50,7 +50,7 @@ async function signupUser(req, res, next) {
     try {
         let user = await createUser(userCredentials);
         let email = await emailSender.sendConfirmationEmail(user);
-        responseJSON(res,200,true,{})
+        responseJSON(res, 200, true, {})
     } catch (err) {
         next(err)
     }
@@ -71,38 +71,41 @@ async function verifyUserConfirmation(req, res, next) {
             { confirmationToken: '', confirmed: true },
             { new: true }
         )
-        responseJSON(res,200,true,{})
+        responseJSON(res, 200, true, {})
     } catch (err) {
         next(err)
     }
 }
-function createUserToken(req, res, next) {
+async function createUserToken(req, res, next) {
     let { email, password } = req.body;
-    User.findOne({ email: email }).then(user => {
+    try {
+        let user = await User.findOne({ email: email })
         let salt = user.salt;
         let hash = user.passwordHash;
         if (user &&
             user.confirmed &&
             isHashesEqual(salt, user.passwordHash, password)) {
             let connectionData = getUserIpAndAgent(req);
-            let token = new Token({
+            let userToken = new Token({
                 userId: user._id,
                 userAgent: connectionData.userAgent,
                 userIp: connectionData.ip,
                 tokenHash: generateToken()
             })
-            token.save()
-                .then(user => {
-                    responseJSON(res,200,true,{"token": user.tokenHash })
-                })
-                .catch(err => {
-                    next(err)
+            let token = await userToken.save();
+            responseJSON(res, 200, true,
+                {
+                    "token": token.tokenHash,
+                    'user': {
+                        email: user.email,
+                        nickname: user.nickname
+                    }
                 })
         }
 
-    }).catch(err => {
-        next(err)
-    })
+    } catch (error) {
+        responseJSON(res,403,false,{error:"Access denied"})
+    }
 }
 function verifyToken(req, res, next) {
     let token = req.token

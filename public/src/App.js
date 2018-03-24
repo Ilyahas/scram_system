@@ -5,9 +5,10 @@ import WelcomePage from "./containers/pages/WelcomePage";
 import SignupPage from "./containers/pages/SignupPage";
 import LoginPage from "./containers/pages/LoginPage";
 import HomePage from "./containers/pages/HomePage";
-import { Route,Switch } from 'react-router-dom'
+import { Switch } from 'react-router-dom'
 import GuestRoute from "../src/containers/routes/GuestRoute";
 import UserRoute from "../src/containers/routes/UserRoute";
+//TODO: props type check
 const App = ({location}) => {
   return (
     <Switch>

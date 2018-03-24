@@ -12,13 +12,6 @@ module.exports = {
         admin: '3'
     },
     'expireTime': '86400',
-    'gmailMailer':{
-        service:'gmail',
-        auth:{
-            user:'yukopa90@gmail.com',
-            pass:'030597uk'
-        }
-    },
     'mailer': {
         host: "smtp.mailtrap.io",
         port: 2525,
