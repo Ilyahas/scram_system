@@ -1,23 +1,41 @@
 $font: 'Lato', sans-serif;
-$onyx: #3E363F;
-$cinnabar: #DD403A;
+$onyx: #0f0f0f;
+$brightColor: #2d2d2d;
+$cinnabar: #175e1b;
+.m-block {
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+}
+.bg-img-block {
+  background-image: url(../WelcomePage/img/simple-codelines.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  z-index: -1;
+}
+.bg-black {
+  background: rgba(0, 0, 0, 0.55);
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+}
 .backImg{
-    background-image: url(https://www.publicdomainpictures.net/pictures/70000/velka/stars-in-the-night-sky.jpg);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	color: $onyx;
+	color: $brightColor;
 	font-family: $font;
 	height: 100vh;
 	overflow: hidden;
 }
 .Allert{
-    color: white;
+    color: $brightColor;
     text-align: center;
     margin-top: 14px;
     font-size: 13px;
 }
 .App{
+    background: rgba(0, 0, 0, 0);
     align-items: center;
 	display: flex;
 	height: 100vh;
@@ -25,12 +43,13 @@ $cinnabar: #DD403A;
 	width: 100vw;
 	position: absolute;
     top: 0; left: 0;
+    z-index: 2;
 }
 .Modal {
 	background: $onyx;
 	border-radius: 2px;
 	padding: 20px;
-    width: 240px;
+    width: 290px;
     button {
         align-items: center;
         background: $cinnabar;
@@ -38,9 +57,9 @@ $cinnabar: #DD403A;
         border-radius: 3px;
         color: white;
         display: flex;
-        
+
         font-family: $font;
-        font-size: 13px;
+        font-size: 15px;
         font-weight: 500;
         justify-content: center;
         margin-top: 20px;
@@ -57,9 +76,41 @@ $cinnabar: #DD403A;
         &:hover {
             transform: scale(1.02);
         }
-        
+
         &:active {
             transform: scale(.99);
         }
     }
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.homeBack {
+  font-size: 20px;
+  display: block;
+  position: absolute;
+  top: 25px;
+  width: 70%;
+
+  .LinkStylinngBtn {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 7px;
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    margin: 0 auto;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      text-decoration: none;
+      -webkit-transition: all 1s;
+      transition: all 1s;
+    }
+
+  }
 }

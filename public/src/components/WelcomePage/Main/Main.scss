@@ -1,0 +1,67 @@
+@import "../style";
+$titleBlockHeigth: calc(100vh - 50px);
+
+.bg-intro-img {
+  position: absolute;
+  background: url(../img/simple-codelines.svg) no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  z-index: -1;
+
+  width: 100%;
+  height: $titleBlockHeigth;
+}
+
+.intro {
+  background: rgba(0, 0, 0, 0.7);
+
+  width: 100%;
+  height: $titleBlockHeigth;
+  z-index: 10;
+
+  .main-title {
+    height: $titleBlockHeigth;
+    color: $white;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+    .title {
+      font-family: $font;
+      font-size: 70px;
+      margin: -50px 0 30px 0;
+      width: 100%;
+    }
+
+    .subTitle {
+      font-family: $font;
+      font-size: 25px;
+      margin-bottom: 30px;
+      width: 100%;
+    }
+
+    .LinkStylinng{
+      background: $darkGreen;
+      border: 1px solid $green;
+      border-radius: 10px;
+      color: $white;
+      display: inline-block;
+      font-family: $font;
+      text-transform: uppercase;
+      text-decoration: none;
+      margin-top: 10px;
+      padding: 20px;
+      @include transition;
+
+      &:hover {
+        -webkit-box-shadow: 1px 2px 5px 1px rgba(0,0,0,0.5);
+        -moz-box-shadow: 1px 2px 5px 1px rgba(0,0,0,0.5);
+        box-shadow: 1px 2px 5px 1px rgba(0,0,0,0.5);
+      }
+    }
+  }
+
+}

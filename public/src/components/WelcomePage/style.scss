@@ -1,0 +1,22 @@
+$white: #FFF;
+$onyx: #3E363F;
+$black: #1c1c1c;
+$green: #2aba31;
+$darkGreen: #175e1b;
+$grey: #d3d3d3;
+$darkGrey: #3a3a3a;
+$activeLinkColor: #f2dd9f;
+
+$font: 'Lato', sans-serif;
+
+
+@mixin transition {
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+
+.conteniner {
+  margin: 0 auto;
+  width: 980px;
+}

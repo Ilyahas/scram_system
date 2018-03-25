@@ -3,19 +3,19 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import './TopMenu.scss'
 const TopMenu = (props) => {
-  return (<div>
-    <nav className="Navigation">
-      <ul>
-        <li>
-            <Link className="LinkStylinng" to='/login'>Login</Link>
-        </li>
-        <li>
-          <Link className="LinkStylinng"  to='/signup'>Signup</Link>
+    return (<div>
+      <nav className="Navigation">
+        <ul className="conteniner">
+          <li>
+            <Link className="LinkStylinng singup"  to='/signup'>Sign up</Link>
+          </li>
+          <li>
+            <Link className="LinkStylinng login" to='/login'>Login</Link>
+          </li>
 
-        </li>
-      </ul>
-    </nav>
-  </div>)
+        </ul>
+      </nav>
+    </div>)
 }
 
 export default TopMenu

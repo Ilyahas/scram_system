@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Input from '../Input'
 import './Signup.scss'
 
@@ -33,20 +34,31 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div className="backImg">
-        <div className="App">
-          <div className="Modal">
-            <form onSubmit={this.onSubmit} className="ModalForm">
-              <Input id="name" type="text" placeholder="nickname" onChange={this.onChange} />
-              <Input id="username" type="email" placeholder="email" onChange={this.onChange} />
-              <Input id="password" type="password" placeholder="password" onChange={this.onChange} />
-              {this.props.errorMessage.duplicate&&
-              <p className="Allert">Such {this.props.errorMessage.duplicate} exists</p>}
-              <button>Signup<i className="fa fa-fw fa-chevron-right"></i> </button>
-            </form>
+        <div className="m-block">
+
+
+          <div className="bg-black"></div>
+          <div className="bg-img-block"></div>
+
+          <div className="backImg">
+
+            <div className="App">
+              <div className="homeBack">
+                <Link className="LinkStylinngBtn"  to='/'><i className="fa fa-fw fa-chevron-left"></i> HOME</Link>
+              </div>
+              <div className="Modal">
+                <form onSubmit={this.onSubmit} className="ModalForm">
+                  <Input id="name" type="text" placeholder="nickname" onChange={this.onChange} />
+                  <Input id="username" type="email" placeholder="email" onChange={this.onChange} />
+                  <Input id="password" type="password" placeholder="password" onChange={this.onChange} />
+                  {this.props.errorMessage.duplicate&&
+                  <p className="Allert">Such {this.props.errorMessage.duplicate} exists</p>}
+                  <button className="btn">Signup<i className="fa fa-fw fa-chevron-right"></i> </button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
     )
   }
 }

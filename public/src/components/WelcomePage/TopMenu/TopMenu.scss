@@ -1,30 +1,48 @@
-$onyx: #3E363F;
-// Variables
-$font: 'Lato', sans-serif;
-// Variables
-$font: 'Lato', sans-serif;
+@import "../style";
+
 .Navigation {
-  background-color:$onyx;
+  background-color:$black;
   display: flex;
   justify-content: flex-end;
   display: -ms-flexbox;
   display: -webkit-box;
   display: -webkit-flex;
-  height: 37px;
+  align-items: center;
+  height: 50px;
   ul{
-    display: flex;
     li{
+      float: right;
       font-family: $font;
       .LinkStylinng{
         text-transform: uppercase;
         text-decoration: none;
         padding: 11px;
-        display: inline-block;
-        color:black;
+        margin-left: 10px;
+        color: $white;
       }
-      .LinkStylinng:hover{
-        color:#fff;
+
+      .singup {
+        border: 1px solid $green;
+        border-radius: 10px;
+        @include transition;
+
+        &:hover {
+          background: $darkGreen;
+          @include transition;
+        }
       }
+
+      .login {
+        border: 1px solid $grey;
+        border-radius: 10px;
+        @include transition;
+
+        &:hover {
+          background: $darkGrey;
+          @include transition;
+        }
+      }
+
     }
 
   }
