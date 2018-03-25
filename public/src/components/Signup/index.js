@@ -1,6 +1,6 @@
 import React from 'react'
 import Input from '../Input'
-import './Signup.scss'
+import './Signup.css'
 
 class Signup extends React.Component {
   constructor(props) {

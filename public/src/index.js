@@ -24,6 +24,5 @@ ReactDOM.render(
     <Provider store={store}>
       <Route component={App} />
     </Provider>
-
   </BrowserRouter>
   , document.getElementById('root'));

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import "./Header.scss";
+import "./Header.css";
 import DropdownOptions from "../DropdownOptions"
 
 class ListItems extends Component {

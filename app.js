@@ -43,7 +43,10 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+//statics
+app.use(express.static(path.join(__dirname, 'public','build')));
+
 
 apiDocs(app)
 app.use('/auth',auth);
@@ -53,10 +56,13 @@ app.use('/user',user);
 
 app.use(errHandler.errHandler)
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname,'public','build', 'index.html'));
+});
+
 app.listen( () => {
   console.log( `server was started at 3030 port` );
 });
 
 
 module.exports = app;
-//TODO: add swager;

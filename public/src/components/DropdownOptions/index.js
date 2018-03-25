@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./DropdownOptions.scss"
+import "./DropdownOptions.css"
 class DropdownOptions extends Component {
     render() {
         return (

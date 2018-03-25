@@ -1,4 +1,4 @@
-import "./App.scss";
+import "./App.css";
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
@@ -15,9 +15,9 @@ const App = ({ location }) => {
   return (
     <Switch>
       <GuestRoute location={location} path="/" exact component={WelcomePage}></GuestRoute>
-      <GuestRoute location={location} path="/auth/signup" exact component={SignupPage}></GuestRoute>
-      <GuestRoute location={location} path="/auth/login" exact component={LoginPage}></GuestRoute>
-      <Route localtion={location} path="/auth/confirmation/:token" exact component={EmailConfirm}> </Route>
+      <GuestRoute location={location} path="/signup" exact component={SignupPage}></GuestRoute>
+      <GuestRoute location={location} path="/login" exact component={LoginPage}></GuestRoute>
+      <Route localtion={location} path="/confirmation/:token" exact component={EmailConfirm}> </Route>
       <UserRoute location={location} path="/home" exact component={HomePage}></UserRoute>
       {/* <Route path='/404' component={My404Component} />
 <Redirect from='*' to='/404' /> */}
