@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-
-export class Teams extends Component {
+import Teams from '../../../../../components/Teams'
+export class TeamContent extends Component {
 
   render() {
     return (
-      <div>
-        
-      </div>
+      <Teams/>
     )
   }
 }
