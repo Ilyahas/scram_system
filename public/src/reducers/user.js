@@ -4,9 +4,11 @@ import {
     , BAD_REQUEST
     , LOG_IN
     , REFRESH_TOKEN
+    , CONFIRM_EMAIL
 } from '../utils/types'
 
 const INITIAL_STATE = {
+    isEmailConfirmed:false,
     isLoading: true,
     isSuccess: false,
     isError: false,
@@ -32,7 +34,8 @@ export default function user(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 isLoading: false,
-                isSuccess: true
+                isSuccess: true,
+                isError:false
             }
         }
         case BAD_REQUEST: {
@@ -48,6 +51,7 @@ export default function user(state = INITIAL_STATE, action) {
                 isLoading: false,
                 isSuccess: true,
                 isLogin: true,
+                isError:false,
                 name: action.nickname,
                 email: action.email,
                 token: action.token
@@ -57,6 +61,15 @@ export default function user(state = INITIAL_STATE, action) {
             return{
                 ...state,
                 token:action.token
+            }
+        }
+        case CONFIRM_EMAIL :{
+            return{
+                ...state,
+                isEmailConfirmed:true,
+                isLoading: false,
+                isSuccess: true,
+                isError:false
             }
         }
         default:

@@ -6,7 +6,10 @@ export default {
         login:(data)=>
         axios.post(host+'/auth/login',{...data}),
         signup:(credentials)=>
-        axios.post(host+'/auth/signup', {...credentials})
+        axios.post(host+'/auth/signup', {...credentials}),
+        confirmEmail:(token)=>
+        axios.post(host +'/auth/confirmation/'+`${token}`)
+
     },
     searchUsers:{
         search:(query)=>axios.get(query,header(localStorage.JWT))

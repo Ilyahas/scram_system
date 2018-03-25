@@ -14,11 +14,11 @@ import UserRoute from "../src/containers/routes/UserRoute";
 const App = ({ location }) => {
   return (
     <Switch>
-      <GuestRoute location={location} path="/" exact component={WelcomePage}></GuestRoute>
-      <GuestRoute location={location} path="/signup" exact component={SignupPage}></GuestRoute>
-      <GuestRoute location={location} path="/login" exact component={LoginPage}></GuestRoute>
-      <Route localtion={location} path="/confirmation/:token" exact component={EmailConfirm}> </Route>
-      <UserRoute location={location} path="/home" exact component={HomePage}></UserRoute>
+      <Route location={location} path="/" exact component={WelcomePage}></Route>
+      <Route location={location} path="/signup" exact component={SignupPage}></Route>
+      <Route location={location} path="/login" exact component={LoginPage}></Route>
+      <Route localtion={location} path="/auth/confirmation/:token" exact component={EmailConfirm}> </Route>
+      <Route location={location} path="/home" exact component={HomePage}></Route>
       {/* <Route path='/404' component={My404Component} />
 <Redirect from='*' to='/404' /> */}
     </Switch>

@@ -4,6 +4,7 @@ import {
     , BAD_REQUEST
     , LOG_IN
     , REFRESH_TOKEN
+    , CONFIRM_EMAIL
 } from '../utils/types';
 //TODO: logout action
 import api from '../utils/api'
@@ -13,7 +14,6 @@ export const userLoggedIn = (user) => ({
 })
 export const userSignup = () => ({
     type: SUCCESS_REQUEST,
-
 })
 export const userStartRequest = () => ({
     type: START_REQUEST
@@ -21,6 +21,9 @@ export const userStartRequest = () => ({
 export const badRequest = (errorMessage) => ({
     type: BAD_REQUEST,
     errorMessage
+})
+export const emailSuccsessfullyConfirmed =()=>({
+    type:CONFIRM_EMAIL
 })
 export const refreshToken = (token) => ({
     type: REFRESH_TOKEN,
@@ -49,6 +52,15 @@ export const signup = credentials => async dispatch => {
 
     }
 }
-export const token = token => dispatch=>{
+export const emailConfirm = token => async dispatch => {
+    try {
+        dispatch(userStartRequest())
+        await api.user.confirmEmail(token)
+        dispatch( emailSuccsessfullyConfirmed())
+    } catch (error) {
+        dispatch(badRequest(error.response.data.requestStatus))
+    }
+}
+export const token = token => dispatch => {
     dispatch(refreshToken(token))
 }

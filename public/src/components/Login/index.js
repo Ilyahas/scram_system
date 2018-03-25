@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Input from '../Input'
-import '../Signup/Signup.scss'
+import '../Signup/Signup.css'
 
 
 class Login extends React.Component {

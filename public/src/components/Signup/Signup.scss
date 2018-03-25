@@ -1,8 +1,7 @@
-$font: 'Lato', sans-serif;
-$onyx: #3E363F;
-$cinnabar: #DD403A;
+@import '../../variables.scss';
+
 .backImg{
-    background-image: url(https://www.publicdomainpictures.net/pictures/70000/velka/stars-in-the-night-sky.jpg);
+    background-image: $background;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;

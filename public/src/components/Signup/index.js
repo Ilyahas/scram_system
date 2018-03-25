@@ -1,7 +1,6 @@
 import React from 'react'
 import Input from '../Input'
 import './Signup.css'
-
 class Signup extends React.Component {
   constructor(props) {
     super(props)
