@@ -80,8 +80,10 @@ async function createUserToken(req, res, next) {
     let { email, password } = req.body;
     try {
         let user = await User.findOne({ email: email })
+        if(!user.confirmed) responseJSON(res,400,false,{error:"Confirm Email"})
         let salt = user.salt;
         let hash = user.passwordHash;
+
         if (user &&
             user.confirmed &&
             isHashesEqual(salt, user.passwordHash, password)) {
@@ -102,7 +104,7 @@ async function createUserToken(req, res, next) {
                     }
                 })
         }
-
+        
     } catch (error) {
         responseJSON(res,403,false,{error:"Access denied"})
     }
