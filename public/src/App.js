@@ -1,24 +1,32 @@
-import  "./App.scss";
+import "./App.css";
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Route, Switch } from 'react-router-dom'
 import WelcomePage from "./containers/pages/WelcomePage";
 import SignupPage from "./containers/pages/SignupPage";
 import LoginPage from "./containers/pages/LoginPage";
 import HomePage from "./containers/pages/HomePage";
-import { Route } from 'react-router-dom'
-const App = ({location}) => {
+import EmailConfirm from './containers/pages/EmailConfirm'
+//
+import GuestRoute from "../src/containers/routes/GuestRoute";
+import UserRoute from "../src/containers/routes/UserRoute";
+//TODO: props type check
+const App = ({ location }) => {
   return (
-    <div>
-        <Route location={location} path="/" exact component={WelcomePage}> </Route>
-        <Route location={location} path="/home" exact component={HomePage}> </Route>
-        <Route location={location} path="/signup" exact component={SignupPage}></Route>
-        <Route location={location} path="/login" exact component={LoginPage}></Route>
-    </div>
+    <Switch>
+      <Route location={location} path="/" exact component={WelcomePage}></Route>
+      <Route location={location} path="/signup" exact component={SignupPage}></Route>
+      <Route location={location} path="/login" exact component={LoginPage}></Route>
+      <Route localtion={location} path="/auth/confirmation/:token" exact component={EmailConfirm}> </Route>
+      <Route location={location} path="/home" exact component={HomePage}></Route>
+      {/* <Route path='/404' component={My404Component} />
+<Redirect from='*' to='/404' /> */}
+    </Switch>
   )
 }
 
-App.propTypes={
-  location:PropTypes.shape({
+App.propTypes = {
+  location: PropTypes.shape({
     pathname: PropTypes.string.isRequired
   }).isRequired
 }

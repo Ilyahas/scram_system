@@ -1,0 +1,33 @@
+.Header {
+  background-color: #3E363F;
+  display: flex;
+  align-items: center; }
+  .Header .NavigationActive {
+    color: gray !important; }
+  .Header .MenuItems li {
+    color: white; }
+    .Header .MenuItems li a {
+      display: block;
+      padding: 10px; }
+  .Header .MenuItems li:hover {
+    color: gray;
+    cursor: pointer; }
+  .Header .MenuItems {
+    display: flex;
+    justify-content: flex-start;
+    flex: 1; }
+  .Header .UserInfo {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1; }
+    .Header .UserInfo li {
+      position: relative; }
+    .Header .UserInfo fa {
+      margin: 0 10px; }
+    .Header .UserInfo .UserProf {
+      display: flex; }
+      .Header .UserInfo .UserProf i::after {
+        content: '\25BE';
+        margin-right: 10px; }
+  .Header .DdOptions {
+    color: antiquewhite; }

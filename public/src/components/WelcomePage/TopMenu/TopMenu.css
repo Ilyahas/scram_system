@@ -1,0 +1,20 @@
+.Navigation {
+  background-color: #3E363F;
+  display: flex;
+  justify-content: flex-end;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -webkit-flex;
+  height: 37px; }
+  .Navigation ul {
+    display: flex; }
+    .Navigation ul li {
+      font-family: "Lato", sans-serif; }
+      .Navigation ul li .LinkStylinng {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 11px;
+        display: inline-block;
+        color: black; }
+      .Navigation ul li .LinkStylinng:hover {
+        color: #fff; }

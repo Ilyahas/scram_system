@@ -12,8 +12,6 @@ class SignupPage extends React.Component {
     )
   }
   componentWillReceiveProps = (nextProps) => {
-    //console.log( nextProps.errorMessage)
-   // console.log(nextProps.e)
     nextProps.isSuccess ?this.props.history.push('/home') : console.log("ERR")
   }
 }

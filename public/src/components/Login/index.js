@@ -14,8 +14,15 @@ class Login extends React.Component {
     loading: false,
     errors: {}
   }
-  onChange = e =>
-    this.setState({ ...this.state.data, [e.target.name]: e.target.value });
+  onChange = e =>  this.setState({
+    ...this.state,
+    data: { ...this.state.data, [e.target.placeholder]: e.target.value }
+  });
+
+  onSubmit = e => {
+    e.preventDefault();
+    this.props.submit(this.state.data)
+  }
 
 
   render() {
@@ -30,10 +37,12 @@ class Login extends React.Component {
                 <Link className="LinkStylinngBtn"  to='/'><i className="fa fa-fw fa-chevron-left"></i> HOME</Link>
               </div>
               <div className="Modal">
-                <form onSubmit={this.props.onSubmit} className="ModalForm">
-                  <Input id="username" type="email" placeholder="email" />
-                  <Input id="password" type="password" placeholder="password" />
-                  <button>Login<i className="fa fa-fw fa-chevron-right"></i> </button>
+                <form onSubmit={this.onSubmit} className="ModalForm">
+                  <Input id="username" type="email" placeholder="email" onChange={this.onChange}/>
+                  <Input id="password" type="password" placeholder="password" onChange={this.onChange}/>
+                    {this.props.errorMessage.error&&
+                    <p className="Allert">Can not log in</p>}
+                    <button>Login<i className="fa fa-fw fa-chevron-right"></i> </button>
                 </form>
               </div>
             </div>

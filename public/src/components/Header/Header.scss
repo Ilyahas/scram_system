@@ -1,28 +1,47 @@
 $onyx: #3E363F;
-.Header{
+
+.Header {
     background-color: $onyx;
     display: flex;
-    li{
+    align-items: center;
+    .NavigationActive{
+        color: gray!important;
+    }
+    .MenuItems li {
         color: white;
-        a{
+        a {
             display: block;
             padding: 10px;
         }
     }
-    li:hover{
-        color:blue;
+    .MenuItems li:hover {
+        color: gray;
         cursor: pointer;
     }
-    .MenuItems{
+    .MenuItems {
         display: flex;
         justify-content: flex-start;
-        flex: 1; 
+        flex: 1;
     }
-    .UserInfo{
+    .UserInfo {
         display: flex;
         justify-content: flex-end;
-       // flex: 1;
+        flex: 1;
+        li {
+            position: relative;
+        }
+        fa {
+            margin:0 10px;
+        }
+        .UserProf{
+            display: flex;
+            i::after{
+                content: '\25BE';
+                margin-right: 10px; 
+            }
+        }
     }
-    
-    
+    .DdOptions{
+        color: antiquewhite;
+    }
 }

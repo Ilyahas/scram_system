@@ -1,0 +1,75 @@
+.backClr {
+  background: -moz-linear-gradient(34deg, gray 0%, #ededed 99%, #ededed 100%);
+  /* ff3.6+ */
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, gray), color-stop(99%, #ededed), color-stop(100%, #ededed));
+  /* safari4+,chrome */
+  background: -webkit-linear-gradient(34deg, gray 0%, #ededed 99%, #ededed 100%);
+  /* safari5.1+,chrome10+ */
+  background: -o-linear-gradient(34deg, gray 0%, #ededed 99%, #ededed 100%);
+  /* opera 11.10+ */
+  background: -ms-linear-gradient(34deg, gray 0%, #ededed 99%, #ededed 100%);
+  /* ie10+ */
+  background: linear-gradient(56deg, gray 0%, #ededed 99%, #ededed 100%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  font: "Lato", sans-serif; }
+  .backClr .FlexContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column; }
+    .backClr .FlexContainer .TeamItem {
+      width: 80%;
+      height: 100px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      transition: 0.3s;
+      border-radius: 5px;
+      background-color: #fff;
+      margin: 6px;
+      display: flex;
+      flex-direction: row; }
+      .backClr .FlexContainer .TeamItem .TeamDetails {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        flex: 1; }
+        .backClr .FlexContainer .TeamItem .TeamDetails h2:first-child {
+          margin-top: 0; }
+        .backClr .FlexContainer .TeamItem .TeamDetails h2 {
+          margin-top: 10px;
+          margin-left: 15px;
+          font-size: 20px; }
+        .backClr .FlexContainer .TeamItem .TeamDetails .TeamLead {
+          color: #3E363F;
+          font-size: 15px; }
+      .backClr .FlexContainer .TeamItem .MoreInfo {
+        display: flex;
+        justify-content: flex-end;
+        flex: 1;
+        align-items: center;
+        margin-right: 20px; }
+        .backClr .FlexContainer .TeamItem .MoreInfo i {
+          font-size: 20px; }
+    .backClr .FlexContainer .TeamItem:first-child {
+      margin-top: 20px; }
+    .backClr .FlexContainer .TeamItem:hover {
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); }
+    .backClr .FlexContainer .ButtonContainer {
+      display: flex;
+      align-items: flex-start;
+      width: 80%; }
+      .backClr .FlexContainer .ButtonContainer .AddButton {
+        background-color: #5ca55c;
+        box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        height: 40px;
+        width: 40px;
+        border-radius: 40px;
+        transition: 0.3s;
+        margin-top: 10px;
+        border: none; }
+        .backClr .FlexContainer .ButtonContainer .AddButton i {
+          color: #fff; }
+      .backClr .FlexContainer .ButtonContainer .AddButton:hover {
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2); }

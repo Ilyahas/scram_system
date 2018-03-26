@@ -11,15 +11,18 @@ import thunk from 'redux-thunk';
 import rootReducer from './utils/rootReducer';
 import { composeWithDevTools } from 'redux-devtools-extension'
 ////
+import { token } from "../src/actions/auth";
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk)))
-
+if(localStorage.JWT){
+    const user = {token:localStorage.JWT}
+    store.dispatch(token(user))
+}
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
       <Route component={App} />
     </Provider>
-
   </BrowserRouter>
   , document.getElementById('root'));
