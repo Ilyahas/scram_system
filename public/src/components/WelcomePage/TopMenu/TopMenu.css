@@ -1,20 +1,40 @@
+.conteniner {
+  margin: 0 auto;
+  width: 980px; }
+
 .Navigation {
-  background-color: #3E363F;
+  background-color: #1c1c1c;
   display: flex;
   justify-content: flex-end;
   display: -ms-flexbox;
   display: -webkit-box;
   display: -webkit-flex;
-  height: 37px; }
-  .Navigation ul {
-    display: flex; }
-    .Navigation ul li {
-      font-family: "Lato", sans-serif; }
-      .Navigation ul li .LinkStylinng {
-        text-transform: uppercase;
-        text-decoration: none;
-        padding: 11px;
-        display: inline-block;
-        color: black; }
-      .Navigation ul li .LinkStylinng:hover {
-        color: #fff; }
+  align-items: center;
+  height: 50px; }
+  .Navigation ul li {
+    float: right;
+    font-family: "Lato", sans-serif; }
+    .Navigation ul li .LinkStylinng {
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 11px;
+      margin-left: 10px;
+      color: #FFF; }
+    .Navigation ul li .singup {
+      border: 1px solid #2aba31;
+      border-radius: 10px;
+      -webkit-transition: all 1s;
+      transition: all 1s; }
+      .Navigation ul li .singup:hover {
+        background: #175e1b;
+        -webkit-transition: all 1s;
+        transition: all 1s; }
+    .Navigation ul li .login {
+      border: 1px solid #d3d3d3;
+      border-radius: 10px;
+      -webkit-transition: all 1s;
+      transition: all 1s; }
+      .Navigation ul li .login:hover {
+        background: #3a3a3a;
+        -webkit-transition: all 1s;
+        transition: all 1s; }

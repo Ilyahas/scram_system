@@ -5,7 +5,7 @@ import { fadeInDown } from 'react-animations'
 import Radium, {StyleRoot} from 'radium';
 
 import "../style.scss"
-import "./Main.scss"
+import "./Main.css"
 
 const styles = {
     fadeInDown: {

@@ -11,6 +11,7 @@
     "dotenv-expand": "4.2.0",
     "file-loader": "1.1.5",
     "font-awesome": "^4.7.0",
+    "grunt-sass": "^2.1.0",
     "promise": "8.0.1",
     "radium": "^0.23.0",
     "raf": "3.4.0",
@@ -37,7 +38,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "node-sass": "^4.7.2",
+    "node-sass": "3.4.1",
     "node-sass-chokidar": "^1.2.1",
     "npm-run-all": "^4.1.2",
     "react-scripts": "^1.1.1",
