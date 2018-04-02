@@ -1,0 +1,62 @@
+.BackdropStyle {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 50px;
+    .ModalStyle {
+        background-color: #fff;
+        border-radius: 5px;
+        max-width: 500px;
+        min-height: 300px;
+        margin: 0 auto;
+        padding: 30px;
+        .CloseButton{
+            position: fixed;
+            top: 0;
+            right: 0;
+            background: #fff;
+            width: 2.5rem;
+            height: 2.5rem;
+            padding: 0;
+            border: 0;
+            cursor: pointer;
+            outline: 0;
+            .fa{
+                font-size: 20px;
+                color: #888;
+            }
+            .fa:hover{
+                color: black;
+            }
+        }
+        .section-heading{
+            margin-bottom: 5px;
+        }
+        .TeamInput{
+            display: block;
+            width: 100%;
+            padding: 0 10px;
+            line-height: 34px;
+            background-color: #fff;
+            border-color: #d9d9d9 #ccc #b3b3b3;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            color: #333;
+            cursor: default;
+        }
+        .PaddingTop{
+            padding-top: 20px;
+        }
+        .PaddingTop:last-of-type{
+            padding-bottom: 30px;
+        }
+        ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #aaa;
+            font-size: 16px;
+            opacity: 1; /* Firefox */
+        }
+    }
+}

@@ -1,7 +1,7 @@
 import {
-    SUCCESS_REQUEST,
-    BAD_REQUEST,
-    GET_REQUEST
+    GET_LIST_USERS,
+    GET_LIST_USERS_BAD_REQUEST,
+    GET_LIST_USERS_SUCCESS
 } from '../utils/types'
 
 const INITIAL_STATE = {
@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 
 export default function userSearch(state = INITIAL_STATE, action) {
     switch (action.type) {
-        case GET_REQUEST: {
+        case GET_LIST_USERS: {
             return {
                 ...state,
                 isRequest: true,
@@ -21,21 +21,21 @@ export default function userSearch(state = INITIAL_STATE, action) {
                 isError: false
             }
         }
-        case SUCCESS_REQUEST: {
+        case GET_LIST_USERS_SUCCESS: {
             return {
                 ...state,
                 searchedUsers: action.users,
-                isRequest:false,
-                isSuccess:true,
-                isError:false
+                isRequest: false,
+                isSuccess: true,
+                isError: false
             }
         }
-        case BAD_REQUEST:{
-            return{
+        case GET_LIST_USERS_BAD_REQUEST: {
+            return {
                 ...state,
-                isRequest:false,
-                isSuccess:false,
-                isError:true
+                isRequest: false,
+                isSuccess: false,
+                isError: true
             }
         }
         default:

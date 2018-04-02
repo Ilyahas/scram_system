@@ -1,5 +1,5 @@
-export const header =(token)=>{
-    return {
-        'Authorization':`Bearer ${token}`
-    }
+const AuthStr = 'Bearer '.concat(localStorage.JWT);
+
+export const header = () => {
+    return {headers: { Authorization: AuthStr } }
 }

@@ -7,7 +7,7 @@ class Signup extends React.Component {
     super(props)
     this.state = {
       data: {
-        nickname: "",
+        companyName: "",
         email: "",
         password: ""
       },
@@ -47,7 +47,7 @@ class Signup extends React.Component {
               </div>
               <div className="Modal">
                 <form onSubmit={this.onSubmit} className="ModalForm">
-                  <Input id="name" type="text" placeholder="nickname" onChange={this.onChange} />
+                  <Input id="name" type="text" placeholder="companyName" onChange={this.onChange} />
                   <Input id="username" type="email" placeholder="email" onChange={this.onChange} />
                   <Input id="password" type="password" placeholder="password" onChange={this.onChange} />
                   {this.props.errorMessage.duplicate&&
