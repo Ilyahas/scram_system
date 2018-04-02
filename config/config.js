@@ -9,7 +9,8 @@ module.exports = {
         user: '0',
         projectManager: '1',
         teamlead: '2',
-        admin: '3'
+        owner:'3',
+        admin: '4'
     },
     'expireTime': '86400',
     'mailer': {

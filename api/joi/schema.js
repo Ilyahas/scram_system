@@ -10,9 +10,9 @@ module.exports = {
     },
     signup: {
         body: Joi.object({
-            nickname: Joi.string().required(),
+            companyName: Joi.string(),
             password: Joi.string().required(),
-            email: Joi.string().email().required()
+            email: Joi.string().email()
         })
     },
     company: {
@@ -28,6 +28,11 @@ module.exports = {
             companyNames:Joi.array().items(Joi.string().regex(/[a-zA-Zа-яА-Я\d\-_\s]+/i))
         })
 
+    },
+    emailConfirm:{
+        params:Joi.object({
+            token:Joi.string().required()
+        })
     },
     user: {
         query: Joi.object({

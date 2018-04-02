@@ -2,13 +2,10 @@ const express = require('express');
 var app = express();
 const path = require('path');
 
-const mongoose= require('mongoose')
-
-
-const config = require('./config/config')
 const expressSetup = require('./config/express')
 const routes = require('./config/routes')
 const apiDocs = require('./config/swagger')
+const mongooseSetup = require('./config/mongoose')
 
 expressSetup(app);
 
@@ -16,18 +13,9 @@ require('./api/models/company')
 require('./api/models/user')
 require('./api/models/token')
 
-
-mongoose.connect(config.mongoUrl)
-
-mongoose.connection.on('connected',()=>{
-  console.log('Mongoose connection opened on '+ config.mongoUrl)
-})
-mongoose.connection.on('error',()=>{
-  console.log('Mongoose connection error  '+ config.mongoUrl)
-})
+mongooseSetup();
 
 app.use(express.static(path.join(__dirname, 'public','build')));
-
 
 apiDocs(app)
 routes(app)

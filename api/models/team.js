@@ -13,6 +13,10 @@ let Team = new Schema({
         type: Shema.Types.ObjecdId,
         ref: 'User'
     },
+    manager: {
+        type: Shema.Types.ObjecdId,
+        ref: 'User'
+    },
     members:[{
         type:Shema.Types.ObjectId,
         ref:'User'

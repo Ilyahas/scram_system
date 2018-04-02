@@ -4,6 +4,7 @@ let jwt = require('jsonwebtoken');
 
 let User = require('../models/user')
 let Token = require('../models/token')
+let Company = require('../models/company')
 let config = require('../../config/config')
 let errObj = require('../utils/parseErrors')
 let emailSender = require('../utils/sendgrid')
@@ -49,6 +50,9 @@ async function signupUser(req, res, next) {
     let userCredentials = req.body;
     try {
         let user = await createUser(userCredentials);
+        let company = await createCompany(user._id, userCredentials.companyName)
+        user.company = company._id;
+        await user.save()
         let email = await emailSender.sendConfirmationEmail(user);
         responseJSON(res, 200, true, {})
     } catch (err) {
@@ -63,6 +67,9 @@ function createUser(data) {
     data.confirmationToken = confirmationToken;
     return User.create(data)
 }
+function createCompany(owner, companyName) {
+    return Company.create({ owner, companyName })
+}
 async function verifyUserConfirmation(req, res, next) {
     let token = req.params.token;
     try {
@@ -71,6 +78,7 @@ async function verifyUserConfirmation(req, res, next) {
             { confirmationToken: '', confirmed: true },
             { new: true }
         )
+        if (!user) return responseJSON(res, 400, false, { error: "email confirmation failed" })
         responseJSON(res, 200, true, {})
     } catch (err) {
         next(err)
@@ -80,7 +88,7 @@ async function createUserToken(req, res, next) {
     let { email, password } = req.body;
     try {
         let user = await User.findOne({ email: email })
-        if(!user.confirmed) responseJSON(res,400,false,{error:"Confirm Email"})
+        if (!user.confirmed) responseJSON(res, 400, false, { error: "Confirm Email" })
         let salt = user.salt;
         let hash = user.passwordHash;
 
@@ -104,9 +112,9 @@ async function createUserToken(req, res, next) {
                     }
                 })
         }
-        
+
     } catch (error) {
-        responseJSON(res,403,false,{error:"Access denied"})
+        responseJSON(res, 403, false, { error: "Access denied" })
     }
 }
 function verifyToken(req, res, next) {
@@ -124,14 +132,13 @@ function verifyToken(req, res, next) {
         .then(data => {
             let connectionCredentials = getUserIpAndAgent(req);
             if (!isTokenCredentialsValid(data, connectionCredentials)) {
-                next(errObj.createError('access denied', 403))
+                return responseJSON(res,403,false,{error:'access denied'})
             }
             req.user = data.userId;
             next();
         })
         .catch(err => {
-            console.log(er)
-            next(errObj.createError('can`t find such token', 400))
+            next(err)
         })
 }
 function verifyAdmin(req, res, next) {
@@ -140,9 +147,10 @@ function verifyAdmin(req, res, next) {
     }
     return next(errObj.createError('don`t have access', 400))
 }
+//TODO:fix ip
 let isTokenCredentialsValid = (tokenModel, reqCredentials) => {
     return tokenModel.userAgent === reqCredentials.userAgent &&
-        tokenModel.userIp === reqCredentials.ip &&
+      //  tokenModel.userIp === reqCredentials.ip &&
         tokenModel.tokenHash === reqCredentials.token;
 }
 function isHashesEqual(salt, hash, password) {

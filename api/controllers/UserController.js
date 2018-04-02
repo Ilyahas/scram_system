@@ -12,15 +12,12 @@ class UserController extends BaseController {
         let isApproved = req.query.isApproved
 
         if (search) {
-            query.nickname = new RegExp('^' + search)
+            query.email = new RegExp('^' + search)
         }
 
         let listUserPromise = User.
             find(query).
-            select('-salt -passwordHash -role -confirmationToken').
-            skip(perPage * (page - 1)).
-            limit(perPage);
-
+            select('email')
         if (sortBy) {
             let sortQuery = {}
             sortQuery[sortBy] = sort

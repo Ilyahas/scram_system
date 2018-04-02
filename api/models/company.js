@@ -7,8 +7,8 @@ const Schema = mongoose.Schema
 let Company = new Schema({
     companyName:{
         type:String,
-        unique:true,
-        required:true
+        default:''
+        //unique:true,
     },
     owner:{
         type:Schema.Types.ObjectId,

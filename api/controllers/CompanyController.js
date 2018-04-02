@@ -49,6 +49,13 @@ class CompanyController extends BaseController {
             next(error)
         }
     }
+    async getUserTeams(req,jes,next){
+        try {
+            
+        } catch (error) {
+            next(error)
+        }
+    }
     async submitCompany() {
 
 

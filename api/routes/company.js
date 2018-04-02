@@ -16,8 +16,9 @@ router.get('/',
     auth.verifyAdmin,
     CmpCtrl.getListOfUnverifiedCompanies.bind(CmpCtrl))
 
-
-
+router.get('/:userId',
+auth.verifyToken,
+)
 router.post('/',
     auth.verifyToken,
     validate.body(schemas.company.bodyCreate, options),

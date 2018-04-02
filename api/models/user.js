@@ -2,10 +2,13 @@ let mongoose = require('mongoose')
 let Schema = mongoose.Schema;
 
 let User = new Schema({
-    nickname:{
+    company:{
+        type:Schema.Types.ObjectId,
+        ref:'Company'
+    },
+    companyName:{
         type:String,
-        required:true,
-        unique:true
+        default:'NoName'
     },
     email: {
         type: String,

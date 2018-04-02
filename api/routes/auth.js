@@ -14,7 +14,8 @@ router.post('/signup',
     validate.body(schemas.signup.body),
     authController.signupUser
 )
-router.get('/confirmation/:token',
+router.post('/confirmation/:token',
+    validate.params(schemas.emailConfirm.params),
     authController.verifyUserConfirmation
 )
 
