@@ -1,6 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import TopMenu from "./TopMenu"
 import MainBlock from "./Main"
 

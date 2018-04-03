@@ -27,7 +27,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   tabChanged:tabChanged,
-
 }
-
+HomePage.propTypes={
+  tabChanged:PropTypes.number.isRequired,
+}
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

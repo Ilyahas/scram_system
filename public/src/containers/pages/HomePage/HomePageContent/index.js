@@ -25,5 +25,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
     
 }
-
+HomePageContent.propTypes={
+  index:PropTypes.number.isRequired,
+}
 export default connect(mapStateToProps, mapDispatchToProps)(HomePageContent)

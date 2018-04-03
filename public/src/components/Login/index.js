@@ -51,4 +51,8 @@ class Login extends React.Component {
     )
   }
 }
+Login.propTypes={
+  errorMessage:PropTypes.string.isRequired,
+  submit:PropTypes.func.isRequired,
+}
 export default Login;

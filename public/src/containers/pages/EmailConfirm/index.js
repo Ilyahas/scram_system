@@ -26,5 +26,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
     emailConfirm,
 }
-
+EmailConfirm.propTypes ={
+    isEmailConfirmed:PropTypes.bool.isRequired,
+}
 export default connect(mapStateToProps, mapDispatchToProps)(EmailConfirm)

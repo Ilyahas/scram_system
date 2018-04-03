@@ -18,9 +18,9 @@ const mapStateToProps = (state) => ({
     isSuccess:state.user.isSuccess,
     errorMessage:state.user.errorMessage
 })
-
-const mapDispatchToProps = {
-  
+LoginPage.propTypes={
+  isLoading:PropTypes.bool.isRequired,
+  isSuccess:PropTypes.bool.isRequired,
+  errorMessage:PropTypes.bool.isRequired,
 }
-
 export default connect(mapStateToProps, {login})(LoginPage)

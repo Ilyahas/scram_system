@@ -1,6 +1,5 @@
 import api from '../utils/api'
-import axios from 'axios'
-import {header} from '../utils/config'
+
 import {
     GET_LIST_USERS,
     GET_LIST_USERS_BAD_REQUEST,

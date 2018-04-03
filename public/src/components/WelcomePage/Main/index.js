@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { fadeInDown } from 'react-animations'
 import Radium, {StyleRoot} from 'radium';
@@ -34,5 +33,4 @@ const MainBlock = (props) => {
     </div>
   )
 }
-
 export default MainBlock

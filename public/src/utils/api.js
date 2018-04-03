@@ -8,7 +8,7 @@ export default {
         signup: (credentials) =>
             axios.post(host + '/auth/signup', { ...credentials }),
         confirmEmail: (token) =>
-            axios.post(host + '/auth/confirmation/' + `${token}`),
+            axios.post(host + '/auth/confirmation/'`${token}`),
         list: (input) =>
             axios.get(host + `/user?search=${input}`, header())
                 .then(response => response.data.requestResult.users)

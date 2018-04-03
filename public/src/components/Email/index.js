@@ -25,3 +25,7 @@ export class Email extends Component {
     )
   }
 }
+Email.propTypes={
+  isError:PropTypes.bool.isRequired,
+  submit:PropTypes.func.isRequired,
+}

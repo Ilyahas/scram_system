@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import './modal.css'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css';
-import axios from 'axios'
-import { header } from '../../../utils/config'
-const AuthStr = 'Bearer '.concat(localStorage.JWT);
-const host = 'http://localhost:3030';
 
 const AsyncItem = ({ label, isMulti, members, onChange, getUsers }) => {
     const AsyncComponent = Select.Async;
