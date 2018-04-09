@@ -1,9 +1,11 @@
 $onyx: #3E363F;
 
 .Header {
+    padding: 0 9.5%;
     background-color: $onyx;
     display: flex;
     align-items: center;
+    z-index: 10;
     .NavigationActive{
         color: gray!important;
     }
@@ -35,6 +37,10 @@ $onyx: #3E363F;
         }
         .UserProf{
             display: flex;
+            color: white;
+            &:hover {
+                cursor: pointer;
+            }
             i::after{
                 content: '\25BE';
                 margin-right: 10px; 

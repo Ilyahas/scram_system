@@ -1,7 +1,9 @@
 .Header {
+  padding: 0 9.5%;
   background-color: #3E363F;
   display: flex;
-  align-items: center; }
+  align-items: center;
+  z-index: 10; }
   .Header .NavigationActive {
     color: gray !important; }
   .Header .MenuItems li {
@@ -25,7 +27,10 @@
     .Header .UserInfo fa {
       margin: 0 10px; }
     .Header .UserInfo .UserProf {
-      display: flex; }
+      display: flex;
+      color: white; }
+      .Header .UserInfo .UserProf:hover {
+        cursor: pointer; }
       .Header .UserInfo .UserProf i::after {
         content: '\25BE';
         margin-right: 10px; }

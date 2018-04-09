@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
 import "./DropdownOptions.css"
+import { fadeInDown } from 'react-animations'
+import Radium, {StyleRoot} from 'radium';
+
+
+const styles = {
+    fadeInDown: {
+        animation: 'x 1s',
+        animationName: Radium.keyframes(fadeInDown, 'fadeInDown')
+    }
+}
+
 class DropdownOptions extends Component {
     render() {
         return (
-            <div className="DbContainer ">
+            <StyleRoot className="DbMain">
+            <div className="DbContainer" style={styles.fadeInDown}>
                  <div className="Nickname  DbSegment">
                     Signed as {this.props.nickname}
                 </div>
@@ -22,6 +34,7 @@ class DropdownOptions extends Component {
                     </ul>
                 </div>
             </div>
+            </StyleRoot>
         );
     }
 }
