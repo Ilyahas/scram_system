@@ -73,6 +73,7 @@ $buttonColor:#5ca55c;
             align-items: flex-start;
             width: 80%;
             .AddButton {
+                outline:none;
                 background-color: $buttonColor;
                 box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
                 border-radius: 10px;
@@ -87,6 +88,7 @@ $buttonColor:#5ca55c;
                 }
             }
             .AddButton:hover {
+                cursor: pointer;
                 box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
             }
         }
