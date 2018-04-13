@@ -147,11 +147,8 @@ function verifyAdmin(req, res, next) {
     }
     return next(errObj.createError('don`t have access', 400))
 }
-//TODO:fix ip
 let isTokenCredentialsValid = (tokenModel, reqCredentials) => {
-    return tokenModel.userAgent === reqCredentials.userAgent &&
-      //  tokenModel.userIp === reqCredentials.ip &&
-        tokenModel.tokenHash === reqCredentials.token;
+    return  tokenModel.tokenHash === reqCredentials.token;
 }
 function isHashesEqual(salt, hash, password) {
     let credentialHash = hashPasswordSha512(String(password), salt);

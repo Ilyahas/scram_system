@@ -17,11 +17,6 @@ let Token = new Schema({
     tokenHash: {
         type: String,
         required: true
-    },
-    createdAt: {
-        type: Date,
-        default:Date.now,
-        expires:parseInt(config.expireTime)
     }
 }, { timestamps: true });
 
