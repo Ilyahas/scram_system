@@ -3,14 +3,14 @@ import "./Header.css";
 import DropdownOptions from "../DropdownOptions"
 
 class ListItems extends Component {
-  onClick = index => {
-    this.props.onTabClick(index)
-  }
+  // onClick = index => {
+  //   this.props.onTabClick(index)
+  // }
   render() {
     let values = ['Home', 'Projects', 'Team', 'Users']
     let listItems = values.map((data, index) =>
       <li key={index.toString()}
-        onClick={() => this.onClick(index)}
+        // onClick={() => this.onClick(index)}
         className={this.props.currentTab===index?'NavigationActive':''}>
         <a>{data}</a>
       </li>

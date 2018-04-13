@@ -19,7 +19,6 @@ const AsyncItem = ({ label, isMulti, members, onChange, getUsers }) => {
         </div>
     )
 }
-
 export default class AddTeamModal extends Component {
     constructor(props) {
         super(props)

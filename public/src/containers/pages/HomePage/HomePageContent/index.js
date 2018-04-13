@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import TeamContent from './Teams'
 export class HomePageContent extends Component {
+  handleActive(url) {
+    this.props.history.push(url)
+  }
   render() {
     return (
       <div>
