@@ -112,14 +112,13 @@ async function createUserToken(req, res, next) {
                     }
                 })
         }
-
+        responseJSON(res, 403,false,{})
     } catch (error) {
         responseJSON(res, 403, false, { error: "Access denied" })
     }
 }
 function verifyToken(req, res, next) {
     let token = req.token
-    //TODO:check if email confirmed or not
     Token.findOne({ tokenHash: token })
         .populate(
             {

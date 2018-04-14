@@ -18,7 +18,6 @@ router.post('/confirmation/:token',
     validate.params(schemas.emailConfirm.params),
     authController.verifyUserConfirmation
 )
-
 router.post('/login',
     validate.body(schemas.auth.body),
     authController.createUserToken)
@@ -26,7 +25,9 @@ router.post('/login',
 router.put('/reset_password', (req, res) => {
     res.status(405).json({ err: 'not implemeted yet' })
 })
-
+router.get('/token/:token',
+    validate.params(schemas.emailConfirm.params),
+    authController.verifyToken)
 router.delete('/logout', (req, res) => {
     res.status(405).json({ err: 'not implemeted yet' })
 })
