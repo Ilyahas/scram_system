@@ -5,10 +5,12 @@ import {
     , LOG_IN
     , REFRESH_TOKEN
     , CONFIRM_EMAIL
+    , VERIFY_TOKEN
+    , VERIFY_TOKEN_FAILED
 } from '../utils/types'
 
 const INITIAL_STATE = {
-    isEmailConfirmed:false,
+    isEmailConfirmed: false,
     isLoading: true,
     isSuccess: false,
     isError: false,
@@ -17,7 +19,7 @@ const INITIAL_STATE = {
     email: "user_email",
     token: 'token',
     avatar: "avatar",
-    errorMessage: {}
+    errorMessage: undefined,
 }
 
 export default function user(state = INITIAL_STATE, action) {
@@ -35,7 +37,7 @@ export default function user(state = INITIAL_STATE, action) {
                 ...state,
                 isLoading: false,
                 isSuccess: true,
-                isError:false
+                isError: false
             }
         }
         case BAD_REQUEST: {
@@ -51,25 +53,39 @@ export default function user(state = INITIAL_STATE, action) {
                 isLoading: false,
                 isSuccess: true,
                 isLogin: true,
-                isError:false,
+                isError: false,
                 name: action.nickname,
                 email: action.email,
                 token: action.token
             }
         }
-        case REFRESH_TOKEN:{
-            return{
+        case VERIFY_TOKEN: {
+            return {
                 ...state,
-                token:action.token
+                isLogin: true
             }
         }
-        case CONFIRM_EMAIL :{
-            return{
+        case VERIFY_TOKEN_FAILED: {
+            return {
                 ...state,
-                isEmailConfirmed:true,
+                isLogin: false,
+                isSuccess: false,
+            }
+        }
+        case REFRESH_TOKEN: {
+            return {
+                ...state,
+                token: action.token,
+                isLoading: true
+            }
+        }
+        case CONFIRM_EMAIL: {
+            return {
+                ...state,
+                isEmailConfirmed: true,
                 isLoading: false,
                 isSuccess: true,
-                isError:false
+                isError: false
             }
         }
         default:

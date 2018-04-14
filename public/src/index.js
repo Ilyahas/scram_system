@@ -4,13 +4,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter, Route } from "react-router-dom";
-//redux conf
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
 import rootReducer from './utils/rootReducer';
 import { composeWithDevTools } from 'redux-devtools-extension'
-////
 import { token } from "../src/actions/auth";
 const store = createStore(
   rootReducer,

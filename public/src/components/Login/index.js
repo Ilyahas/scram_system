@@ -40,7 +40,7 @@ class Login extends React.Component {
                 <form onSubmit={this.onSubmit} className="ModalForm">
                   <Input id="username" type="email" placeholder="email" onChange={this.onChange}/>
                   <Input id="password" type="password" placeholder="password" onChange={this.onChange}/>
-                    {this.props.errorMessage.error&&
+                    {this.props.isError&&
                     <p className="Allert">Can not log in</p>}
                     <button>Login<i className="fa fa-fw fa-chevron-right"></i> </button>
                 </form>
@@ -52,7 +52,7 @@ class Login extends React.Component {
   }
 }
 Login.propTypes={
-  errorMessage:PropTypes.string.isRequired,
+  errorMessage:PropTypes.object,
   submit:PropTypes.func.isRequired,
 }
 export default Login;

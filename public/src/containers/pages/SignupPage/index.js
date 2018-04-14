@@ -20,6 +20,7 @@ SignupPage.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  errorMessage:PropTypes.object,
 }
 const mapStateToProps = (state) => ({
   isLoading: state.user.isLoading,

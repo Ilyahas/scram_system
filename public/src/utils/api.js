@@ -11,6 +11,8 @@ export default {
             axios.post(host + '/auth/confirmation/'`${token}`),
         list: (input) =>
             axios.get(host + `/user?search=${input}`, header())
-                .then(response => response.data.requestResult.users)
+                .then(response => response.data.requestResult.users),
+        tokenExp: (token) =>
+            axios.get(host + `/auth/token/${token}`,header())
     }
 }

@@ -55,7 +55,8 @@
         border-radius: 40px;
         transition: 0.3s;
         margin-top: 10px;
-        border: none; }
+        border: none;
+        margin-bottom: 5px; }
         .backClr .FlexContainer .ButtonContainer .AddButton i {
           color: #fff; }
       .backClr .FlexContainer .ButtonContainer .AddButton:hover {

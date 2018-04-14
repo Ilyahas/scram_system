@@ -7,7 +7,7 @@ $onyx: #3E363F;
     z-index: 10;
     .NavigationActive {
         color: green !important;
-        border-bottom: solid 2px green !important;
+        border-bottom: solid 3px green !important;
     }
     .MenuItems li {
         a {
@@ -15,6 +15,8 @@ $onyx: #3E363F;
             padding: 15px;
             color: #fff;
             text-decoration: none;
+            letter-spacing: 1px;
+            font-weight: 200;
         }
         a:hover {
             color: green;
@@ -40,7 +42,7 @@ $onyx: #3E363F;
         .UserProf {
             display: flex;
             color: white;
-            &:hover{
+            &:hover {
                 cursor: pointer;
             }
         }

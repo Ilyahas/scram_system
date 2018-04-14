@@ -6,7 +6,7 @@ import {login} from '../../../actions/auth'
 export class LoginPage extends Component {
   submit = data =>  this.props.login(data)
   render() {
-    return <Login submit={this.submit} errorMessage={this.props.errorMessage}/>
+    return <Login submit={this.submit} isError={this.props.isError}/>
   }
   componentWillReceiveProps = (nextProps)=>{
       nextProps.isSuccess ? this.props.history.push('/home') :console.log('err');
@@ -14,13 +14,11 @@ export class LoginPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    isLoading: state.user.isLoading,
     isSuccess:state.user.isSuccess,
-    errorMessage:state.user.errorMessage
+    isError:state.user.isError,
 })
 LoginPage.propTypes={
-  isLoading:PropTypes.bool.isRequired,
   isSuccess:PropTypes.bool.isRequired,
-  errorMessage:PropTypes.bool.isRequired,
+  isError:PropTypes.bool.isRequired,
 }
 export default connect(mapStateToProps, {login})(LoginPage)

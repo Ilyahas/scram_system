@@ -17,7 +17,7 @@ class TeamContent extends React.Component {
 
 TeamContent.propTypes = {
   userList: PropTypes.func.isRequired,
-  user: PropTypes.array.isRequired,
+//  user: PropTypes.array.isRequired,
 }
 const mapStateToProps = (state) => ({
   users: state.userSearch.searchedUsers,

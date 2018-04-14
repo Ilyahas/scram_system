@@ -10,13 +10,13 @@ const GuestRoute = ({ isAuthenticated,
             render={
                 props => !isAuthenticated ?
                     <Component {...props} /> :
-                    <Redirect to='/home' />
+                    <Redirect to='/teams' />
             }
         />
     )
 function mapStateToProps(state) {
     return {
-        isAuthenticated: !!state.user.token,
+        isAuthenticated: state.user.isLogin,
     }
 }
 GuestRoute.propTypes = {

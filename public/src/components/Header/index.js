@@ -57,7 +57,7 @@ export default class Header extends Component {
           <ul className="UserInfo">
             <li>
               <div onClick={this.onClick} className="UserProf">
-                <i class="fa fa-cog" aria-hidden="true"></i>
+                <i className="fa fa-cog" aria-hidden="true"></i>
               </div>
             </li>
             {this.state.isShowUserOptions && <DropdownOptions />}
