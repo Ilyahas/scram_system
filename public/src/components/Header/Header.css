@@ -5,15 +5,17 @@
   align-items: center;
   z-index: 10; }
   .Header .NavigationActive {
-    color: gray !important; }
-  .Header .MenuItems li {
-    color: white; }
-    .Header .MenuItems li a {
-      display: block;
-      padding: 10px; }
-  .Header .MenuItems li:hover {
-    color: gray;
-    cursor: pointer; }
+    color: green !important;
+    border-bottom: solid 2px green !important; }
+  .Header .MenuItems li a {
+    display: block;
+    padding: 15px;
+    color: #fff;
+    text-decoration: none; }
+  .Header .MenuItems li a:hover {
+    color: green;
+    cursor: pointer;
+    text-decoration: none; }
   .Header .MenuItems {
     display: flex;
     justify-content: flex-start;
@@ -24,15 +26,10 @@
     flex: 1; }
     .Header .UserInfo li {
       position: relative; }
-    .Header .UserInfo fa {
-      margin: 0 10px; }
+    .Header .UserInfo .fa {
+      font-size: 20px; }
     .Header .UserInfo .UserProf {
       display: flex;
       color: white; }
       .Header .UserInfo .UserProf:hover {
         cursor: pointer; }
-      .Header .UserInfo .UserProf i::after {
-        content: '\25BE';
-        margin-right: 10px; }
-  .Header .DdOptions {
-    color: antiquewhite; }

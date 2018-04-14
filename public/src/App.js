@@ -3,30 +3,38 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 
+import Header from './components/Header'
+
 import WelcomePage from "./containers/pages/WelcomePage";
 import SignupPage from "./containers/pages/SignupPage";
 import LoginPage from "./containers/pages/LoginPage";
-import HomePage from "./containers/pages/HomePage";
 import EmailConfirm from './containers/pages/EmailConfirm'
+import TeamContent from './containers/pages/Teams'
 import GuestRoute from "../src/containers/routes/GuestRoute";
 import UserRoute from "../src/containers/routes/UserRoute";
-import  {tabChanged} from './actions/header'
+import { tabChanged } from './actions/header'
 //TODO: props type check
 const App = ({ location }) => {
   return (
-    <Switch>
-      <Route location={location} path="/" exact component={WelcomePage}></Route>
-      <Route location={location} path="/signup" exact component={SignupPage}></Route>
-      <Route location={location} path="/login" exact component={LoginPage}></Route>
-      <Route localtion={location} path="/auth/confirmation/:token" exact component={EmailConfirm}> </Route>
-      <Route location={location} path="/home" exact component={HomePage}>
-        <Route path='teams'  onEnter={()=>{tabChanged(2)}}>
+    <div>
+      {
+        <Switch>
+          <GuestRoute location={location} exact path="/" component={WelcomePage}></GuestRoute>
+          <GuestRoute location={location} exact path="/signup" component={SignupPage}></GuestRoute>
+          <GuestRoute location={location} exact path="/login" component={LoginPage}></GuestRoute>
+          <GuestRoute localtion={location} exact path="/auth/confirmation/:token" component={EmailConfirm}> </GuestRoute>
+          
+          <div>
+            <Header />
+            {/* <UserRoute localtion={location} exact path="/home" component={TeamContent}></UserRoute>
+            <UserRoute localtion={location} exact path="/users" component={TeamContent}></UserRoute>
+            <UserRoute localtion={location} exact path="/projects" component={TeamContent}></UserRoute> */}
+            <UserRoute localtion={location} exact path="/teams" component={TeamContent}></UserRoute>
+          </div>
 
-        </Route>
-      </Route>
-      {/* <Route path='/404' component={My404Component} />
-<Redirect from='*' to='/404' /> */}
-    </Switch>
+        </Switch>
+      }
+    </div>
   )
 }
 

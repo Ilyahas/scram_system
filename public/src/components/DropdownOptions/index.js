@@ -15,7 +15,7 @@ class DropdownOptions extends Component {
     render() {
         return (
             <StyleRoot className="DbMain">
-            <div className="DbContainer" style={styles.fadeInDown}>
+            <div className="DbContainer" >
                  <div className="Nickname  DbSegment">
                     Signed as {this.props.nickname}
                 </div>

@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import Teams from '../../../../../components/Teams'
-import { userList } from '../../../../../actions/userSearch'
-import api from '../../../../../utils/api'
+import Teams from '../../../components/Teams'
+import { userList } from '../../../actions/userSearch'
+import api from '../../../utils/api'
 class TeamContent extends React.Component {
   list = data => api.user.list(data)
   render() {

@@ -1,24 +1,26 @@
 $onyx: #3E363F;
-
 .Header {
     padding: 0 9.5%;
     background-color: $onyx;
     display: flex;
     align-items: center;
     z-index: 10;
-    .NavigationActive{
-        color: gray!important;
+    .NavigationActive {
+        color: green !important;
+        border-bottom: solid 2px green !important;
     }
     .MenuItems li {
-        color: white;
         a {
             display: block;
-            padding: 10px;
+            padding: 15px;
+            color: #fff;
+            text-decoration: none;
         }
-    }
-    .MenuItems li:hover {
-        color: gray;
-        cursor: pointer;
+        a:hover {
+            color: green;
+            cursor: pointer;
+            text-decoration: none;
+        }
     }
     .MenuItems {
         display: flex;
@@ -32,22 +34,15 @@ $onyx: #3E363F;
         li {
             position: relative;
         }
-        fa {
-            margin:0 10px;
+        .fa {
+            font-size: 20px;
         }
-        .UserProf{
+        .UserProf {
             display: flex;
             color: white;
-            &:hover {
+            &:hover{
                 cursor: pointer;
             }
-            i::after{
-                content: '\25BE';
-                margin-right: 10px; 
-            }
         }
-    }
-    .DdOptions{
-        color: antiquewhite;
     }
 }

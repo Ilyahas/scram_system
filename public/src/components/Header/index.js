@@ -1,18 +1,34 @@
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom';
 import "./Header.css";
 import DropdownOptions from "../DropdownOptions"
+const menuItems = [
+  {
+    title: 'Home',
+    url: '/home',
+  },
+  {
+    title: 'Projects',
+    url: '/projects',
+  },
+  {
+    title: 'Team',
+    url: '/teams',
+  },
+  {
+    title: 'Users',
+    url: '/users',
+  },
+]
 
 class ListItems extends Component {
-  // onClick = index => {
-  //   this.props.onTabClick(index)
-  // }
   render() {
-    let values = ['Home', 'Projects', 'Team', 'Users']
+    let values = menuItems.slice(0, menuItems.length)
     let listItems = values.map((data, index) =>
-      <li key={index.toString()}
-        // onClick={() => this.onClick(index)}
-        className={this.props.currentTab===index?'NavigationActive':''}>
-        <a>{data}</a>
+      <li key={index}>
+        <NavLink to={data.url} activeClassName='NavigationActive'>
+          {data.title}
+        </NavLink>
       </li>
     )
     return (
@@ -27,36 +43,21 @@ export default class Header extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isShowUserOptions: false,
-      currentActiveTab: 0
+      isShowUserOptions: false
     }
-  }
-  onTabClick = currentIndex => {
-    this.props.tabChanged(currentIndex);
-    this.setState({ currentActiveTab: currentIndex }, () => {
-      console.log("active tab = " + this.state.currentActiveTab)
-    })
   }
   onClick = e => {
     this.setState({ isShowUserOptions: !this.state.isShowUserOptions })
   }
-
-  isValidTabIndex(index) {
-    return this.state.currentActiveTab === index
-  }
-
-  
   render() {
     return (
       <div>
         <header className="Header">
-          <ListItems onTabClick={this.onTabClick} 
-            currentTab ={this.state.currentActiveTab}
-          />
+          <ListItems />
           <ul className="UserInfo">
             <li>
               <div onClick={this.onClick} className="UserProf">
-                <i className="fa fa-user-circle-o"></i>
+                <i class="fa fa-cog" aria-hidden="true"></i>
               </div>
             </li>
             {this.state.isShowUserOptions && <DropdownOptions />}
