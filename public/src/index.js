@@ -14,8 +14,7 @@ const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk)))
 if(localStorage.JWT){
-    const user = {token:localStorage.JWT}
-    store.dispatch(token(user))
+    store.dispatch(token(localStorage.JWT))
 }
 ReactDOM.render(
   <BrowserRouter>

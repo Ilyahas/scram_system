@@ -13,6 +13,13 @@ export default {
             axios.get(host + `/user?search=${input}`, header())
                 .then(response => response.data.requestResult.users),
         tokenExp: (token) =>
-            axios.get(host + `/auth/token/${token}`,header())
+            axios.get(host + `/auth/token/${token}`, header())
+    },
+    company: {
+        get: () =>
+            axios.get(host + `/company`, header()),
+        createTeam: (id, data) => {
+            axios.post(host + `/company/${id}/team`, { ...data }, header())
+        }
     }
 }

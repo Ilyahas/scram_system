@@ -19,24 +19,34 @@ module.exports = {
         bodyCreate: Joi.object({
             companyName: Joi.string().regex(/[a-zA-Zа-яА-Я\d\-_\s]+/i).required(),
             owner: Joi.objectId(),
-            teamlead: Joi.objectId(),
             workers: Joi.array().items(Joi.objectId()),
-            listOfTeams:Joi.array().items(Joi.objectId()),
+            listOfTeams: Joi.array().items(Joi.objectId()),
             confirmed: Joi.boolean()
         }),
-        bodyUpdate:Joi.object({
-            companyNames:Joi.array().items(Joi.string().regex(/[a-zA-Zа-яА-Я\d\-_\s]+/i))
+        teamCreate: Joi.object({
+            teamName: Joi.string().regex(/[a-zA-Zа-яА-Я\d\-_\s]+/i).required(),
+            teamlead: Joi.objectId(),
+            manager: Joi.objectId(),
+            members: Joi.array().items(Joi.objectId()),
+            listOfTasks: Joi.array().items(Joi.objectId()),
+            description: Joi.string()
+        }),
+        bodyUpdate: Joi.object({
+            companyNames: Joi.array().items(Joi.string().regex(/[a-zA-Zа-яА-Я\d\-_\s]+/i))
         })
 
     },
-    emailConfirm:{
-        params:Joi.object({
-            token:Joi.string().required()
+    id: Joi.object({
+        id: Joi.objectId().required()
+    }),
+    emailConfirm: {
+        params: Joi.object({
+            token: Joi.string().required()
         })
     },
     user: {
         query: Joi.object({
-            sort:Joi.string().valid(['asc','desc']),
+            sort: Joi.string().valid(['asc', 'desc']),
             search: Joi.string().regex(/[a-zA-Zа-яА-Я\d\-_\s]+/i),
             sortBy: Joi.string().valid(['email',
                 'nickname']),

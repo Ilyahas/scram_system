@@ -2,30 +2,44 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Teams from '../../../components/Teams'
-import { userList } from '../../../actions/userSearch'
+import { createTeam, getCompany } from '../../../actions/company'
 import api from '../../../utils/api'
+
 class TeamContent extends React.Component {
   list = data => api.user.list(data)
+  createTeam = data => { 
+    this.props.createTeam(this.props.companyId, data)
+  }
+
+
+  componentDidMount() {
+  }
+
+  
   render() {
     return (
       <Teams list={this.list}
+        createTeam={this.createTeam}
         users={this.props.users}
-        isSuccess={this.props.isSuccess} />
+        isSuccess={this.props.isSuccess}
+        company={this.props.company} />
     )
   }
 }
 
 TeamContent.propTypes = {
-  userList: PropTypes.func.isRequired,
-//  user: PropTypes.array.isRequired,
+  createTeam: PropTypes.func.isRequired,
 }
 const mapStateToProps = (state) => ({
   users: state.userSearch.searchedUsers,
-  isSuccess:state.userSearch.isSuccess
+  companyId: state.company.id,
+  isSuccess: state.userSearch.isSuccess,
+  company: state.company,
 })
 
 const mapDispatchToProps = {
-  userList
+  createTeam,
+  getCompany
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeamContent)

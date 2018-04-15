@@ -10,7 +10,7 @@ const GuestRoute = ({ isAuthenticated,
             render={
                 props => !isAuthenticated ?
                     <Component {...props} /> :
-                    <Redirect to='/teams' />
+                    <Redirect to='/home' />
             }
         />
     )

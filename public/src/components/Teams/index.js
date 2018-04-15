@@ -18,12 +18,12 @@ let Button = ({ modal }) => {
 }
 
 
-let TeamItem = () => {
+let TeamItem = ({ teamName, teamlead }) => {
     return (
         <div className="TeamItem">
             <div className="TeamDetails">
-                <h2> Team Name</h2>
-                <h2 className='TeamLead'>Team lead: <label>Name</label></h2>
+                <h2>{teamName} </h2>
+                <h2 className='TeamLead'>Team lead: <label>{teamlead}</label></h2>
             </div>
             <div className="MoreInfo">
                 <i className="fa fa-arrow-right" aria-hidden="true"></i>
@@ -31,7 +31,16 @@ let TeamItem = () => {
         </div>
     )
 }
-
+let TeamItems = ({ listOfTeams }) => {
+    return (
+        listOfTeams.map(
+            (elem) =>
+                <TeamItem key={elem._id}
+                    teamName={elem.teamName}
+                    teamlead={elem.teamlead.email} />
+        )
+    )
+}
 
 
 export default class Teams extends Component {
@@ -54,14 +63,16 @@ export default class Teams extends Component {
                 <div className="FlexContainer">
                     <Button modal={this.modal} />
                     <AddTeamModal
+                        createTeam={this.props.createTeam}
                         list={this.props.list}
                         show={this.state.isModalOpen}
                         users={this.props.users}
                         onClose={this.modal}
                         isSuccess={this.props.isSuccess} />
-                    <TeamItem />
-                    <TeamItem />
-                    <TeamItem />
+                    {this.props.company.isRequested ?
+                        (<img alt='loading' src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />) :
+                        (<TeamItems listOfTeams={this.props.company.listOfTeams} />)
+                    }
                 </div>
             </div>
         )
@@ -69,4 +80,5 @@ export default class Teams extends Component {
 }
 Teams.propTypes = {
     list: PropTypes.func.isRequired,
+    createTeam: PropTypes.func.isRequired,
 }

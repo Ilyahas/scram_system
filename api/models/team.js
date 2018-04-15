@@ -10,26 +10,24 @@ let Team = new Schema({
         required: true
     },
     teamlead: {
-        type: Shema.Types.ObjecdId,
+        type: Schema.Types.ObjectId,
         ref: 'User'
     },
     manager: {
-        type: Shema.Types.ObjecdId,
+        type: Schema.Types.ObjectId,
         ref: 'User'
     },
     members:[{
-        type:Shema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref:'User'
     }],
     listOfTasks:[{
-        type:Shema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref:'Task'
     }],
     description:{
         type:String,
         default:''
     }
-
-
 })
 module.exports =  mongoose.model('Team', Team)

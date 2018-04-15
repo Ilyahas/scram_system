@@ -76,7 +76,8 @@ export default function user(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 token: action.token,
-                isLoading: true
+                isLoading: true,
+                isLogin:true
             }
         }
         case CONFIRM_EMAIL: {

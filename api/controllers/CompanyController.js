@@ -1,4 +1,5 @@
 const Company = require('../models/company')
+const Team = require('../models/team')
 const BaseController = require('./BaseController');
 const config = require('../../config/config')
 let errObj = require('../utils/parseErrors')
@@ -18,7 +19,39 @@ class CompanyController extends BaseController {
                     select: 'nickname -_id'
                 })
                 .exec()
-            super.responseJSON(res,200,true,unverifiedCompanies)
+            super.responseJSON(res, 200, true, unverifiedCompanies)
+        } catch (error) {
+            next(error)
+        }
+    }
+    async getCompany(req, res, next) {
+        try {
+            let company = await Company.findOne({ owner: req.user },
+                '-workers -confirmed')
+                .populate({
+                    path: 'listOfTeams',
+                    populate: {
+                        path: 'teamlead manager members',
+                        select:'email',
+                        model: 'User'
+                    },
+                })
+                .exec();
+            super.responseJSON(res, 200, true, company);
+        } catch (error) {
+            next(error)
+        }
+    }
+    async createTeam(req, res, next) {
+        let _companyId = req.params.id
+        let data = req.body;
+        try {
+            let team = await Team.create(data);
+            await Company.findByIdAndUpdate(_companyId,
+                {
+                    $push: { listOfTeams: team.id }
+                })
+            super.responseJSON(res, 201, true, {});
         } catch (error) {
             next(error)
         }
@@ -28,7 +61,7 @@ class CompanyController extends BaseController {
         try {
             data.owner = req.user.id
             let company = await Company.create(data)
-            super.responseJSON(res,200,true,company)
+            super.responseJSON(res, 200, true, company)
         } catch (error) {
             next(error)
         }
@@ -37,21 +70,21 @@ class CompanyController extends BaseController {
         try {
             //   let compArray = req.body.companyNames.;
             let criteria = {
-                companyName: { $in: req.body.companyNames}
+                companyName: { $in: req.body.companyNames }
             }
             let approvedCompanies = await Company.update(
                 criteria,
                 { $set: { confirmed: true } },
                 { multi: true }
             )
-            super.responseJSON(res,200,true,approvedCompanies)
+            super.responseJSON(res, 200, true, approvedCompanies)
         } catch (error) {
             next(error)
         }
     }
-    async getUserTeams(req,jes,next){
+    async getUserTeams(req, jes, next) {
         try {
-            
+
         } catch (error) {
             next(error)
         }

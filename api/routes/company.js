@@ -7,35 +7,33 @@ const companyController = require('../controllers/CompanyController')
 const validate = require('express-joi-validation')({})
 const schemas = require('../joi/schema')
 
-const options = { joi: { convert: true, allowUnknown: false } }
-
 const CmpCtrl = new companyController();
 
 router.get('/',
     auth.verifyToken,
-    auth.verifyAdmin,
-    CmpCtrl.getListOfUnverifiedCompanies.bind(CmpCtrl))
+    CmpCtrl.getCompany
+)
 
 router.get('/:userId',
-auth.verifyToken,
-)
-router.post('/',
     auth.verifyToken,
-    validate.body(schemas.company.bodyCreate, options),
-    CmpCtrl.createCompany)
-
+)
 router.put('/approve',
     auth.verifyToken,
     auth.verifyAdmin,
     validate.body(schemas.company.bodyUpdate),
     CmpCtrl.approveCompanies)
+router.post('/',
+    auth.verifyToken,
+    validate.body(schemas.company.bodyCreate),
+    CmpCtrl.createCompany)
+router.post('/:id/team',
+    auth.verifyToken,
+    validate.params(schemas.id),
+    validate.body(schemas.company.teamCreate),
+    CmpCtrl.createTeam)
 
 
 router.delete('/', (req, res) => {
-    res.status(405).json({ err: 'not implemeted yet' })
-})
-
-router.get('/:id', (req, res) => {
     res.status(405).json({ err: 'not implemeted yet' })
 })
 router.post('/:id', (req, res) => {

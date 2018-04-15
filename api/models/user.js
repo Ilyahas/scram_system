@@ -6,16 +6,13 @@ let User = new Schema({
         type:Schema.Types.ObjectId,
         ref:'Company'
     },
-    companyName:{
-        type:String,
-        default:'NoName'
-    },
     email: {
         type: String,
         required: true,
         unique: true,
         lowercase: true,
     },
+    
     salt:{
         type:String,
         required:true

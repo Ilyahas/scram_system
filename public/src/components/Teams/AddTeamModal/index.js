@@ -19,6 +19,12 @@ const AsyncItem = ({ label, isMulti, members, onChange, getUsers }) => {
         </div>
     )
 }
+const INITIAL_STATE = {
+    teamName: '',
+    teamlead: {},
+    manager: {},
+    members: [],
+}
 export default class AddTeamModal extends Component {
     constructor(props) {
         super(props)
@@ -27,7 +33,6 @@ export default class AddTeamModal extends Component {
             teamlead: {},
             manager: {},
             members: [],
-            multi: false
         }
     }
     onTeamNameChange = e => this.setState({
@@ -52,6 +57,16 @@ export default class AddTeamModal extends Component {
                 options: data
             };
         })
+    }
+    createTeam = () => {
+        this.props.onClose();
+        let copyObj = {}
+        copyObj.teamName = this.state.teamName;
+        copyObj.teamlead = this.state.teamlead._id;
+        copyObj.manager = this.state.manager._id;
+        copyObj.members = this.state.members.map(data => data._id)
+        this.setState({...INITIAL_STATE})
+        this.props.createTeam(copyObj)
     }
     render() {
         if (!this.props.show) return null
@@ -82,7 +97,8 @@ export default class AddTeamModal extends Component {
                         onChange={this.onManagerChange}
                         getUsers={this.getUsers} />
 
-                    <button className="btn btn-success btn-block">Create Team</button>
+                    <button className="btn btn-success btn-block"
+                        onClick={this.createTeam}>Create Team</button>
                 </div>
             </div>
         )
@@ -90,5 +106,6 @@ export default class AddTeamModal extends Component {
 }
 AddTeamModal.propTypes = {
     onClose: PropTypes.func.isRequired,
+    createTeam: PropTypes.func.isRequired,
     show: PropTypes.bool,
 };
