@@ -1,0 +1,51 @@
+@import '../../variables.scss';
+.Sidenav{
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+     a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+    
+    a:hover {
+        color: #f1f1f1;
+    }
+}
+article{
+    width: 250px !important;
+}
+.BFmJH{
+    width: 100%;
+    text-align: center;
+    position: unset;
+    color: #111 !important;
+    background-color: $styleColor;
+    border-radius: 5px;
+}
+.kfefRd{
+    top: -2px ;
+    right: -1px ;
+    width: 16px ;
+    height: 16px ;
+}
+.ifVHOW{
+    width: 11px;
+    height: 11px;
+}
+.ifVHOW:before, .ifVHOW:after{
+    height: 1px ;
+    top: 4px ;
+    left: 2px ;
+}

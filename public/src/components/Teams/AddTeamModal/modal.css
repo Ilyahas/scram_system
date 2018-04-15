@@ -12,9 +12,10 @@
     max-width: 500px;
     min-height: 300px;
     margin: 0 auto;
-    padding: 30px; }
+    padding: 30px;
+    position: relative; }
     .BackdropStyle .ModalStyle .CloseButton {
-      position: fixed;
+      position: absolute;
       top: 0;
       right: 0;
       background: #fff;

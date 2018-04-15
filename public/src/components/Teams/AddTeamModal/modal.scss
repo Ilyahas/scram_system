@@ -13,8 +13,9 @@
         min-height: 300px;
         margin: 0 auto;
         padding: 30px;
+        position: relative;
         .CloseButton{
-            position: fixed;
+            position: absolute;
             top: 0;
             right: 0;
             background: #fff;

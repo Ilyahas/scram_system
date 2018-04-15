@@ -1,7 +1,7 @@
 import React from 'react'
 import Board from 'react-trello'
+import './Board.css'
 const data = require('./data.json')
-
 const handleDragStart = (cardId, laneId) => {
   console.log('drag started')
   console.log(`cardId: ${cardId}`)
@@ -62,16 +62,23 @@ export default class BoardPan extends React.Component {
 
   render() {
     return (
-      <Board
-        editable
-        onCardAdd={this.handleCardAdd}
-        data={this.state.boardData}
-        draggable
-        onDataChange={this.shouldReceiveNewData}
-        eventBusHandle={this.setEventBus}
-        handleDragStart={handleDragStart}
-        handleDragEnd={handleDragEnd}
-      />
+      <div>
+        <Board
+          editable
+          onCardAdd={this.handleCardAdd}
+          data={this.state.boardData}
+          draggable
+          onDataChange={this.shouldReceiveNewData}
+          eventBusHandle={this.setEventBus}
+          handleDragStart={handleDragStart}
+          handleDragEnd={handleDragEnd}
+        />
+        <div className="Sidenav">
+          <a href="#">About</a>
+          <a href="#">Services</a>
+          <a href="#">Clients</a>
+          <a href="#">Contact</a></div>
+      </div>
     )
   }
 }

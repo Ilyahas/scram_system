@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './Teams.css'
 import AddTeamModal from './AddTeamModal'
 import PropTypes from 'prop-types'
-
+import { Link } from 'react-router-dom'
 let Button = ({ modal }) => {
     const onClick = e => {
         e.preventDefault()
@@ -35,9 +35,11 @@ let TeamItems = ({ listOfTeams }) => {
     return (
         listOfTeams.map(
             (elem) =>
-                <TeamItem key={elem._id}
-                    teamName={elem.teamName}
-                    teamlead={elem.teamlead.email} />
+                <Link key={elem._id} to={`/team/${elem.teamName}`}>
+                    <TeamItem
+                        teamName={elem.teamName}
+                        teamlead={elem.teamlead.email} />
+                </Link>
         )
     )
 }

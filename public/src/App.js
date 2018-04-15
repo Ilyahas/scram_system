@@ -32,7 +32,7 @@ class App extends React.Component {
           <GuestRoute location={this.props.location} exact path="/login" component={LoginPage}></GuestRoute>
           <GuestRoute localtion={this.props.location} exact path="/auth/confirmation/:token" component={EmailConfirm}> </GuestRoute>
           <UserRoute localtion={this.props.location} exact path="/home" component={HomePage}></UserRoute>
-          <UserRoute localtion={this.props.location} exact path={`/team/${'lol'}`} component={BoardPage}></UserRoute>
+          <UserRoute localtion={this.props.location} exact path="/team/:teamName" component={BoardPage}></UserRoute>
           <UserRoute localtion={this.props.location} exact path="/teams" component={TeamContent}></UserRoute>
         </Switch>
       </div>

@@ -4,8 +4,13 @@
     display: flex;
     align-items: center;
     flex-direction: column; }
+    .backClr .FlexContainer a {
+      color: #000;
+      width: 80%; }
+    .backClr .FlexContainer a:hover {
+      color: #000;
+      text-decoration: none; }
     .backClr .FlexContainer .TeamItem {
-      width: 80%;
       height: 100px;
       border-top: solid 2px green;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);

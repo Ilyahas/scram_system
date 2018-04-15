@@ -12,7 +12,6 @@ let User = new Schema({
         unique: true,
         lowercase: true,
     },
-    
     salt:{
         type:String,
         required:true
