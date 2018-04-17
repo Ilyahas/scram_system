@@ -44,6 +44,8 @@ export default function user(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 isError: true,
+                isSuccess:false,
+                isLoading:false,
                 errorMessage: action.errorMessage,
             }
         }

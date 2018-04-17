@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { header } from '../utils/config'
-const host = 'https://shrouded-anchorage-48030.herokuapp.com';
+//const host = 'https://shrouded-anchorage-48030.herokuapp.com';
+const host = 'http://localhost:3030';
 export default {
     user: {
         login: (data) =>

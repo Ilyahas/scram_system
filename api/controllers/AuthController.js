@@ -103,7 +103,7 @@ async function createUserToken(req, res, next) {
                 tokenHash: generateToken()
             })
             let token = await userToken.save();
-            responseJSON(res, 200, true,
+            return responseJSON(res, 200, true,
                 {
                     "token": token.tokenHash,
                     'user': {
@@ -112,7 +112,7 @@ async function createUserToken(req, res, next) {
                     }
                 })
         }
-        responseJSON(res, 403,false,{})
+        responseJSON(res, 403, false, {})
     } catch (error) {
         responseJSON(res, 403, false, { error: "Access denied" })
     }
@@ -131,7 +131,7 @@ function verifyToken(req, res, next) {
         .then(data => {
             let connectionCredentials = getUserIpAndAgent(req);
             if (!isTokenCredentialsValid(data, connectionCredentials)) {
-                return responseJSON(res,403,false,{error:'access denied'})
+                return responseJSON(res, 403, false, { error: 'access denied' })
             }
             req.user = data.userId;
             next();
@@ -147,7 +147,7 @@ function verifyAdmin(req, res, next) {
     return next(errObj.createError('don`t have access', 400))
 }
 let isTokenCredentialsValid = (tokenModel, reqCredentials) => {
-    return  tokenModel.tokenHash === reqCredentials.token;
+    return tokenModel.tokenHash === reqCredentials.token;
 }
 function isHashesEqual(salt, hash, password) {
     let credentialHash = hashPasswordSha512(String(password), salt);
