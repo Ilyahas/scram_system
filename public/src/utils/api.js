@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { header } from '../utils/config'
-const host = 'http://localhost:3030';
+const host = 'https://dry-hollows-32052.herokuapp.com';
 export default {
     user: {
         login: (data) =>
