@@ -12,7 +12,7 @@ class SignupPage extends React.Component {
     )
   }
   componentWillReceiveProps = (nextProps) => {
-    nextProps.isSuccess ?this.props.history.push('/home') : console.log("ERR")
+    nextProps.isSuccess ?this.props.history.push('/login') : console.log("ERR")
   }
 }
 SignupPage.propTypes = {
