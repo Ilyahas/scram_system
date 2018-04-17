@@ -8,14 +8,9 @@ export default {
             axios.post(host + '/auth/login', { ...data }),
         signup: (credentials) =>
             axios.post(host + '/auth/signup', { ...credentials }),
-        confirmEmail: (token) =>{
-            console.log(`${host}/auth/confirmation/${token}`)
-            axios.post(`${host}/auth/confirmation/${token}`);
-
-        }
-           ,
-        list: (input) =>
-            axios.get(host + `/user?search=${input}`, header())
+        confirmEmail: (token) => 
+            axios.post(`${host}/auth/confirmation/${token}`),
+        list: (input) =>axios.get(host + `/user?search=${input}`, header())
                 .then(response => response.data.requestResult.users),
         tokenExp: (token) =>
             axios.get(host + `/auth/token/${token}`, header())

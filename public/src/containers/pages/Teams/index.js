@@ -10,13 +10,9 @@ class TeamContent extends React.Component {
   createTeam = data => { 
     this.props.createTeam(this.props.companyId, data)
   }
-
-
   componentDidMount() {
     this.props.getCompany()
   }
-
-  
   render() {
     return (
       <Teams list={this.list}
