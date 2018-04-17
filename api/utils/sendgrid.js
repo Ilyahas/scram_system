@@ -17,6 +17,6 @@ function sendConfirmationEmail(user) {
     })
 }
 let generateConfirmationUrl = (confirmationToken) => {
-    return `http://${config.host}:${config.port}/auth/confirmation/${confirmationToken}`
+    return `http://${config.host}/auth/confirmation/${confirmationToken}`
 }
 module.exports.sendConfirmationEmail = sendConfirmationEmail

@@ -1,8 +1,7 @@
 module.exports = {
     'apiName':'scumDesk',
     'apiKey':'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',
-    'host':'localhost',
-    'port': '3030',
+    'host':'https://shrouded-anchorage-48030.herokuapp.com',
     'mongoUrl': 'mongodb://superhotty:123@ds113849.mlab.com:13849/trellodb',
     'secretKey': '1qw23r4r-1qwqwqqw-1223weweqw-weqwqe',
     'userPrivilages': {
