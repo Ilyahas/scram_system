@@ -23,12 +23,12 @@ article {
   width: 250px !important; }
 
 .BFmJH {
-  width: 100%;
-  text-align: center;
-  position: unset;
+  width: 250px !important;
+  text-align: center !important;
+  position: unset !important;
   color: #111 !important;
   background-color: green;
-  border-radius: 5px; }
+  border-radius: 5px !important; }
 
 .kfefRd {
   top: -2px;
