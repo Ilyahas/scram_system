@@ -13,6 +13,7 @@ class TeamContent extends React.Component {
 
 
   componentDidMount() {
+    this.props.getCompany()
   }
 
   

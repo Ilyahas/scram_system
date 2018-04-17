@@ -19,7 +19,7 @@ import { getCompany } from '../src/actions/company'
 class App extends React.Component {
   componentWillMount() {
     this.props.verifyToken(localStorage.JWT)
-    this.props.getCompany()
+    //this.props.getCompany()
   }
   //TODO:add id in route
   render() {
