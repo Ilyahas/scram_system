@@ -62,6 +62,7 @@ export const signup = credentials => async dispatch => {
 export const emailConfirm = token => async dispatch => {
     try {
         dispatch(userStartRequest())
+        console.log(token)
         await api.user.confirmEmail(token)
         dispatch(emailSuccsessfullyConfirmed())
     } catch (error) {

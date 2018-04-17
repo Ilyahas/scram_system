@@ -55,9 +55,7 @@ export default class Teams extends Component {
     modal = () => {
         this.setState((prevState) => ({
             isModalOpen: !prevState.isModalOpen
-        }), () => {
-            console.log(this.state.isModalOpen)
-        })
+        }))
     }
     render() {
         return (
