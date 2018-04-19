@@ -110,11 +110,17 @@ export default class BoardPan extends React.Component {
             >Add new list
             <i class="fa fa-plus" aria-hidden="true"></i>
             </button>
-             <button className="btn btn-block btn-info">
-             Chart  
+            <button className="btn btn-block btn-info">
+              Chart
              <i className="fa fa-area-chart" aria-hidden="true"></i>
-             </button>
-
+            </button>
+            <h1>Participants</h1>
+            <div className='Participans'>
+              <div className="User">
+                <p>YK</p>
+              </div>
+            </div>
+            <h1>History</h1>
           </div>
         </div>
         {this.state.isShowModal && (<Modal
@@ -130,20 +136,19 @@ export default class BoardPan extends React.Component {
 }
 const CustomCard = props => {
   return (
-    <div style={{padding:5}}>
-      <header
-        style={{
-          borderBottom: '1px solid #eee', padding: 6, marginBottom: 10,
-          display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
-          color: props.cardColor
-        }}
-      >
-        <div style={{ fontSize: 14, fontWeight: 'bold' }}>{props.title}</div>
-        <div style={{ fontSize: 11 }}>{props.label}</div>
+    <div className="Card">
+      <header className="card-header">
+        <div className='title'>{props.title}</div>
+        <div className='time'>{props.label}</div>
       </header>
-      <div style={{padding:6}} >
+      <div className='Description'>
         <div >
           {props.description}
+        </div>
+      </div>
+      <div className='Participans '>
+        <div className="User Small">
+          <p>YK</p>
         </div>
       </div>
     </div>
