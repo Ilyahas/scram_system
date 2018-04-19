@@ -1,7 +1,8 @@
-import React from 'react'
-import Board from 'react-trello'
-import './Board.css'
-const data = require('./data.json')
+import React from 'react';
+import Board from 'react-trello';
+import './Board.css';
+import Modal from '../Modal'
+const data = require('./data.json');
 const handleDragStart = (cardId, laneId) => {
   console.log('drag started')
   console.log(`cardId: ${cardId}`)
@@ -14,10 +15,18 @@ const handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
   console.log(`sourceLaneId: ${sourceLaneId}`)
   console.log(`targetLaneId: ${targetLaneId}`)
 }
-
 export default class BoardPan extends React.Component {
-  state = { boardData: { lanes: [] } }
-
+  state = {
+    boardData:
+      {
+        lanes: []
+      },
+    isShowModal: false,
+    value: ''
+  }
+  showModal = () => {
+    this.setState({ isShowModal: !this.state.isShowModal })
+  }
   setEventBus = eventBus => {
     this.setState({ eventBus })
   }
@@ -59,12 +68,24 @@ export default class BoardPan extends React.Component {
     console.log(`New card added to lane ${laneId}`)
     console.dir(card)
   }
-
+  addNewList = () => {
+    let boardData = { ...this.state.boardData }
+    boardData.lanes = [...boardData.lanes, {
+      "id": `${this.state.value.toUpperCase()}`,
+      "title": `${this.state.value}`,
+      "cards": []
+    }]
+    this.setState({ boardData, isShowModal: false })
+  }
+  handleInputChange = (event) => {
+    this.setState({ value: event.target.value })
+  }
   render() {
     return (
-      <div>
-        <Board
+      <div className="Container">
+        <Board className='SideMenuActive'
           editable
+          customCardLayout
           onCardAdd={this.handleCardAdd}
           data={this.state.boardData}
           draggable
@@ -72,13 +93,59 @@ export default class BoardPan extends React.Component {
           eventBusHandle={this.setEventBus}
           handleDragStart={handleDragStart}
           handleDragEnd={handleDragEnd}
-        />
-        <div className="Sidenav">
-          <a href="#">About</a>
-          <a href="#">Services</a>
-          <a href="#">Clients</a>
-          <a href="#">Contact</a></div>
+          addCardLink={<button className="btn btn-block btn-success btn-card">Add card</button>
+
+          }
+        >
+          <CustomCard />
+        </Board>
+        <div className="Sidenav ActiveSidenav">
+          <div className="MenuContainer">
+            <h1>Menu</h1>
+            <button className="btn btn-block btn-success"
+              data-toggle="modal"
+              data-target="#myModal"
+              onClick={this.showModal}
+              value={this.state.value}
+            >Add new list
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+             <button className="btn btn-block btn-info">
+             Chart  
+             <i className="fa fa-area-chart" aria-hidden="true"></i>
+             </button>
+
+          </div>
+        </div>
+        {this.state.isShowModal && (<Modal
+          handleInputChange={this.handleInputChange}
+          showModal={this.showModal}
+          labelName='New List Name:'
+          name='Create New List'
+          addNewList={this.addNewList} />)}
+
       </div>
     )
   }
+}
+const CustomCard = props => {
+  return (
+    <div style={{padding:5}}>
+      <header
+        style={{
+          borderBottom: '1px solid #eee', padding: 6, marginBottom: 10,
+          display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
+          color: props.cardColor
+        }}
+      >
+        <div style={{ fontSize: 14, fontWeight: 'bold' }}>{props.title}</div>
+        <div style={{ fontSize: 11 }}>{props.label}</div>
+      </header>
+      <div style={{padding:6}} >
+        <div >
+          {props.description}
+        </div>
+      </div>
+    </div>
+  )
 }

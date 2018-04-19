@@ -1,0 +1,40 @@
+.Modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: calc( 100% - 305px); }
+  .Modal .ModalStyle {
+    background-color: #fff;
+    border-radius: 5px;
+    max-width: 500px;
+    min-height: 300px;
+    margin: 0 auto;
+    padding: 30px;
+    position: relative;
+    z-index: 5002;
+    width: calc( 100% - 305px); }
+    .Modal .ModalStyle .CloseButton {
+      z-index: inherit;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #fff;
+      width: 2.5rem;
+      height: 2.5rem;
+      padding: 0;
+      border: 0;
+      cursor: pointer;
+      outline: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      .Modal .ModalStyle .CloseButton .fa {
+        font-size: 20px;
+        color: #888; }
+      .Modal .ModalStyle .CloseButton .fa:hover {
+        color: black; }
+  .Modal label {
+    padding-bottom: 7px; }

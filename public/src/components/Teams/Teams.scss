@@ -10,10 +10,12 @@ $buttonColor:#5ca55c;
         a{
             color: #000;
             width: 80%;
+            
         }
         a:hover{
             color: #000;
             text-decoration: none;
+            cursor: unset;
         }
         .TeamItem {
             height: 100px;
@@ -59,6 +61,7 @@ $buttonColor:#5ca55c;
         }
         .TeamItem:hover {
             box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            cursor: pointer;
         }
         .ButtonContainer {
             display: flex;

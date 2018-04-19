@@ -1,51 +1,86 @@
 @import '../../variables.scss';
-.Sidenav{
+.Container {
+    position: relative;
+}
+
+.ActiveSidenav {
+    width: $sideNavWidth !important;
+}
+.CardHeader {
+    border-bottom: '1px solid #eee';
+    padding-bottom: 6;
+    margin-bottom: 10;
+    display: 'flex';
+    flex-direction: 'row';
+    justify-content: 'space-between'; // color: props.cardColor
+}
+.SideMenuActive {
+    width: $calcWidth !important;
+  
+}
+
+.Sidenav {
     height: 100%;
     width: 0;
-    position: fixed;
-    z-index: 1;
+    position: absolute;
+    z-index: 5001;
     top: 0;
-    left: 0;
+    right: 0;
     background-color: #111;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
-     a {
-        padding: 8px 8px 8px 32px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-        transition: 0.3s;
+    .MenuContainer {
+        padding: 10px;
+        h1 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        h1:after {
+            margin-top: 5px;
+            content: '';
+            display: block;
+            border-bottom: 1px solid #fff;
+        }
+        .fa{
+            margin-left: 15px;
+        }
     }
-    
-    a:hover {
-        color: #f1f1f1;
+    .CloseBtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
     }
 }
-article{
+
+article {
     width: 250px !important;
 }
-.BFmJH{
-    width: 250px !important;
-    text-align: center !important;
-    position: unset !important;
-    color: #111 !important;
-    background-color: $styleColor;
-    border-radius: 5px !important;
+
+.btn-card {
+    padding: 5px 2px;
+    position: absolute;
+    cursor: pointer;
+    width: 250px;
+    bottom: 5px;
 }
-.kfefRd{
-    top: -2px ;
-    right: -1px ;
-    width: 16px ;
-    height: 16px ;
+
+.kfefRd {
+    top: -2px;
+    right: -1px;
+    width: 16px;
+    height: 16px;
 }
-.ifVHOW{
+
+.ifVHOW {
     width: 11px;
     height: 11px;
 }
-.ifVHOW:before, .ifVHOW:after{
-    height: 1px ;
-    top: 4px ;
-    left: 2px ;
+
+.ifVHOW:before,
+.ifVHOW:after {
+    height: 1px;
+    top: 4px;
+    left: 2px;
 }

@@ -3,3 +3,5 @@ $font: 'Lato', sans-serif;
 $onyx: #3E363F;
 $cinnabar: #DD403A;
 $styleColor:green;
+$sideNavWidth:305px;
+$calcWidth: calc( 100% - #{$sideNavWidth});
