@@ -42,12 +42,12 @@
   left: 0;
   z-index: 2; }
 
-.Modal {
+.RegModal {
   background: #0f0f0f;
   border-radius: 2px;
   padding: 20px;
   width: 240px; }
-  .Modal button {
+  .RegModal button {
     align-items: center;
     background: #175e1b;
     border: 0;
@@ -63,14 +63,14 @@
     padding: 10px 9px 10px 11px;
     text-transform: uppercase;
     width: 100%; }
-    .Modal button .fa {
+    .RegModal button .fa {
       font-size: 12px;
       margin-left: auto;
       position: relative;
       top: 1px; }
-    .Modal button:hover {
+    .RegModal button:hover {
       transform: scale(1.02); }
-    .Modal button:active {
+    .RegModal button:active {
       transform: scale(0.99); }
 
 .btn {

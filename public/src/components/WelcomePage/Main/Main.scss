@@ -20,6 +20,7 @@ $titleBlockHeigth: calc(100vh - 50px);
   width: 100%;
   height: $titleBlockHeigth;
   z-index: 10;
+  display: flex;
 
   .main-title {
     height: $titleBlockHeigth;

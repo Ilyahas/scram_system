@@ -36,7 +36,7 @@ class Login extends React.Component {
               <div className="homeBack">
                 <Link className="LinkStylinngBtn"  to='/'><i className="fa fa-fw fa-chevron-left"></i> HOME</Link>
               </div>
-              <div className="Modal">
+              <div className="RegModal">
                 <form onSubmit={this.onSubmit} className="ModalForm">
                   <Input id="username" type="email" placeholder="email" onChange={this.onChange}/>
                   <Input id="password" type="password" placeholder="password" onChange={this.onChange}/>

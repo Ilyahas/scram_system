@@ -46,7 +46,7 @@ class Signup extends React.Component {
             <div className="homeBack">
               <Link className="LinkStylinngBtn" to='/'><i className="fa fa-fw fa-chevron-left"></i> HOME</Link>
             </div>
-            <div className="Modal">
+            <div className="RegModal">
               <form onSubmit={this.onSubmit} className="ModalForm">
                 <Input id="name" type="text" placeholder="companyName" onChange={this.onChange} />
                 <Input id="username" type="email" placeholder="email" onChange={this.onChange} />

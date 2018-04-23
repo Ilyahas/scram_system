@@ -24,7 +24,7 @@ class App extends React.Component {
   //TODO:add id in route
   render() {
     return (
-      <div>
+      <div >
         {this.props.isLogin && <Header />}
         <Switch>
           <GuestRoute location={this.props.location} exact path="/" component={WelcomePage}></GuestRoute>

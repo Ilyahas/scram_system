@@ -51,7 +51,7 @@ export default class Header extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="HeaderContainer">
         <header className="Header">
           <ListItems />
           <ul className="UserInfo">

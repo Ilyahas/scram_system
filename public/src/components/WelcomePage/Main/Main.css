@@ -17,7 +17,8 @@
   background: rgba(0, 0, 0, 0.7);
   width: 100%;
   height: calc(100vh - 50px);
-  z-index: 10; }
+  z-index: 10;
+  display: flex; }
   .intro .main-title {
     height: calc(100vh - 50px);
     color: #FFF;
