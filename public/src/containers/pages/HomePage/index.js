@@ -1,25 +1,21 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Home from '../../../components/Home'
-import {token} from '../../../actions/auth'
+import { token } from '../../../actions/auth'
+
 export class HomePage extends Component {
-  componentDidMount(){
+  componentDidMount() {
     this.props.token(localStorage.JWT)
   }
   render() {
-    return (
-     <Home/>
-    )
+    return <Home />
   }
 }
 
-const mapStateToProps = (state) => ({
-  
-})
+const mapStateToProps = () => ({})
 
 const mapDispatchToProps = {
-  token
+  token,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

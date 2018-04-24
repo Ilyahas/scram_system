@@ -1,5 +1,5 @@
-export const header = () => {
-    let AuthStr = 'Bearer '.concat(localStorage.JWT);
-    let formString = AuthStr;
-    return {headers: { Authorization: AuthStr } }
+const header = () => {
+  const AuthStr = 'Bearer '.concat(localStorage.JWT)
+  return { headers: { Authorization: AuthStr } }
 }
+export default header

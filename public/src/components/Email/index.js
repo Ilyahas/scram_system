@@ -2,25 +2,26 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import '../Signup/Signup.css'
 import './Email.css'
-export class Email extends Component {
+
+class Email extends Component {
   render() {
     return (
       <div className="m-block">
-        <div className="bg-black"></div>
-        <div className="bg-img-block"></div>
+        <div className="bg-black" />
+        <div className="bg-img-block" />
         <div className="backImg">
           <div className="App">
-            <div className="Modal">
+            <div className="RegModal">
               <form onSubmit={this.props.submit} className="ModalForm">
-
                 <h1>
                   Email
-                {this.props.isError ? " confirmation failed" : " confirmed"}
+                  {this.props.isError ? ' confirmation failed' : ' confirmed'}
                 </h1>
-                {!this.props.isError &&
+                {!this.props.isError && (
                   <button>
-                    Got It<i className="fa fa-fw fa-chevron-right"></i>
-                  </button>}
+                    Got It<i className="fa fa-fw fa-chevron-right" />
+                  </button>
+                )}
               </form>
             </div>
           </div>
@@ -29,7 +30,10 @@ export class Email extends Component {
     )
   }
 }
+
 Email.propTypes = {
   isError: PropTypes.bool.isRequired,
   submit: PropTypes.func.isRequired,
 }
+
+export default Email

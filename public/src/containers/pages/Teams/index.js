@@ -7,7 +7,7 @@ import api from '../../../utils/api'
 
 class TeamContent extends React.Component {
   list = data => api.user.list(data)
-  createTeam = data => { 
+  createTeam = (data) => {
     this.props.createTeam(this.props.companyId, data)
   }
   componentDidMount() {
@@ -15,11 +15,13 @@ class TeamContent extends React.Component {
   }
   render() {
     return (
-      <Teams list={this.list}
+      <Teams
+        list={this.list}
         createTeam={this.createTeam}
         users={this.props.users}
         isSuccess={this.props.isSuccess}
-        company={this.props.company} />
+        company={this.props.company}
+      />
     )
   }
 }
@@ -27,7 +29,7 @@ class TeamContent extends React.Component {
 TeamContent.propTypes = {
   createTeam: PropTypes.func.isRequired,
 }
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   users: state.userSearch.searchedUsers,
   companyId: state.company.id,
   isSuccess: state.userSearch.isSuccess,
@@ -36,7 +38,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   createTeam,
-  getCompany
+  getCompany,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeamContent)

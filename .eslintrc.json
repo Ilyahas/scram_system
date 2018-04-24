@@ -1,0 +1,12 @@
+{
+  "extends": "strongloop",
+  "parser": "babel-eslint",
+  "env": {
+    "node": true,
+    "es6": true 
+  },
+  "rules": {
+    "max-len": [1, 100, 2, { "ignoreComments": true }],
+    "semi": "off"
+  }
+}

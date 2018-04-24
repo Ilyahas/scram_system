@@ -25,7 +25,7 @@ app.get('*', (req, res) => {
 });
 
 app.listen( () => {
-  console.log( `server was started at 3030 port` );
+  console.log( `server was started at ${process.env.PORT || '3030'} port` );
 });
 
 
