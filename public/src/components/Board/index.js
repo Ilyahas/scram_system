@@ -1,8 +1,10 @@
-import React from 'react';
-import Board from 'react-trello';
-import './Board.css';
+import React from 'react'
+import Board from 'react-trello'
+import './Board.css'
 import Modal from '../Modal'
-const data = require('./data.json');
+
+const data = require('./data.json')
+
 const handleDragStart = (cardId, laneId) => {
   console.log('drag started')
   console.log(`cardId: ${cardId}`)
@@ -17,17 +19,16 @@ const handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
 }
 export default class BoardPan extends React.Component {
   state = {
-    boardData:
-      {
-        lanes: []
-      },
+    boardData: {
+      lanes: [],
+    },
     isShowModal: false,
-    value: ''
+    value: '',
   }
   showModal = () => {
     this.setState({ isShowModal: !this.state.isShowModal })
   }
-  setEventBus = eventBus => {
+  setEventBus = (eventBus) => {
     this.setState({ eventBus })
   }
 
@@ -37,7 +38,7 @@ export default class BoardPan extends React.Component {
   }
 
   getBoard() {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       resolve(data)
     })
   }
@@ -46,7 +47,12 @@ export default class BoardPan extends React.Component {
     this.state.eventBus.publish({
       type: 'ADD_CARD',
       laneId: 'COMPLETED',
-      card: { id: 'Milk', title: 'Buy Milk', label: '15 mins', description: 'Use Headspace app' }
+      card: {
+        id: 'Milk',
+        title: 'Buy Milk',
+        label: '15 mins',
+        description: 'Use Headspace app',
+      },
     })
     this.state.eventBus.publish({ type: 'REMOVE_CARD', laneId: 'PLANNED', cardId: 'Milk' })
   }
@@ -55,11 +61,16 @@ export default class BoardPan extends React.Component {
     this.state.eventBus.publish({
       type: 'ADD_CARD',
       laneId: 'BLOCKED',
-      card: { id: 'Ec2Error', title: 'EC2 Instance Down', label: '30 mins', description: 'Main EC2 instance down' }
+      card: {
+        id: 'Ec2Error',
+        title: 'EC2 Instance Down',
+        label: '30 mins',
+        description: 'Main EC2 instance down',
+      },
     })
   }
 
-  shouldReceiveNewData = nextData => {
+  shouldReceiveNewData = (nextData) => {
     console.log('New card has been added')
     console.log(nextData)
   }
@@ -69,12 +80,15 @@ export default class BoardPan extends React.Component {
     console.dir(card)
   }
   addNewList = () => {
-    let boardData = { ...this.state.boardData }
-    boardData.lanes = [...boardData.lanes, {
-      "id": `${this.state.value.toUpperCase()}`,
-      "title": `${this.state.value}`,
-      "cards": []
-    }]
+    const boardData = { ...this.state.boardData }
+    boardData.lanes = [
+      ...boardData.lanes,
+      {
+        id: `${this.state.value.toUpperCase()}`,
+        title: `${this.state.value}`,
+        cards: [],
+      },
+    ]
     this.setState({ boardData, isShowModal: false })
   }
   handleInputChange = (event) => {
@@ -83,7 +97,8 @@ export default class BoardPan extends React.Component {
   render() {
     return (
       <div className="Container">
-        <Board className='SideMenuActive'
+        <Board
+          className="SideMenuActive"
           editable
           customCardLayout
           onCardAdd={this.handleCardAdd}
@@ -93,29 +108,29 @@ export default class BoardPan extends React.Component {
           eventBusHandle={this.setEventBus}
           handleDragStart={handleDragStart}
           handleDragEnd={handleDragEnd}
-          addCardLink={<button className="btn btn-block btn-success btn-card">Add card</button>
-
-          }
+          addCardLink={<button className="btn btn-block btn-success btn-card">Add card</button>}
         >
           <CustomCard />
         </Board>
         <div className="Sidenav ActiveSidenav">
           <div className="MenuContainer">
             <h1>Menu</h1>
-            <button className="btn btn-block btn-success"
+            <button
+              className="btn btn-block btn-success"
               data-toggle="modal"
               data-target="#myModal"
               onClick={this.showModal}
               value={this.state.value}
-            >Add new list
-            <i class="fa fa-plus" aria-hidden="true"></i>
+            >
+              Add new list
+              <i className="fa fa-plus" aria-hidden="true" />
             </button>
             <button className="btn btn-block btn-info">
               Chart
-             <i className="fa fa-area-chart" aria-hidden="true"></i>
+              <i className="fa fa-area-chart" aria-hidden="true" />
             </button>
             <h1>Participants</h1>
-            <div className='Participans'>
+            <div className="Participans">
               <div className="User">
                 <p>YK</p>
               </div>
@@ -123,34 +138,32 @@ export default class BoardPan extends React.Component {
             <h1>History</h1>
           </div>
         </div>
-        {this.state.isShowModal && (<Modal
-          handleInputChange={this.handleInputChange}
-          showModal={this.showModal}
-          labelName='New List Name:'
-          name='Create New List'
-          addNewList={this.addNewList} />)}
-
+        {this.state.isShowModal && (
+          <Modal
+            handleInputChange={this.handleInputChange}
+            showModal={this.showModal}
+            labelName="New List Name:"
+            name="Create New List"
+            addNewList={this.addNewList}
+          />
+        )}
       </div>
     )
   }
 }
-const CustomCard = props => {
-  return (
-    <div className="Card">
-      <header className="card-header">
-        <div className='title'>{props.title}</div>
-        <div className='time'>{props.label}</div>
-      </header>
-      <div className='Description'>
-        <div >
-          {props.description}
-        </div>
-      </div>
-      <div className='Participans '>
-        <div className="User Small">
-          <p>YK</p>
-        </div>
+const CustomCard = props => (
+  <div className="Card">
+    <header className="card-header">
+      <div className="title">{props.title}</div>
+      <div className="time">{props.label}</div>
+    </header>
+    <div className="Description">
+      <div>{props.description}</div>
+    </div>
+    <div className="Participans ">
+      <div className="User Small">
+        <p>YK</p>
       </div>
     </div>
-  )
-}
+  </div>
+)

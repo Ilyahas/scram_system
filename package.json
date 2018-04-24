@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon --exec ./bin/www",
+    "pretest": "eslint --ignore-path .gitignore ."
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -26,5 +27,10 @@
     "sendgrid": "^1.9.2",
     "serve-favicon": "~2.4.5",
     "swagger-ui-express": "^2.0.15"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-config-strongloop": "^2.1.0"
   }
 }

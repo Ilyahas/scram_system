@@ -1,15 +1,12 @@
 import React from 'react'
-import TopMenu from "./TopMenu"
-import MainBlock from "./Main"
+import TopMenu from './TopMenu'
+import MainBlock from './Main'
 
-
-const MainPage = (props) => {
-  return (
+const MainPage = () => (
     <div>
-        <TopMenu/>
-        <MainBlock/>
+      <TopMenu />
+      <MainBlock />
     </div>
-  )
-}
+)
 
 export default MainPage

@@ -1,12 +1,13 @@
 import React from 'react'
-import MainPage from "../../../components/WelcomePage";
+import MainPage from '../../../components/WelcomePage'
+
 class WelcomePage extends React.Component {
-  render () {
-    return(
+  render() {
+    return (
       <div>
-        <MainPage/>
+        <MainPage />
       </div>
     )
   }
 }
-export default WelcomePage;
+export default WelcomePage

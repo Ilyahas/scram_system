@@ -1,24 +1,23 @@
 function errHandler(err, req, res, next) {
-  console.error(err.message);
+  console.error(err.message)
   if (err.code === 11000) {
-    let field = err.message.split('.$')[1];
-    field = field.split(' dup key')[0];
-    field = field.substring(0, field.lastIndexOf('_')); 
+    let field = err.message.split('.$')[1]
+    field = field.split(' dup key')[0]
+    field = field.substring(0, field.lastIndexOf('_'))
     res.status(400).json({
       requestStatus: false,
       requestResult: {
         error: err.message,
-        duplicate:field
-      }
+        duplicate: field,
+      },
     })
   } else {
     res.status(400).json({
       requestStatus: false,
       requestResult: {
-        err
-      }
+        err,
+      },
     })
-
   }
 }
 module.exports.errHandler = errHandler

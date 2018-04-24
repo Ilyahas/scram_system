@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Login from '../../../components/Login'
 import { login } from '../../../actions/auth'
+
 export class LoginPage extends Component {
   submit = data => this.props.login(data);
   render() {

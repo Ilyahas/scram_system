@@ -4,55 +4,64 @@ import { Link } from 'react-router-dom'
 import Input from '../Input'
 import '../Signup/Signup.scss'
 
-
 class Login extends React.Component {
   state = {
     data: {
-      email: "",
-      password: ""
+      email: '',
+      password: '',
     },
     loading: false,
-    errors: {}
+    errors: {},
   }
-  onChange = e =>  this.setState({
-    ...this.state,
-    data: { ...this.state.data, [e.target.placeholder]: e.target.value }
-  });
+  onChange = e =>
+    this.setState({
+      ...this.state,
+      data: { ...this.state.data, [e.target.placeholder]: e.target.value },
+    })
 
-  onSubmit = e => {
-    e.preventDefault();
+  onSubmit = (e) => {
+    e.preventDefault()
     this.props.submit(this.state.data)
   }
 
-
   render() {
     return (
-        <div className="m-block">
-          <div className="bg-black"></div>
-          <div className="bg-img-block"></div>
+      <div className="m-block">
+        <div className="bg-black" />
+        <div className="bg-img-block" />
 
-          <div className="backImg">
-            <div className="App">
-              <div className="homeBack">
-                <Link className="LinkStylinngBtn"  to='/'><i className="fa fa-fw fa-chevron-left"></i> HOME</Link>
-              </div>
-              <div className="Modal">
-                <form onSubmit={this.onSubmit} className="ModalForm">
-                  <Input id="username" type="email" placeholder="email" onChange={this.onChange}/>
-                  <Input id="password" type="password" placeholder="password" onChange={this.onChange}/>
-                    {this.props.isError&&
-                    <p className="Allert">Can not log in</p>}
-                    <button>Login<i className="fa fa-fw fa-chevron-right"></i> </button>
-                </form>
-              </div>
+        <div className="backImg">
+          <div className="App">
+            <div className="homeBack">
+              <Link className="LinkStylinngBtn" to="/">
+                <i className="fa fa-fw fa-chevron-left" /> HOME
+              </Link>
+            </div>
+            <div className="Modal">
+              <form onSubmit={this.onSubmit} className="ModalForm">
+                <Input id="username"
+                  type="email"
+                  placeholder="email"
+                  onChange={this.onChange} />
+                <Input id="password"
+                  type="password"
+                  placeholder="password"
+                  onChange={this.onChange} />
+                {this.props.isError &&
+                <p className="Allert">Can not log in</p>}
+                <button>
+                  Login<i className="fa fa-fw fa-chevron-right" />{' '}
+                </button>
+              </form>
             </div>
           </div>
+        </div>
       </div>
     )
   }
 }
-Login.propTypes={
-  errorMessage:PropTypes.object,
-  submit:PropTypes.func.isRequired,
+Login.propTypes = {
+  errorMessage: PropTypes.object,
+  submit: PropTypes.func.isRequired,
 }
-export default Login;
+export default Login

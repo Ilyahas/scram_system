@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom';
-import "./Header.css";
-import DropdownOptions from "../DropdownOptions"
+import { NavLink } from 'react-router-dom'
+import './Header.css'
+import DropdownOptions from '../DropdownOptions'
+
 const menuItems = [
   {
     title: 'Home',
@@ -23,30 +24,26 @@ const menuItems = [
 
 class ListItems extends Component {
   render() {
-    let values = menuItems.slice(0, menuItems.length)
-    let listItems = values.map((data, index) =>
+    const values = menuItems.slice(0, menuItems.length)
+    const listItems = values.map((data, index) => (
       <li key={index}>
-        <NavLink to={data.url} activeClassName='NavigationActive'>
+        <NavLink to={data.url} activeClassName="NavigationActive">
           {data.title}
         </NavLink>
       </li>
-    )
-    return (
-      <ul className="MenuItems">{listItems}</ul>
-    );
+    ))
+    return <ul className="MenuItems">{listItems}</ul>
   }
 }
-
-
 
 export default class Header extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isShowUserOptions: false
+      isShowUserOptions: false,
     }
   }
-  onClick = e => {
+  onClick =() => {
     this.setState({ isShowUserOptions: !this.state.isShowUserOptions })
   }
   render() {
@@ -57,7 +54,7 @@ export default class Header extends Component {
           <ul className="UserInfo">
             <li>
               <div onClick={this.onClick} className="UserProf">
-                <i className="fa fa-cog" aria-hidden="true"></i>
+                <i className="fa fa-cog" aria-hidden="true" />
               </div>
             </li>
             {this.state.isShowUserOptions && <DropdownOptions />}

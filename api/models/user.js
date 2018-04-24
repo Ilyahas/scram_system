@@ -1,43 +1,41 @@
 let mongoose = require('mongoose')
-let Schema = mongoose.Schema;
+let Schema = mongoose.Schema
 
 let User = new Schema({
-    company:{
-        type:Schema.Types.ObjectId,
-        ref:'Company'
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        lowercase: true,
-    },
-    salt:{
-        type:String,
-        required:true
-    },
-    passwordHash: {
-        type: String,
-        required:true
-    },
-    confirmationToken:{
-        type:String,
-        default:''
-    },
-    confirmed: {
-        type: Boolean,
-        default:false
-    },
-    role:{
-        type:String,
-        default:'0'
-    }
+  company: {
+    type: Schema.Types.ObjectId,
+    ref: 'Company',
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    lowercase: true,
+  },
+  salt: {
+    type: String,
+    required: true,
+  },
+  passwordHash: {
+    type: String,
+    required: true,
+  },
+  confirmationToken: {
+    type: String,
+    default: '',
+  },
+  confirmed: {
+    type: Boolean,
+    default: false,
+  },
+  role: {
+    type: String,
+    default: '0',
+  },
 })
 
-
-
-User.methods.setConfirmationToken = ()=>{
-    this.confirmationToken = this.generateJWT;
+User.methods.setConfirmationToken = () => {
+  this.confirmationToken = this.generateJWT
 }
 
-module.exports = mongoose.model('User', User);
+module.exports = mongoose.model('User', User)
