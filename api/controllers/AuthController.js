@@ -113,6 +113,7 @@ async function createUserToken(req, res, next) {
 }
 function verifyToken(req, res, next) {
   let token = req.token
+  if (!token) return responseJSON(res, 403, false, { error: 'access denied' })
   Token.findOne({ tokenHash: token })
     .populate({
       path: 'userId',
