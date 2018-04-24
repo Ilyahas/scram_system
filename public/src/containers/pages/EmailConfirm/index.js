@@ -7,11 +7,11 @@ import { emailConfirm } from '../../../actions/auth'
 class EmailConfirm extends Component {
   componentDidMount() {
     const token = this.props.match.params
-    this.props.emailConfirm(token)
+    this.props.emailConfirm(token.token)
   }
   submit = () => (this.props.isEmailConfirmed ? this.props.history.push('/login') : '')
   render() {
-    return <Email submit={this.submit} errorMessage={this.props.isError} />
+    return <Email submit={this.submit} isError={this.props.isError} />
   }
 }
 const mapStateToProps = state => ({
@@ -24,5 +24,6 @@ const mapDispatchToProps = {
 }
 EmailConfirm.propTypes = {
   isEmailConfirmed: PropTypes.bool.isRequired,
+  isError: PropTypes.bool.isRequired,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(EmailConfirm)

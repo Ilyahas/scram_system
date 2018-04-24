@@ -29,9 +29,7 @@ class Signup extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault()
-    this.props.submit(this.state.data).catch((err) => {
-      console.log(`HERE ERROR${err}`)
-    })
+    this.props.submit(this.state.data)
   }
 
   render() {
