@@ -1,10 +1,11 @@
-let fs = require('fs')
-let path = require('path')
-let config = require('../../config/config')
-let hogan = require('hogan.js')
-let sendGrid = require('sendgrid')(config.apiKey)
-let template = fs.readFileSync(path.resolve(__dirname, '../../views/confirmation.hjs'), 'utf-8')
-let compileTemplate = hogan.compile(template)
+const fs = require('fs')
+const path = require('path')
+const config = require('../../config/config')
+const hogan = require('hogan.js')
+const sendGrid = require('sendgrid')(config.apiKey)
+
+const template = fs.readFileSync(path.resolve(__dirname, '../../views/confirmation.hjs'), 'utf-8')
+const compileTemplate = hogan.compile(template)
 function sendConfirmationEmail(user) {
   return sendGrid.send({
     to: user.email,
@@ -16,7 +17,6 @@ function sendConfirmationEmail(user) {
     }),
   })
 }
-let generateConfirmationUrl = confirmationToken => {
-  return `${config.host}/auth/confirmation/${confirmationToken}`
-}
+let generateConfirmationUrl = confirmationToken =>
+  `${config.host}/auth/confirmation/${confirmationToken}`
 module.exports.sendConfirmationEmail = sendConfirmationEmail

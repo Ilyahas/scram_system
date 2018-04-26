@@ -1,8 +1,7 @@
-function errHandler(err, req, res, next) {
-  console.error(err.message)
+function errHandler(err, req, res) {
   if (err.code === 11000) {
-    let field = err.message.split('.$')[1]
-    field = field.split(' dup key')[0]
+    let [, field] = err.message.split('.$');
+    [field] = field.split(' dup key')
     field = field.substring(0, field.lastIndexOf('_'))
     res.status(400).json({
       requestStatus: false,

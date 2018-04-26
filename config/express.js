@@ -6,7 +6,7 @@ const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 
-module.exports = app => {
+module.exports = (app) => {
   app.use(cors())
   app.use(helmet())
 

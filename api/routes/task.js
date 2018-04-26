@@ -1,6 +1,7 @@
-let express = require('express')
-let authController = require('../controllers/AuthController')
-let router = express.Router()
+const express = require('express')
+const authController = require('../controllers/AuthController')
+
+const router = express.Router()
 
 router.get('/', authController.verifyToken, (req, res) => {
   res.status(405).json({ err: 'not implemeted yet' })

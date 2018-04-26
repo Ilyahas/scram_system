@@ -38,7 +38,8 @@ module.exports = {
       description: Joi.string(),
     }),
     bodyUpdate: Joi.object({
-      companyNames: Joi.array().items(Joi.string().regex(/[a-zA-Zа-яА-Я\d\-_\s]+/i)),
+      companyNames: Joi.array().items(Joi.string()
+        .regex(/[a-zA-Zа-яА-Я\d\-_\s]+/i)),
     }),
   },
   id: Joi.object({
@@ -48,6 +49,34 @@ module.exports = {
     params: Joi.object({
       token: Joi.string().required(),
     }),
+  },
+  dashboard: {
+    params: Joi.object({
+      id: Joi.objectId().required(),
+      name: Joi.string().required(),
+    }),
+    deleteLane: Joi.object({
+      id: Joi.objectId().required(),
+      name: Joi.string().required(),
+      laneId: Joi.objectId().required(),
+    }),
+    bodyCreate: Joi.object({
+      slug: Joi.string(),
+      title: Joi.string(),
+    }),
+  },
+  card: {
+    cardCreate: Joi.object({
+      title: Joi.string(),
+      label: Joi.string(),
+      description: Joi.string(),
+    }),
+    cardUpdate: {
+      cardId: Joi.object({
+        id: Joi.objectId(),
+        cardId: Joi.objectId(),
+      }),
+    },
   },
   user: {
     query: Joi.object({

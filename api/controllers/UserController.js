@@ -1,33 +1,33 @@
-let User = require('../models/user')
+const User = require('../models/user')
 
 const BaseController = require('./BaseController')
 
 class UserController extends BaseController {
   async list(req, res, next) {
-    let query = {}
-    let sort = req.query.sort === 'desc' ? -1 : 1
-    let search = req.query.search
-    let sortBy = req.query.sortBy
+    const query = {}
+    const sort = req.query.sort === 'desc' ? -1 : 1
+    const { search } = req.query
+    const { sortBy } = req.query
     // let page = req.query.page
     // let perPage = req.query.perPage || 10
     // let isApproved = req.query.isApproved
 
     if (search) {
-      query.email = new RegExp('^' + search)
+      query.email = new RegExp(`^${search}`)
     }
 
-    let listUserPromise = User.find(query).select('email')
+    const listUserPromise = User.find(query).select('email')
     if (sortBy) {
-      let sortQuery = {}
+      const sortQuery = {}
       sortQuery[sortBy] = sort
       listUserPromise.sort(sortQuery)
     }
 
-    let countUserPromise = User.find(query).count()
+    const countUserPromise = User.find(query).count()
 
     try {
-      let users = await listUserPromise
-      let totalCount = await countUserPromise
+      const users = await listUserPromise
+      const totalCount = await countUserPromise
       super.responseJSON(res, 200, true, { users, totalCount })
     } catch (error) {
       next(error)

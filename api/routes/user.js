@@ -1,13 +1,15 @@
-let express = require('express')
-let router = express.Router()
+const express = require('express')
+
+const router = express.Router()
 
 const validate = require('express-joi-validation')({})
 const schemas = require('../joi/schema')
 
-let AuthCtrl = require('../controllers/AuthController')
+const AuthCtrl = require('../controllers/AuthController')
 
-let UserController = require('../controllers/UserController')
-let UsrCtrl = new UserController()
+const UserController = require('../controllers/UserController')
+
+const UsrCtrl = new UserController()
 
 router.get('/', AuthCtrl.verifyToken, validate.query(schemas.user.query), UsrCtrl.list)
 

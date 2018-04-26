@@ -1,55 +1,50 @@
-let crypto = require('crypto')
-let jwt = require('jsonwebtoken')
-let User = require('../models/user')
-let Token = require('../models/token')
-let Company = require('../models/company')
-let config = require('../../config/config')
-let errObj = require('../utils/parseErrors')
-let emailSender = require('../utils/sendgrid')
+const crypto = require('crypto')
+const jwt = require('jsonwebtoken')
+const User = require('../models/user')
+const Token = require('../models/token')
+const Company = require('../models/company')
+const config = require('../../config/config')
+const errObj = require('../utils/parseErrors')
+const emailSender = require('../utils/sendgrid')
 
-let algorithm = 'sha512'
-let stringLenght = 16
-let generateRandomString = lenght => {
-  return crypto
-    .randomBytes(Math.ceil(lenght / 2))
-    .toString('hex')
-    .slice(0, lenght)
-}
-let hashPasswordSha512 = (password, salt) => {
-  let hash = crypto.createHmac(algorithm, salt)
+const algorithm = 'sha512'
+const stringLenght = 16
+const generateRandomString = lenght => crypto
+  .randomBytes(Math.ceil(lenght / 2))
+  .toString('hex')
+  .slice(0, lenght)
+
+const hashPasswordSha512 = (password, salt) => {
+  const hash = crypto.createHmac(algorithm, salt)
   hash.update(password)
-  let value = hash.digest('hex')
+  const value = hash.digest('hex')
   return {
-    salt: salt,
+    salt,
     passwordHash: value,
   }
 }
-let saltHashPassword = userPassword => {
-  let salt = generateRandomString(stringLenght)
+const saltHashPassword = (userPassword) => {
+  const salt = generateRandomString(stringLenght)
   return hashPasswordSha512(userPassword, salt)
 }
-let generateJWT = email => {
-  return jwt.sign(
+const generateJWT = email =>
+  jwt.sign(
     {
-      email: email,
+      email,
     },
-    config.secretKey
+    config.secretKey,
   )
-}
 function responseJSON(res, code, requestStatus, requestResult) {
   return res.status(code).json({ requestStatus, requestResult })
 }
 // conf token for use model
-let getCongirmationToken = email => {
-  return generateJWT(email)
-}
+const getCongirmationToken = email => generateJWT(email)
 
 async function signupUser(req, res, next) {
-  console.log(req.body)
-  let userCredentials = req.body
+  const userCredentials = req.body
   try {
-    let user = await createUser(userCredentials)
-    let company = await createCompany(user._id, userCredentials.companyName)
+    const user = await createUser(userCredentials)
+    const company = await createCompany(user._id, userCredentials.companyName)
     user.company = company._id
     await user.save()
     emailSender.sendConfirmationEmail(user)
@@ -59,23 +54,24 @@ async function signupUser(req, res, next) {
   }
 }
 function createUser(data) {
-  let hashedPassword = saltHashPassword(data.password)
-  let confirmationToken = getCongirmationToken(data.email)
-  data.salt = hashedPassword.salt
-  data.passwordHash = hashedPassword.passwordHash
-  data.confirmationToken = confirmationToken
-  return User.create(data)
+  const hashedPassword = saltHashPassword(data.password)
+  const confirmationToken = getCongirmationToken(data.email)
+  const userData = data
+  userData.salt = hashedPassword.salt
+  userData.passwordHash = hashedPassword.passwordHash
+  userData.confirmationToken = confirmationToken
+  return User.create(userData)
 }
 function createCompany(owner, companyName) {
   return Company.create({ owner, companyName })
 }
 async function verifyUserConfirmation(req, res, next) {
-  let token = req.params.token
+  const { token } = req.params
   try {
-    let user = await User.findOneAndUpdate(
+    const user = await User.findOneAndUpdate(
       { confirmationToken: token },
       { confirmationToken: '', confirmed: true },
-      { new: true }
+      { new: true },
     )
     if (!user) return responseJSON(res, 400, false, { error: 'email confirmation failed' })
     responseJSON(res, 200, true, {})
@@ -83,21 +79,21 @@ async function verifyUserConfirmation(req, res, next) {
     next(err)
   }
 }
-async function createUserToken(req, res, next) {
-  let { email, password } = req.body
+async function createUserToken(req, res) {
+  const { email, password } = req.body
   try {
-    let user = await User.findOne({ email: email })
+    const user = await User.findOne({ email })
     if (!user.confirmed) responseJSON(res, 400, false, { error: 'Confirm Email' })
-    let salt = user.salt
+    const { salt } = user
     if (user && user.confirmed && isHashesEqual(salt, user.passwordHash, password)) {
-      let connectionData = getUserIpAndAgent(req)
-      let userToken = new Token({
+      const connectionData = getUserIpAndAgent(req)
+      const userToken = new Token({
         userId: user._id,
         userAgent: connectionData.userAgent,
         userIp: connectionData.ip,
         tokenHash: generateToken(),
       })
-      let token = await userToken.save()
+      const token = await userToken.save()
       return responseJSON(res, 200, true, {
         token: token.tokenHash,
         user: {
@@ -112,7 +108,7 @@ async function createUserToken(req, res, next) {
   }
 }
 function verifyToken(req, res, next) {
-  let token = req.token
+  const { token } = req
   if (!token) return responseJSON(res, 403, false, { error: 'access denied' })
   Token.findOne({ tokenHash: token })
     .populate({
@@ -121,15 +117,15 @@ function verifyToken(req, res, next) {
       select: 'nickname email role ',
     })
     .exec()
-    .then(data => {
-      let connectionCredentials = getUserIpAndAgent(req)
+    .then((data) => {
+      const connectionCredentials = getUserIpAndAgent(req)
       if (!isTokenCredentialsValid(data, connectionCredentials)) {
         return responseJSON(res, 403, false, { error: 'access denied' })
       }
       req.user = data.userId
       next()
     })
-    .catch(err => {
+    .catch((err) => {
       next(err)
     })
 }
@@ -139,30 +135,25 @@ function verifyAdmin(req, res, next) {
   }
   return next(errObj.createError('don`t have access', 400))
 }
-let isTokenCredentialsValid = (tokenModel, reqCredentials) => {
-  return tokenModel.tokenHash === reqCredentials.token
-}
+let isTokenCredentialsValid = (tokenModel, reqCredentials) =>
+  tokenModel.tokenHash === reqCredentials.token
 function isHashesEqual(salt, hash, password) {
-  let credentialHash = hashPasswordSha512(String(password), salt)
-  let isEqual = hash === credentialHash.passwordHash
+  const credentialHash = hashPasswordSha512(String(password), salt)
+  const isEqual = hash === credentialHash.passwordHash
   return isEqual
 }
 // TODO: logout
 // function logout(req, res, next) {}
-let generateToken = () => {
-  return crypto.randomBytes(16).toString('hex')
-}
-let getUserIpAndAgent = req => {
-  return {
-    ip: req.ip,
-    userAgent: req.get('User-Agent'),
-    token: req.token,
-  }
-}
+let generateToken = () => crypto.randomBytes(16).toString('hex')
+let getUserIpAndAgent = req => ({
+  ip: req.ip,
+  userAgent: req.get('User-Agent'),
+  token: req.token,
+})
 module.exports = {
-  signupUser: signupUser,
-  createUserToken: createUserToken,
-  verifyUserConfirmation: verifyUserConfirmation,
-  verifyToken: verifyToken,
-  verifyAdmin: verifyAdmin,
+  signupUser,
+  createUserToken,
+  verifyUserConfirmation,
+  verifyToken,
+  verifyAdmin,
 }

@@ -1,8 +1,13 @@
-let mongoose = require('mongoose')
+const mongoose = require('mongoose')
+require('./lane')
 
-let Schema = mongoose.Schema
+const { Schema } = mongoose
 
-let Team = new Schema({
+const Team = new Schema({
+  companyId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Company',
+  },
   teamName: {
     type: String,
     required: true,
@@ -24,7 +29,7 @@ let Team = new Schema({
   lanes: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Task',
+      ref: 'Lanes',
     },
   ],
   description: {

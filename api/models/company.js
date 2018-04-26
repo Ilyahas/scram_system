@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
-const Schema = mongoose.Schema
+const { Schema } = mongoose
 
-let Company = new Schema({
+const Company = new Schema({
   companyName: {
     type: String,
     default: '',

@@ -1,5 +1,6 @@
 const express = require('express');
-var app = express();
+
+const app = express();
 const path = require('path');
 
 const expressSetup = require('./config/express')
@@ -15,17 +16,17 @@ require('./api/models/token')
 
 mongooseSetup();
 
-app.use(express.static(path.join(__dirname, 'public','build')));
+app.use(express.static(path.join(__dirname, 'public', 'build')));
 
 apiDocs(app)
 routes(app)
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname,'public','build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'build', 'index.html'));
 });
 
-app.listen( () => {
-  console.log( `server was started at ${process.env.PORT || '3030'} port` );
+app.listen(() => {
+  console.log(`server was started at ${process.env.PORT || '3030'} port`);
 });
 
 

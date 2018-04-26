@@ -1,8 +1,8 @@
-let mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
-let Schema = mongoose.Schema()
+const { Schema } = mongoose
 
-let Comment = new Schema({
+const Comment = new Schema({
   commnet: {
     type: String,
   },

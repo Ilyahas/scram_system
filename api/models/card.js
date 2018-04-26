@@ -1,8 +1,8 @@
-let mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
-let Schema = mongoose.Schema
+const { Schema } = mongoose
 
-let Card = new Schema({
+const Card = new Schema({
   slug: {
     type: String,
   },
@@ -17,4 +17,4 @@ let Card = new Schema({
   },
 })
 
-module.exports = mongoose.model('Card', Card)
+module.exports = Card
