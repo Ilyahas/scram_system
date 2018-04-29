@@ -13,6 +13,15 @@ const User = new Schema({
     unique: true,
     lowercase: true,
   },
+  nickname: {
+    type: String,
+  },
+  firstname: {
+    type: String,
+  },
+  lastname: {
+    type: String,
+  },
   salt: {
     type: String,
     required: true,

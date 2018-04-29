@@ -5,13 +5,18 @@ const router = express.Router()
 const validate = require('express-joi-validation')({})
 const schemas = require('../joi/schema')
 
-const AuthCtrl = require('../controllers/AuthController')
+const AuthCtrl = require('../controllers/authController')
 
-const UserController = require('../controllers/UserController')
+const UserController = require('../controllers/userController')
 
 const UsrCtrl = new UserController()
 
-router.get('/', AuthCtrl.verifyToken, validate.query(schemas.user.query), UsrCtrl.list)
+router.get(
+  '/',
+  AuthCtrl.verifyToken,
+  validate.query(schemas.user.query),
+  UsrCtrl.list,
+)
 
 router.post('/', (req, res) => {
   res.status(405).json({ err: 'not implemeted yet' })

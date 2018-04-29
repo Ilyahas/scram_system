@@ -1,13 +1,14 @@
 const express = require('express')
-const auth = require('../controllers/AuthController')
+const auth = require('../controllers/authController')
 
 const router = express.Router()
-const CompanyController = require('../controllers/CompanyController')
-
+const CompanyController = require('../controllers/companyController')
+const LaneController = require('../controllers/laneController')
 const validate = require('express-joi-validation')({})
 const schemas = require('../joi/schema')
 
 const CmpCtrl = new CompanyController()
+const LaneCtrl = new LaneController()
 
 router.get('/', auth.verifyToken, CmpCtrl.getCompany)
 
@@ -36,20 +37,36 @@ router.post(
   '/:id/team/:name/lane',
   validate.params(schemas.dashboard.params),
   validate.body(schemas.dashboard.bodyCreate),
-  CmpCtrl.createLane,
+  LaneCtrl.create,
 )
-router.delete('/:id/team/:name/lane/:laneId', CmpCtrl.deleteLane)
+router.get(
+  '/:id/team/:name/dashboard',
+  validate.params(schemas.dashboard.params),
+  LaneCtrl.get,
+)
+router.put(
+  '/lane/:id',
+  validate.params(schemas.id),
+  validate.body(schemas.dashboard.bodyUpdate),
+  LaneCtrl.update,
+)
+router.delete('/:id/team/:name/lane/:laneId', LaneCtrl.delete)
 router.post(
   '/lane/:id/card',
   validate.params(schemas.id),
   validate.body(schemas.card),
-  CmpCtrl.addCard,
+  LaneCtrl.addCard,
 )
 router.put(
   '/lane/:id/card/:cardId',
   validate.params(schemas.card.cardUpdate.cardId),
   validate.body(schemas.card.cardCreate),
-  CmpCtrl.updateCard,
+  LaneCtrl.updateCard,
+)
+router.delete(
+  '/lane/:id/card/:cardId',
+  validate.params(schemas.card.cardUpdate.cardId),
+  LaneCtrl.deleteCard,
 )
 
 module.exports = router

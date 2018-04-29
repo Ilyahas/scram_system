@@ -9,10 +9,11 @@ const emailSender = require('../utils/sendgrid')
 
 const algorithm = 'sha512'
 const stringLenght = 16
-const generateRandomString = lenght => crypto
-  .randomBytes(Math.ceil(lenght / 2))
-  .toString('hex')
-  .slice(0, lenght)
+const generateRandomString = lenght =>
+  crypto
+    .randomBytes(Math.ceil(lenght / 2))
+    .toString('hex')
+    .slice(0, lenght)
 
 const hashPasswordSha512 = (password, salt) => {
   const hash = crypto.createHmac(algorithm, salt)
@@ -73,7 +74,11 @@ async function verifyUserConfirmation(req, res, next) {
       { confirmationToken: '', confirmed: true },
       { new: true },
     )
-    if (!user) return responseJSON(res, 400, false, { error: 'email confirmation failed' })
+    if (!user) {
+      return responseJSON(res, 400, false, {
+        error: 'email confirmation failed',
+      })
+    }
     responseJSON(res, 200, true, {})
   } catch (err) {
     next(err)
@@ -83,9 +88,15 @@ async function createUserToken(req, res) {
   const { email, password } = req.body
   try {
     const user = await User.findOne({ email })
-    if (!user.confirmed) responseJSON(res, 400, false, { error: 'Confirm Email' })
+    if (!user.confirmed) {
+      responseJSON(res, 400, false, { error: 'Confirm Email' })
+    }
     const { salt } = user
-    if (user && user.confirmed && isHashesEqual(salt, user.passwordHash, password)) {
+    if (
+      user &&
+      user.confirmed &&
+      isHashesEqual(salt, user.passwordHash, password)
+    ) {
       const connectionData = getUserIpAndAgent(req)
       const userToken = new Token({
         userId: user._id,

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-require('./lane')
 
 const { Schema } = mongoose
 
@@ -29,7 +28,7 @@ const Team = new Schema({
   lanes: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Lanes',
+      ref: 'Lane',
     },
   ],
   description: {

@@ -1,7 +1,6 @@
 const Company = require('../models/company')
 const Team = require('../models/team')
-const Lane = require('../models/lane')
-const BaseController = require('./BaseController')
+const BaseController = require('./baseController')
 
 class CompanyController extends BaseController {
   async getListOfUnverifiedCompanies(req, res, next) {
@@ -52,81 +51,6 @@ class CompanyController extends BaseController {
         $push: { listOfTeams: team.id },
       })
       super.responseJSON(res, 201, true, {})
-    } catch (error) {
-      next(error)
-    }
-  }
-  async createLane(req, res, next) {
-    const companyId = req.params.id
-    const teamName = req.params.name
-    const laneBody = req.body
-
-    try {
-      const lane = await Lane.create(laneBody)
-      const team = await Team.findOneAndUpdate(
-        { companyId, teamName },
-        {
-          $push: { lanes: lane.id },
-        },
-      )
-      return super.responseJSON(res, team ? 200 : 400, !!team, team)
-    } catch (error) {
-      next(error)
-    }
-  }
-  async deleteLane(req, res, next) {
-    const companyId = req.params.id
-    const teamName = req.params.name
-    const _id = req.params.laneId
-    try {
-      const team = await Team.findOneAndUpdate(
-        { companyId, teamName },
-        {
-          $pull: {
-            lanes: _id,
-          },
-        },
-      )
-      await Lane.remove({ _id })
-      super.responseJSON(res, team ? 202 : 404, !!team, team)
-    } catch (error) {
-      next(error)
-    }
-  }
-  async addCard(req, res, next) {
-    const _id = req.params.id
-    const cardData = req.body.cardCreate
-    try {
-      const lane = await Lane.findOneAndUpdate(
-        {
-          _id,
-        },
-        {
-          $push: {
-            cards: cardData,
-          },
-        },
-      )
-      super.responseJSON(res, lane ? 200 : 400, !!lane, lane)
-    } catch (error) {
-      next(error)
-    }
-  }
-  async updateCard(req, res, next) {
-    const _id = req.params.id
-    const { cardId } = req.params
-    const card = req.body
-    try {
-      const lane = await Lane.findOneAndUpdate(
-        {
-          _id,
-          'cards._id': cardId,
-        },
-        {
-          $set: { 'cards.$': card },
-        },
-      )
-      super.responseJSON(res, lane ? 202 : 404, !!lane, lane)
     } catch (error) {
       next(error)
     }
