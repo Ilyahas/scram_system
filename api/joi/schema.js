@@ -38,9 +38,8 @@ module.exports = {
       description: Joi.string(),
     }),
     bodyUpdate: Joi.object({
-      companyNames: Joi.array().items(
-        Joi.string().regex(/[a-zA-Zа-яА-Я\d\-_\s]+/i),
-      ),
+      companyNames: Joi.array()
+        .items(Joi.string().regex(/[a-zA-Zа-яА-Я\d\-_\s]+/i)),
     }),
   },
   id: Joi.object({
@@ -66,15 +65,13 @@ module.exports = {
       title: Joi.string(),
     }),
     bodyUpdate: Joi.object({
-      cards: Joi.array().items(
-        Joi.object({
-          assignedUsers: Joi.array().items(Joi.objectId()),
-          title: Joi.string(),
-          label: Joi.string(),
-          description: Joi.string(),
-          _id: Joi.objectId(),
-        }),
-),
+      cards: Joi.array().items(Joi.object({
+        assignedUsers: Joi.array().items(Joi.objectId()),
+        title: Joi.string(),
+        label: Joi.string(),
+        description: Joi.string(),
+        _id: Joi.objectId(),
+      })),
     }),
   },
   card: {

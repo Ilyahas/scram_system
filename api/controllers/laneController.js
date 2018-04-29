@@ -75,17 +75,16 @@ class LaneController extends BaseController {
     }
   }
   async updateCard(req, res, next) {
-    const _id = req.params.id
+    // const _id = req.params.id
     const { cardId } = req.params
     const card = req.body.cardCreate
     try {
-      const lane = await Lane.findOneAndUpdate(
+      const lane = await Card.findOneAndUpdate(
         {
-          _id,
-          'cards._id': cardId,
+          _id: cardId,
         },
         {
-          $set: { 'cards.$': card },
+          $set: { card },
         },
       )
       super.responseJSON(res, lane ? 202 : 404, !!lane, lane)
