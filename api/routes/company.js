@@ -40,14 +40,14 @@ router.post(
   LaneCtrl.create,
 )
 router.get(
-  '/:id/team/:name/dashboard',
+  '/team/:name/dashboard',
   validate.params(schemas.dashboard.params),
   LaneCtrl.get,
 )
 router.put(
   '/lane/:id',
   validate.params(schemas.id),
-  validate.body(schemas.dashboard.bodyUpdate),
+  validate.body(schemas.dashboard.laneUpdate),
   LaneCtrl.update,
 )
 router.delete('/:id/team/:name/lane/:laneId', LaneCtrl.delete)

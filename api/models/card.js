@@ -3,6 +3,10 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose
 
 const Card = new Schema({
+  idLane: {
+    type: Schema.Types.ObjectId,
+    ref: 'Lane',
+  },
   slug: {
     type: String,
   },

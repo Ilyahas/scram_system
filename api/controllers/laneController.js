@@ -24,16 +24,15 @@ class LaneController extends BaseController {
   }
   async update(req, res, next) {
     const _id = req.params.id
-    const cards = req.body
+    const { body } = req
     try {
-      const lane = await Card.refreshCardsArr(_id, cards)
-      return super.responseJSON(res, lane ? 202 : 404, !!lane, {})
+      const lane = Lane.updateCards(_id, body)
+      super.responseJSON(res, lane ? 202 : 404, !!lane, lane)
     } catch (error) {
       next(error)
     }
   }
   async get(req, res, next) {
-    // const companyId = req.params.id
     const teamName = req.params.name
     try {
       const lanes = await Lane.find({ teamName })
@@ -67,6 +66,7 @@ class LaneController extends BaseController {
   async addCard(req, res, next) {
     const _id = req.params.id
     const cardData = req.body.cardCreate
+    cardData.idLane = _id
     try {
       const lane = Lane.addCard(_id, cardData)
       super.responseJSON(res, lane ? 200 : 400, !!lane, lane)
@@ -96,31 +96,9 @@ class LaneController extends BaseController {
     const _id = req.params.id
     const { cardId } = req.params
     try {
-      const laneToUpdate = await Lane.findById(_id)
-      const cardToDelete = await Card.findByIdAndRemove({ _id: cardId })
-      const prevCard = await Card.findOne({ next: cardId })
-      if (isHeadOrTailChanged(laneToUpdate, cardToDelete)) {
-        const query = constructDeleteQueue(
-          cardToDelete,
-          prevCard,
-          isOneElement(laneToUpdate),
-        )
-        if (isLaneUpdated(query)) {
-          if ('head' in query) {
-            laneToUpdate.head = query.head
-          }
-          if ('tail' in query) {
-            laneToUpdate.tail = query.tail
-            prevCard.next = undefined
-            await prevCard.save()
-          }
-          await laneToUpdate.save()
-        }
-      }
-      if (isPrevExists(cardToDelete, prevCard)) {
-        prevCard.next = cardToDelete.next
-        await prevCard.save()
-      }
+      const cardToDelete = await Card.findById({ _id: cardId })
+      await Lane.deleteCardPointers(_id, cardToDelete)
+      cardToDelete.remove()
       super.responseJSON(
         res,
         cardToDelete ? 202 : 404,
@@ -132,25 +110,4 @@ class LaneController extends BaseController {
     }
   }
 }
-const constructDeleteQueue = (cardToDelete, prevCard, isOneElem) => {
-  const query = {}
-  if (!isOneElem) {
-    Object.assign(
-      query,
-      cardToDelete.next ? { head: cardToDelete.next } : null,
-      prevCard ? { tail: prevCard.id } : null,
-    )
-  } else {
-    Object.assign(query, { head: undefined, tail: undefined })
-  }
-  return query
-}
-const isPrevExists = (cardToDelete, prevCard) =>
-  cardToDelete && cardToDelete.next && prevCard
-const isOneElement = laneToUpdate =>
-  laneToUpdate && laneToUpdate.head.equals(laneToUpdate.tail)
-const isHeadOrTailChanged = (comparedObj, deletedObj) =>
-  (comparedObj.head && comparedObj.head.equals(deletedObj._id)) ||
-  (comparedObj.tail && comparedObj.tail.equals(deletedObj._id))
-const isLaneUpdated = query => 'head' in query || 'tail' in query
 module.exports = LaneController

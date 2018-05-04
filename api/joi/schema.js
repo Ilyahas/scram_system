@@ -52,13 +52,17 @@ module.exports = {
   },
   dashboard: {
     params: Joi.object({
-      id: Joi.objectId().required(),
+      id: Joi.objectId(),
       name: Joi.string().required(),
     }),
     deleteLane: Joi.object({
       id: Joi.objectId().required(),
       name: Joi.string().required(),
       laneId: Joi.objectId().required(),
+    }),
+    laneUpdate: Joi.object({
+      prevId: Joi.objectId(),
+      currentId: Joi.objectId(),
     }),
     bodyCreate: Joi.object({
       slug: Joi.string(),
