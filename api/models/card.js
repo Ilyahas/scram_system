@@ -34,9 +34,10 @@ Card.statics = {
   async get(lanes) {
     const laneArr = []
     for (let i = 0; i < lanes.length; i += 1) {
-      const laneObj = {}
+      const laneObj = { }
       const item = lanes[i]
-      laneObj.lane = item
+      laneObj.id = item._id
+      laneObj.title = item.title
       const cards = []
       if (item.head) {
         let current = await this.findById(item.head)

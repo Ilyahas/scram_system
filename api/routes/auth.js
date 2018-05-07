@@ -28,6 +28,9 @@ router.get(
   '/token/:token',
   validate.params(schemas.emailConfirm.params),
   authController.verifyToken,
+  (req, res) => {
+    return res.status(200)
+  },
 )
 router.delete('/logout', (req, res) => {
   res.status(405).json({ err: 'not implemeted yet' })

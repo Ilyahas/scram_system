@@ -58,13 +58,13 @@ router.post(
   LaneCtrl.addCard,
 )
 router.put(
-  '/lane/:id/card/:cardId',
+  '/card/:cardId',
   validate.params(schemas.card.cardUpdate.cardId),
   validate.body(schemas.card.cardCreate),
   LaneCtrl.updateCard,
 )
 router.delete(
-  '/lane/:id/card/:cardId',
+  '/card/:cardId',
   validate.params(schemas.card.cardUpdate.cardId),
   LaneCtrl.deleteCard,
 )

@@ -37,9 +37,7 @@ class LaneController extends BaseController {
     try {
       const lanes = await Lane.find({ teamName })
       const cardsInfo = await Card.get(lanes)
-      return super.responseJSON(res, lanes ? 200 : 404, !!lanes, {
-        cardsInfo,
-      })
+      return super.responseJSON(res, lanes ? 200 : 404, !!lanes, cardsInfo)
     } catch (error) {
       next(error)
     }
@@ -57,6 +55,7 @@ class LaneController extends BaseController {
           },
         },
       )
+      // TODO delete all cards assosiated with lane
       await Lane.remove({ _id })
       super.responseJSON(res, team ? 202 : 404, !!team, team)
     } catch (error) {
@@ -75,7 +74,6 @@ class LaneController extends BaseController {
     }
   }
   async updateCard(req, res, next) {
-    // const _id = req.params.id
     const { cardId } = req.params
     const card = req.body.cardCreate
     try {

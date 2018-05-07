@@ -1,47 +1,17 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import Board from 'react-trello'
 import './Board.css'
 import Modal from '../Modal'
 
-const data = require('./data.json')
+// const data = require('./data.json')
 
-const handleDragStart = (cardId, laneId) => {
-  console.log('drag started')
-  console.log(`cardId: ${cardId}`)
-  console.log(`laneId: ${laneId}`)
-}
-
-const handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
-  console.log('drag ended')
-  console.log(`cardId: ${cardId}`)
-  console.log(`sourceLaneId: ${sourceLaneId}`)
-  console.log(`targetLaneId: ${targetLaneId}`)
-}
 export default class BoardPan extends React.Component {
-  state = {
-    boardData: {
-      lanes: [],
-    },
-    isShowModal: false,
-    value: '',
-  }
-  showModal = () => {
-    this.setState({ isShowModal: !this.state.isShowModal })
-  }
-  setEventBus = (eventBus) => {
-    this.setState({ eventBus })
-  }
-
-  async componentWillMount() {
-    const response = await this.getBoard()
-    this.setState({ boardData: response })
-  }
-
-  getBoard() {
-    return new Promise((resolve) => {
-      resolve(data)
-    })
-  }
+  // getBoard() {
+  //   return new Promise((resolve) => {
+  //     resolve(data)
+  //   })
+  // }
 
   completeCard = () => {
     this.state.eventBus.publish({
@@ -69,45 +39,22 @@ export default class BoardPan extends React.Component {
       },
     })
   }
-
-  shouldReceiveNewData = (nextData) => {
-    console.log('New card has been added')
-    console.log(nextData)
-  }
-
-  handleCardAdd = (card, laneId) => {
-    console.log(`New card added to lane ${laneId}`)
-    console.dir(card)
-  }
-  addNewList = () => {
-    const boardData = { ...this.state.boardData }
-    boardData.lanes = [
-      ...boardData.lanes,
-      {
-        id: `${this.state.value.toUpperCase()}`,
-        title: `${this.state.value}`,
-        cards: [],
-      },
-    ]
-    this.setState({ boardData, isShowModal: false })
-  }
-  handleInputChange = (event) => {
-    this.setState({ value: event.target.value })
-  }
   render() {
+    const onbj = {}
+    onbj.lanes = this.props.lanes
     return (
       <div className="Container">
         <Board
           className="SideMenuActive"
           editable
           customCardLayout
-          onCardAdd={this.handleCardAdd}
-          data={this.state.boardData}
+          onCardAdd={this.props.handleCardAdd}
+          data={onbj}
           draggable
-          onDataChange={this.shouldReceiveNewData}
-          eventBusHandle={this.setEventBus}
-          handleDragStart={handleDragStart}
-          handleDragEnd={handleDragEnd}
+          onDataChange={this.props.shouldReceiveNewData}
+          eventBusHandle={this.props.setEventBus}
+          handleDragStart={this.props.handleDragStart}
+          handleDragEnd={this.props.handleDragEnd}
           addCardLink={<button className="btn btn-block btn-success btn-card">Add card</button>}
         >
           <CustomCard />
@@ -120,7 +67,7 @@ export default class BoardPan extends React.Component {
               data-toggle="modal"
               data-target="#myModal"
               onClick={this.showModal}
-              value={this.state.value}
+              value={this.props.value}
             >
               Add new list
               <i className="fa fa-plus" aria-hidden="true" />
@@ -138,7 +85,7 @@ export default class BoardPan extends React.Component {
             <h1>History</h1>
           </div>
         </div>
-        {this.state.isShowModal && (
+        {this.props.isShowModal && (
           <Modal
             handleInputChange={this.handleInputChange}
             showModal={this.showModal}
@@ -150,6 +97,9 @@ export default class BoardPan extends React.Component {
       </div>
     )
   }
+}
+BoardPan.propTypes = {
+  lanes: PropTypes.array.isRequired,
 }
 const CustomCard = props => (
   <div className="Card">
