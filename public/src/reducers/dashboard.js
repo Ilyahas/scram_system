@@ -1,4 +1,13 @@
+import { createReducer } from 'redux-act'
 import { dashboardActions } from '../utils/types'
+import {
+  createCard,
+  createCardFailed,
+  createCardRequest,
+  deleteCardAction,
+  deleteCardFailed,
+  deleteCardRequest,
+} from '../actions/dashboard'
 
 const INITIAL_STATE = {
   lanes: [],
@@ -33,23 +42,8 @@ function requestFailed(state) {
   }
   return updateObject(state, failedObj)
 }
-export function createCard(state = INITIAL_STATE, action) {
-  switch (action.type) {
-    case dashboardActions.CREATE_CARD_REQUEST: {
-      return requestStart(state)
-    }
-    case dashboardActions.CREATE_CARD_SUCCESS: {
-      return requestSuccess(state)
-    }
-    case dashboardActions.CREATE_CARD_FAILED: {
-      return requestFailed(state)
-    }
-    default:
-      return state
-  }
-}
 
-export function deleteCard(state = INITIAL_STATE, action) {}
+// export function deleteCard(state = INITIAL_STATE, action) {}
 
 export function dashboard(state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -65,7 +59,41 @@ export function dashboard(state = INITIAL_STATE, action) {
         lanes: action.data,
       }
     }
+    case dashboardActions.ADD_NEW_LANE: {
+      const newLanes = state.lanes.concat(action.data)
+      return updateObject(state, { lanes: newLanes })
+    }
     default:
       return state
   }
 }
+export function lane(state = INITIAL_STATE, action) {
+  switch (action.type) {
+    case dashboardActions.CREATE_LANE_REQUEST: {
+      return requestStart(state)
+    }
+    case dashboardActions.CREATE_LANE_FAILED: {
+      return requestFailed(state)
+    }
+    case dashboardActions.CREATE_LANE_SUCCESS: {
+      return requestSuccess(state)
+    }
+    default:
+      return state
+  }
+}
+
+export const card = createReducer(
+  {
+    [createCard]: state => requestSuccess(state),
+    [createCardRequest]: state => requestStart(state),
+    [createCardFailed]: state => requestFailed(state),
+  },
+  INITIAL_STATE,
+)
+
+export const deleteCard = createReducer({
+  [deleteCardAction]: state => requestSuccess(state),
+  [deleteCardFailed]: state => requestFailed(state),
+  [deleteCardRequest]: state => requestStart(state),
+}, INITIAL_STATE)

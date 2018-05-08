@@ -61,8 +61,8 @@ module.exports = {
       laneId: Joi.objectId().required(),
     }),
     laneUpdate: Joi.object({
-      prevId: Joi.objectId(),
-      currentId: Joi.objectId(),
+      prevId: Joi.string(),
+      currentId: Joi.string(),
     }),
     bodyCreate: Joi.object({
       slug: Joi.string(),
@@ -80,6 +80,7 @@ module.exports = {
   },
   card: {
     cardCreate: Joi.object({
+      customId: Joi.string().required(),
       title: Joi.string(),
       label: Joi.string(),
       description: Joi.string(),

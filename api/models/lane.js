@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Card = require('./card')
+const { ObjectId } = require('mongoose').Types
 
 const { Schema } = mongoose
 
@@ -57,37 +58,29 @@ Lane.statics = {
       }
       lane.tail = card
       await lane.save()
-      return lane
+      return card
     } catch (error) {
       throw new Error(error)
     }
   },
   async updateCards(laneId, body) {
     const lane = await this.findById(laneId)
-    const insertedCard = await Card.findById(body.currentId)
-    // delete card pointers from old lane if lanes not matched
-    if (!lane._id.equals(insertedCard.idLane)) {
-      await this.deleteCardPointers(insertedCard.idLane, insertedCard)
-      insertedCard.idLane = laneId
-    }
-    const prevCard = body.prevId && await Card.findById(body.prevId)
+    let query = validObjectId(body.currentId)
+    const insertedCard = await Card.findOne(query)
+    await this.deleteCardPointers(insertedCard.idLane, insertedCard)
+    insertedCard.idLane = laneId
+    query = body.prevId && validObjectId(body.prevId)
+    const prevCard = body.prevId && await Card.findOne(query)
     const isLane = isHeadOrTailChanged(lane, prevCard && prevCard._id)
-    isLane.head = !prevCard
+    isLane.head = !body.prevId
     if (isLane.head || isLane.tail) {
-      if (!isLane.head && !isLane.tail) {
-        lane.head = insertedCard._id
-        lane.tail = insertedCard._id
-      }
-      if (isLane.tail && isLane.head) {
-        lane.head = insertedCard._id
-        lane.tail = prevCard._id
-        insertedCard.next = prevCard._id
-      } else if (isLane.tail) {
+      if (isLane.tail) {
         prevCard.next = insertedCard._id
         prevCard.save()
         lane.tail = insertedCard._id
       } else if (isLane.head) {
         insertedCard.next = lane.head
+        if (!lane.tail) lane.tail = insertedCard._id
         lane.head = insertedCard._id
       }
       insertedCard.save()
@@ -133,4 +126,6 @@ const isHeadOrTailChanged = (lane, _id) => {
 }
 const isPrevExists = (cardToDelete, prevCard) =>
   cardToDelete && cardToDelete.next && prevCard
+const validObjectId = id =>
+  (ObjectId.isValid(id) ? { _id: id } : { customId: id })
 module.exports = mongoose.model('Lane', Lane)

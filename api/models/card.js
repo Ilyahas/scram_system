@@ -7,6 +7,12 @@ const Card = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Lane',
   },
+  customId: {
+    type: String,
+    required: true,
+    unique: true,
+    index: true,
+  },
   slug: {
     type: String,
   },

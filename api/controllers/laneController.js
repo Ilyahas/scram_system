@@ -2,22 +2,23 @@ const Team = require('../models/team')
 const Lane = require('../models/lane')
 const Card = require('../models/card')
 const BaseController = require('./baseController')
+const { ObjectId } = require('mongoose').Types
 
 class LaneController extends BaseController {
   async create(req, res, next) {
-    const companyId = req.params.id
+    // const companyId = req.params.id
     const teamName = req.params.name
     const laneBody = req.body
     laneBody.teamName = teamName
     try {
       const lane = await Lane.create(laneBody)
       const team = await Team.findOneAndUpdate(
-        { companyId, teamName },
+        { teamName },
         {
           $push: { lanes: lane.id },
         },
       )
-      return super.responseJSON(res, team ? 200 : 400, !!team, team)
+      return super.responseJSON(res, team ? 200 : 400, !!team, lane)
     } catch (error) {
       next(error)
     }
@@ -64,11 +65,11 @@ class LaneController extends BaseController {
   }
   async addCard(req, res, next) {
     const _id = req.params.id
-    const cardData = req.body.cardCreate
+    const cardData = req.body
     cardData.idLane = _id
     try {
-      const lane = Lane.addCard(_id, cardData)
-      super.responseJSON(res, lane ? 200 : 400, !!lane, lane)
+      const card = Lane.addCard(_id, cardData)
+      super.responseJSON(res, card ? 200 : 400, !!card, card)
     } catch (error) {
       next(error)
     }
@@ -91,11 +92,11 @@ class LaneController extends BaseController {
     }
   }
   async deleteCard(req, res, next) {
-    const _id = req.params.id
     const { cardId } = req.params
+    const query = validObjectId(cardId)
     try {
-      const cardToDelete = await Card.findById({ _id: cardId })
-      await Lane.deleteCardPointers(_id, cardToDelete)
+      const cardToDelete = await Card.findOne(query)
+      await Lane.deleteCardPointers(cardToDelete.idLane, cardToDelete)
       cardToDelete.remove()
       super.responseJSON(
         res,
@@ -108,4 +109,6 @@ class LaneController extends BaseController {
     }
   }
 }
+const validObjectId = id =>
+  (ObjectId.isValid(id) ? { _id: id } : { customId: id })
 module.exports = LaneController
