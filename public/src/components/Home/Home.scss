@@ -1,17 +1,65 @@
-.OverrideCont {
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    .TeamItem {
-        transition: 0.3s !important;
-        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2) !important;
-        border-radius: 0 0 4px 4px !important;
-        border-top:solid 5px green !important;
-        flex: 1 0 20% !important; 
+$box-size:100px;
+$icon-size:45px;
+.backClr {
+    padding: 15px;
+    .SetupContainer {
+        box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2) !important;
+        margin: 10px 0;
+        h1{
+            color: #000;
+            font-size: 25px;
+            font-weight: 400;
+            padding-top: 10px;
+        }
+        .SetupGuide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            flex-wrap: wrap;
+            .BoxItem {
+                .fa{
+                    font-size: 40px;
+                    margin-bottom: 5px;
+                    width: $icon-size;
+                    height:  $icon-size;
+                    display: block;
+                }
+                width: $box-size;
+                height: $box-size;
+                background-color: indigo;
+                margin: 20px;
+                color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+        }
     }
-    .TeamItem:hover {
-        box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2) !important ;
-    }
-    .TeamItem:first-child {
-        margin-top: 6px !important;
+    .OverrideCont {
+        display: flex;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        .TeamItem {
+            transition: 0.3s !important;
+            box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2) !important;
+            border-radius: 0 0 4px 4px !important;
+            border-top: solid 5px green !important;
+            flex: 1 0 20% !important;
+            width:150px
+        }
+        .TeamItem:first-child{
+            margin-left: unset;
+        }
+        .TeamItem:last-child{
+            margin-right: unset;
+        }
+        .TeamItem:hover {
+            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2) !important;
+        }
+        .TeamItem:first-child {
+            margin-top: 6px !important;
+        }
     }
 }

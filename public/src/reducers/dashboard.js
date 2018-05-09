@@ -43,8 +43,6 @@ function requestFailed(state) {
   return updateObject(state, failedObj)
 }
 
-// export function deleteCard(state = INITIAL_STATE, action) {}
-
 export function dashboard(state = INITIAL_STATE, action) {
   switch (action.type) {
     case dashboardActions.GET_BOARD_REQUEST: {

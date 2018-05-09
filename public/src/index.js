@@ -14,7 +14,6 @@ import { token, verifyToken } from '../src/actions/auth'
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 if (localStorage.JWT) {
   store.dispatch(token(localStorage.JWT))
-  store.dispatch(verifyToken(localStorage.JWT))
 }
 ReactDOM.render(
   <BrowserRouter>
@@ -22,5 +21,5 @@ ReactDOM.render(
       <Route component={App} />
     </Provider>
   </BrowserRouter>,
-  document.getElementById('root')
+  document.getElementById('root'),
 )

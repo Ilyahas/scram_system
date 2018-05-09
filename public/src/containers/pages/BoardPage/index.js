@@ -14,14 +14,6 @@ export class BoardPage extends React.Component {
     const { teamName } = this.props.match.params
     this.props.getDashboard(teamName)
   }
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props.lanes, nextProps.lanes)
-  }
-  handleDragStart = (cardId, laneId) => {
-    console.log('drag started')
-    console.log(`cardId: ${cardId}`)
-    console.log(`laneId: ${laneId}`)
-  }
   setEventBus = (eventBus) => {
     this.setState({ eventBus })
   }

@@ -1,13 +1,51 @@
-.OverrideCont {
-  flex-direction: row !important;
-  flex-wrap: wrap !important; }
-  .OverrideCont .TeamItem {
-    transition: 0.3s !important;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2) !important;
-    border-radius: 0 0 4px 4px !important;
-    border-top: solid 5px green !important;
-    flex: 1 0 20% !important; }
-  .OverrideCont .TeamItem:hover {
-    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2) !important; }
-  .OverrideCont .TeamItem:first-child {
-    margin-top: 6px !important; }
+.backClr {
+  padding: 15px; }
+  .backClr .SetupContainer {
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2) !important;
+    margin: 10px 0; }
+    .backClr .SetupContainer h1 {
+      color: #000;
+      font-size: 25px;
+      font-weight: 400;
+      padding-top: 10px; }
+    .backClr .SetupContainer .SetupGuide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      flex-wrap: wrap; }
+      .backClr .SetupContainer .SetupGuide .BoxItem {
+        width: 100px;
+        height: 100px;
+        background-color: indigo;
+        margin: 20px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column; }
+        .backClr .SetupContainer .SetupGuide .BoxItem .fa {
+          font-size: 40px;
+          margin-bottom: 5px;
+          width: 45px;
+          height: 45px;
+          display: block; }
+  .backClr .OverrideCont {
+    display: flex;
+    flex-direction: row !important;
+    flex-wrap: wrap !important; }
+    .backClr .OverrideCont .TeamItem {
+      transition: 0.3s !important;
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2) !important;
+      border-radius: 0 0 4px 4px !important;
+      border-top: solid 5px green !important;
+      flex: 1 0 20% !important;
+      width: 150px; }
+    .backClr .OverrideCont .TeamItem:first-child {
+      margin-left: unset; }
+    .backClr .OverrideCont .TeamItem:last-child {
+      margin-right: unset; }
+    .backClr .OverrideCont .TeamItem:hover {
+      box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2) !important; }
+    .backClr .OverrideCont .TeamItem:first-child {
+      margin-top: 6px !important; }
