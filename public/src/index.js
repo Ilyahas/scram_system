@@ -9,7 +9,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import rootReducer from './utils/rootReducer'
-import { token, verifyToken } from '../src/actions/auth'
+import { token } from '../src/actions/auth'
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 if (localStorage.JWT) {

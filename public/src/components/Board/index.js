@@ -27,15 +27,17 @@ export default class BoardPan extends React.Component {
         >
           <CustomCard />
         </Board>
-       <SideNav showModal={this.props.showModal}
-         isRequested={this.props.isRequested}/>
+        <SideNav showModal={this.props.showModal} isRequested={this.props.isRequested} />
         {this.props.isShowModal && (
           <Modal
             handleInputChange={this.props.handleInputChange}
             labelName="New List Name:"
             name="Create New List"
             addNewList={this.props.addNewList}
-          />
+          >
+            <label htmlFor="usr">New List Name:</label>
+            <input type="text" className="form-control" id="usr" onChange={this.props.handleInputChange} />
+          </Modal>
         )}
       </div>
     )

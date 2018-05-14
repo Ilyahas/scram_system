@@ -1,0 +1,10 @@
+.BoardContainer .AddMember {
+  width: 100%;
+  color: green;
+  background-color: #3E363F;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .BoardContainer .AddMember .fa {
+    font-size: 25px;
+    margin-right: 10px; }

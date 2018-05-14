@@ -1,0 +1,62 @@
+.SettingsHeader {
+  background-color: #edeff0;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .SettingsHeader .PaneHeader {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+    .SettingsHeader .PaneHeader .BcgCircle {
+      height: 70px;
+      width: 70px;
+      border-radius: 70px;
+      margin-right: 10px;
+      background-color: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      .SettingsHeader .PaneHeader .BcgCircle .fa {
+        font-size: 35px; }
+    .SettingsHeader .PaneHeader .CurrentDetails h1 {
+      color: #000;
+      margin-bottom: 8px;
+      font-weight: 600;
+      margin-right: 5px;
+      font-weight: 600;
+      display: inline-block; }
+    .SettingsHeader .PaneHeader .CurrentDetails label {
+      font-size: 8px; }
+    .SettingsHeader .PaneHeader .CurrentDetails p {
+      margin: 0 0 8px;
+      font-size: 10px; }
+    .SettingsHeader .PaneHeader .CurrentDetails .btn {
+      padding: 4px 5px;
+      font-size: 14px;
+      margin-top: 8px; }
+
+.NavPane ul {
+  display: flex;
+  justify-content: center;
+  background-color: #edeff0; }
+  .NavPane ul li {
+    display: inline-block;
+    margin: 10px;
+    margin-bottom: unset; }
+    .NavPane ul li .ActiveSettings {
+      background-color: #fff;
+      border-color: #d6dadc;
+      cursor: default;
+      margin-bottom: -1px;
+      padding-bottom: 9px; }
+    .NavPane ul li a {
+      background-color: #d6dadc;
+      border: 1px solid #d6dadc;
+      border-bottom: 0;
+      border-radius: 3px 3px 0 0;
+      display: inline-block;
+      font-weight: 700;
+      margin: 2px 2px 0;
+      padding: 8px 20px;
+      text-decoration: none; }

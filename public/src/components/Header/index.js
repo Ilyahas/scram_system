@@ -17,7 +17,7 @@ const menuItems = [
     url: '/teams',
   },
   {
-    title: 'Users',
+    title: 'Memvers',
     url: '/users',
   },
 ]

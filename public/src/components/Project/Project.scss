@@ -1,0 +1,61 @@
+$header-color:#fff;
+.BoardContainer {
+    padding: 15px;
+    .BoardSection {
+        .BoardHeader {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 10px;
+            h {
+                background-color: $header-color;
+                font-size: 16px;
+                font-weight: 700;
+            }
+            .custom {
+                margin: 10px;
+                font-size: 25px;
+            }
+        }
+        .BoardSectionList {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            .SectionItem {
+                width: 160px;
+                height: 100px;
+                margin: 0 15px 20px 0;
+                display: block;
+                background-color: #0aab20;
+                border-radius: 5px;
+                h {
+                    font-size: 16px;
+                    font-weight: 700;
+                    display: inline-block;
+                    max-height: 40px;
+                    color: $header-color;
+                    margin: 5px;
+                }
+            }
+            .SectionItem:hover {
+                cursor: pointer;
+                background-color: #078819;
+            }
+            .SectionItemAdd {
+                background-color: #e2e4e6;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                .fa{
+                    font-size: 25px;
+                    margin-bottom: 5px;
+                }
+            }
+            .SectionItemAdd:hover {
+                cursor: pointer;
+                background-color: #838c91;
+            }
+        }
+    }
+}

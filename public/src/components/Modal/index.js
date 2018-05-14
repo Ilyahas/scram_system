@@ -3,11 +3,9 @@ import './Modal.css';
 
 const ModalComp = ({
   showModal,
-  labelName,
-  handleInputChange,
-  value,
   addNewList,
   name,
+  children,
 }) => (
   <div className="Modal">
     <div className="ModalStyle">
@@ -15,14 +13,7 @@ const ModalComp = ({
         <i className="fa fa-times" aria-hidden="true" />
       </div>
       <div className="form-group">
-        <label htmlFor="usr">{labelName}</label>
-        <input
-          type="text"
-          className="form-control"
-          id="usr"
-          value={value}
-          onChange={handleInputChange}
-        />
+      {children}
       </div>
       <button className="btn btn-block btn-success" onClick={addNewList}>
         {name}

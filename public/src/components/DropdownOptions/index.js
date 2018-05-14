@@ -13,7 +13,7 @@ import './DropdownOptions.css'
 class DropdownOptions extends Component {
   render() {
     return (
-      <div className="DbContainer">
+      <div className="DbContainer DbMain">
         <div className="Nickname  DbSegment">
           Signed as {this.props.nickname}
         </div>

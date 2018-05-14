@@ -1,0 +1,81 @@
+$faSize:70px;
+$navBcgClr:#edeff0;
+$faBcgClr:#ccc;
+.SettingsHeader {
+    background-color: $navBcgClr;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .PaneHeader {
+        padding: 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .BcgCircle {
+            height: $faSize;
+            width: $faSize;
+            border-radius: $faSize;
+            margin-right: 10px;
+            background-color: $faBcgClr;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .fa {
+                font-size: 35px;
+            }
+        }
+        .CurrentDetails {
+            h1 {
+                color: #000;
+                margin-bottom: 8px;
+                font-weight: 600;
+                margin-right: 5px;
+                font-weight: 600;
+                display: inline-block;
+            }
+            label {
+                font-size: 8px;
+            }
+            p {
+                margin: 0 0 8px;
+                font-size: 10px;
+            }
+            .btn {
+                padding: 4px 5px;
+                font-size: 14px;
+                margin-top: 8px;
+            }
+        }
+    }
+}
+$borderClr:#d6dadc;
+.NavPane {
+    ul {
+        display: flex;
+        justify-content: center;
+        background-color: $navBcgClr;
+        li {
+            display: inline-block;
+            margin: 10px;
+            margin-bottom: unset;
+            .ActiveSettings{
+                background-color: #fff;
+                border-color: #d6dadc;
+                cursor: default;
+                margin-bottom: -1px;
+                padding-bottom: 9px;
+            }
+            a {
+                background-color: $borderClr;
+                border: 1px solid $borderClr;
+                border-bottom: 0;
+                border-radius: 3px 3px 0 0;
+                display: inline-block;
+                font-weight: 700;
+                margin: 2px 2px 0;
+                padding: 8px 20px;
+                text-decoration: none;
+            }
+        }
+    }
+}

@@ -8,9 +8,12 @@ import Home from './containers/pages/HomePage'
 import WelcomePage from './containers/pages/WelcomePage'
 import SignupPage from './containers/pages/SignupPage'
 import Login from './containers/pages/LoginPage'
+import { Settings } from './containers/pages/Settings'
 import EmailConfirm from './containers/pages/EmailConfirm'
 import TeamContent from './containers/pages/Teams'
+import { Members } from './containers/pages/Users'
 import Board from './containers/pages/BoardPage'
+import { Projects } from './containers/pages/Projects'
 import GuestRoute from '../src/containers/routes/GuestRoute'
 import UserRoute from '../src/containers/routes/UserRoute'
 import { verifyToken } from '../src/actions/auth'
@@ -30,12 +33,15 @@ class App extends React.Component {
           <GuestRoute location={this.props.location} exact path="/" component={WelcomePage} />
           <GuestRoute location={this.props.location} exact path="/signup" component={SignupPage} />
           <GuestRoute location={this.props.location} exact path="/login" component={Login} />
-          <GuestRoute localtion={this.props.location} exact path="/auth/confirmation/:token" component={EmailConfirm}>
+          <GuestRoute location={this.props.location} exact path="/auth/confirmation/:token" component={EmailConfirm}>
             {' '}
           </GuestRoute>
-          <UserRoute localtion={this.props.location} exact path="/home" component={Home} />
-          <UserRoute localtion={this.props.location} exact path="/team/:teamName" component={Board} />
-          <UserRoute localtion={this.props.location} exact path="/teams" component={TeamContent} />
+          <UserRoute location={this.props.location} exact path="/home" component={Home} />
+          <UserRoute location={this.props.location} exact path="/projects" component={Projects} />
+          <UserRoute location={this.props.location} exact path="/team/:teamName" component={Board} />
+          <UserRoute location={this.props.location} exact path="/teams" component={TeamContent} />
+          <UserRoute location={this.props.location} exact path="/users" component={ Members } />
+          <UserRoute location={this.props.location} path="/settings" component={ Settings } />
         </Switch>
       </div>
     )

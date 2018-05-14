@@ -1,0 +1,47 @@
+.BoardContainer {
+  padding: 15px; }
+  .BoardContainer .BoardSection .BoardHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px; }
+    .BoardContainer .BoardSection .BoardHeader h {
+      background-color: #fff;
+      font-size: 16px;
+      font-weight: 700; }
+    .BoardContainer .BoardSection .BoardHeader .custom {
+      margin: 10px;
+      font-size: 25px; }
+  .BoardContainer .BoardSection .BoardSectionList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; }
+    .BoardContainer .BoardSection .BoardSectionList .SectionItem {
+      width: 160px;
+      height: 100px;
+      margin: 0 15px 20px 0;
+      display: block;
+      background-color: #0aab20;
+      border-radius: 5px; }
+      .BoardContainer .BoardSection .BoardSectionList .SectionItem h {
+        font-size: 16px;
+        font-weight: 700;
+        display: inline-block;
+        max-height: 40px;
+        color: #fff;
+        margin: 5px; }
+    .BoardContainer .BoardSection .BoardSectionList .SectionItem:hover {
+      cursor: pointer;
+      background-color: #078819; }
+    .BoardContainer .BoardSection .BoardSectionList .SectionItemAdd {
+      background-color: #e2e4e6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column; }
+      .BoardContainer .BoardSection .BoardSectionList .SectionItemAdd .fa {
+        font-size: 25px;
+        margin-bottom: 5px; }
+    .BoardContainer .BoardSection .BoardSectionList .SectionItemAdd:hover {
+      cursor: pointer;
+      background-color: #838c91; }

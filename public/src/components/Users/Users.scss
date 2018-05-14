@@ -1,0 +1,15 @@
+@import '../../variables.scss';
+.BoardContainer {
+    .AddMember {
+        width: 100%;
+        color: $styleColor;
+        background-color: $onyx;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .fa{
+            font-size: 25px;
+            margin-right: 10px;
+        }
+    }
+}
