@@ -45,6 +45,7 @@ class CompanyController extends BaseController {
   async createTeam(req, res, next) {
     const companyId = req.params.id
     const data = req.body
+    data.companyId = companyId
     try {
       const team = await Team.create(data)
       await Company.findByIdAndUpdate(companyId, {

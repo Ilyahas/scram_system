@@ -54,6 +54,11 @@ module.exports = {
     params: Joi.object({
       id: Joi.objectId(),
       name: Joi.string().required(),
+      idBoard: Joi.objectId(),
+    }),
+    dashboardCreate: Joi.object({
+      name: Joi.string(),
+      teamId: Joi.objectId().required(),
     }),
     deleteLane: Joi.object({
       id: Joi.objectId().required(),
@@ -67,6 +72,7 @@ module.exports = {
     bodyCreate: Joi.object({
       slug: Joi.string(),
       title: Joi.string(),
+      idBoard: Joi.objectId().required(),
     }),
     bodyUpdate: Joi.object({
       cards: Joi.array().items(Joi.object({

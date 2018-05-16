@@ -6,6 +6,7 @@ const Team = new Schema({
   companyId: {
     type: Schema.Types.ObjectId,
     ref: 'Company',
+    required: true,
   },
   teamName: {
     type: String,
@@ -25,10 +26,10 @@ const Team = new Schema({
       ref: 'User',
     },
   ],
-  lanes: [
+  dashboards: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Lane',
+      ref: 'Dashboard',
     },
   ],
   description: {

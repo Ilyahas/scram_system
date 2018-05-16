@@ -7,6 +7,9 @@ import {
   deleteCardAction,
   deleteCardFailed,
   deleteCardRequest,
+  getAllDashboards,
+  getAllDashboardsFailed,
+  getAllDashboardsRequest,
 } from '../actions/dashboard'
 
 const INITIAL_STATE = {
@@ -88,6 +91,21 @@ export const card = createReducer(
     [createCardFailed]: state => requestFailed(state),
   },
   INITIAL_STATE,
+)
+const DASHBOARDS_INITIAL_STATE = {
+  lanes: [],
+  isSuccess: false,
+  isError: false,
+  isRequested: false,
+  dashboards: [],
+}
+export const allDashboards = createReducer(
+  {
+    [getAllDashboards]: (state, payload) => ({ ...state, dashboards: payload }),
+    [getAllDashboardsFailed]: state => requestFailed(state),
+    [getAllDashboardsRequest]: state => requestStart(state),
+  },
+  DASHBOARDS_INITIAL_STATE,
 )
 
 export const deleteCard = createReducer({

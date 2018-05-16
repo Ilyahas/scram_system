@@ -5,7 +5,7 @@ export default () => {
   return (
     <div className="BoardContainer">
       <button className="btn AddMember">
-      <i class="fa fa-user-plus" aria-hidden="true"></i>
+      <i className="fa fa-user-plus" aria-hidden="true"></i>
       Invite Member</button>
     </div>
   )

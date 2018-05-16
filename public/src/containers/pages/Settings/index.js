@@ -41,20 +41,12 @@ export class Settings extends Component {
   render() {
     return (
       <div>
-        <SettingsPage name={'name'} additionalInf={'some info'} description={'description'} btnName={'btnName'} list={<ListItems />} />
-        {/* <h2>Topics</h2>
-        <ul>
-          <li>
-            <Link to={'/settings/rendering'}>Rendering with React</Link>
-          </li>
-          <li>
-            <Link to={'/settings/components'}>Components</Link>
-             </li>
-          <li>
-            <Link to={'/settings/props-v-state'}>Props v. State</Link>
-          </li>
-        </ul>
-       */}
+        <SettingsPage name={'name'}
+         additionalInf={'some info'}
+         description={'description'}
+         btnName={'btnName'}
+         list={<ListItems /> }
+        />
         <Route path={'/settings/rendering'} component = {Desks} />
         <Route path={'/settings/components'} component = {Members} />
       </div>

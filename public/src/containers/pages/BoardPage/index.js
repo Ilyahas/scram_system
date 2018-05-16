@@ -11,8 +11,8 @@ export class BoardPage extends React.Component {
     nextData: {},
   }
   componentDidMount() {
-    const { teamName } = this.props.match.params
-    this.props.getDashboard(teamName)
+    const { teamName, dashboardId } = this.props.match.params
+    this.props.getDashboard(teamName, dashboardId)
   }
   setEventBus = (eventBus) => {
     this.setState({ eventBus })
@@ -30,7 +30,8 @@ export class BoardPage extends React.Component {
     const newLane = {
       title: `${this.state.value}`,
     }
-    const { teamName } = this.props.match.params
+    const { teamName, dashboardId } = this.props.match.params
+    newLane.idBoard = dashboardId
     this.props.lane(teamName, newLane)
     this.setState({ isShowModal: false })
   }

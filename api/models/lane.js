@@ -10,6 +10,10 @@ const Lane = new Schema({
     default: '',
     // unique: true,
   },
+  idBoard: {
+    type: Schema.Types.ObjectId,
+    ref: 'Dashboard',
+  },
   teamName: {
     type: String,
   },
@@ -70,7 +74,7 @@ Lane.statics = {
     await this.deleteCardPointers(insertedCard.idLane, insertedCard)
     insertedCard.idLane = laneId
     query = body.prevId && validObjectId(body.prevId)
-    const prevCard = body.prevId && await Card.findOne(query)
+    const prevCard = body.prevId && (await Card.findOne(query))
     const isLane = isHeadOrTailChanged(lane, prevCard && prevCard._id)
     isLane.head = !body.prevId
     if (isLane.head || isLane.tail) {
@@ -127,5 +131,5 @@ const isHeadOrTailChanged = (lane, _id) => {
 const isPrevExists = (cardToDelete, prevCard) =>
   cardToDelete && cardToDelete.next && prevCard
 const validObjectId = id =>
-  (ObjectId.isValid(id) ? { _id: id } : { customId: id })
+  ObjectId.isValid(id) ? { _id: id } : { customId: id }
 module.exports = mongoose.model('Lane', Lane)

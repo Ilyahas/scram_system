@@ -41,10 +41,26 @@ export const moveCardAction = createAction(`${MOVE_CARD}${SUCCESS}`)
 export const moveCardRequest = createAction(`${MOVE_CARD}${REQUEST}`)
 export const moveCardFailed = createAction(`${MOVE_CARD}${FAILED}`)
 
-export const getDashboard = teamName => async (dispatch) => {
+export const getAllDashboards = createAction('get all company teams with dashboards')
+export const getAllDashboardsRequest = createAction('get dashboards request')
+export const getAllDashboardsFailed = createAction('get company dashboards failed')
+
+export const getCompanyTeamsWithDashboards = companyId => async (dispatch) => {
+  try {
+    dispatch(getAllDashboardsRequest())
+    let data = await api.dashboard.getCompanyTeamsDashboards(companyId)
+    data = data.data.requestResult
+    dispatch(getAllDashboards(data))
+  } catch (error) {
+    console.log(error)
+    dispatch(getAllDashboardsFailed())
+  }
+}
+
+export const getDashboard = (teamName, dashboardId) => async (dispatch) => {
   try {
     dispatch(dashboardStart())
-    const dashboardData = await api.dashboard.get(teamName)
+    const dashboardData = await api.dashboard.get(teamName, dashboardId)
     let data = dashboardData.data.requestResult
     data = data.map(element => ({ ...element, cards: element.cards.map(item => ({ ...item, id: item._id })) }))
     dispatch(dashboard(data))
@@ -52,6 +68,7 @@ export const getDashboard = teamName => async (dispatch) => {
     dispatch(dashboardFailed())
   }
 }
+
 export const lane = (teamName, laneTitle) => async (dispatch) => {
   try {
     dispatch(createLaneStart())

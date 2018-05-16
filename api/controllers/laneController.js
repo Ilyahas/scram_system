@@ -1,24 +1,56 @@
 const Team = require('../models/team')
 const Lane = require('../models/lane')
 const Card = require('../models/card')
+const Dashboard = require('../models/dashboard')
 const BaseController = require('./baseController')
 const { ObjectId } = require('mongoose').Types
 
 class LaneController extends BaseController {
   async create(req, res, next) {
-    // const companyId = req.params.id
     const teamName = req.params.name
     const laneBody = req.body
     laneBody.teamName = teamName
     try {
       const lane = await Lane.create(laneBody)
-      const team = await Team.findOneAndUpdate(
-        { teamName },
+      // const team = await Team.findOneAndUpdate(
+      //   { teamName },
+      //   {
+      //     $push: { lanes: lane.id },
+      //   },
+      // )
+      return super.responseJSON(res, lane ? 200 : 400, !!lane, lane)
+    } catch (error) {
+      next(error)
+    }
+  }
+  async createDashboard(req, res, next) {
+    const dashboardBody = req.body
+    const { teamId } = dashboardBody
+    try {
+      const dashboard = await Dashboard.create(dashboardBody)
+      const teams = await Team.findOneAndUpdate(
+        { _id: teamId },
         {
-          $push: { lanes: lane.id },
+          $push: { dashboards: dashboard.id },
         },
       )
-      return super.responseJSON(res, team ? 200 : 400, !!team, lane)
+      return super.responseJSON(
+        res,
+        teams ? 200 : 400,
+        !!teams,
+        teams,
+      )
+    } catch (error) {
+      next(error)
+    }
+  }
+  async getDashboard(req, res, next) {
+    const companyId = req.params.id
+    try {
+      const teams = await Team.find({ companyId }, 'dashboards teamName').populate({
+        path: 'dashboards',
+      })
+      return super.responseJSON(res, teams ? 200 : 404, !!teams, teams)
     } catch (error) {
       next(error)
     }
@@ -35,8 +67,9 @@ class LaneController extends BaseController {
   }
   async get(req, res, next) {
     const teamName = req.params.name
+    const { idBoard } = req.params
     try {
-      const lanes = await Lane.find({ teamName })
+      const lanes = await Lane.find({ teamName, idBoard })
       const cardsInfo = await Card.get(lanes)
       return super.responseJSON(res, lanes ? 200 : 404, !!lanes, cardsInfo)
     } catch (error) {

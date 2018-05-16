@@ -13,7 +13,7 @@ import EmailConfirm from './containers/pages/EmailConfirm'
 import TeamContent from './containers/pages/Teams'
 import { Members } from './containers/pages/Users'
 import Board from './containers/pages/BoardPage'
-import { Projects } from './containers/pages/Projects'
+import Projects from './containers/pages/Projects'
 import GuestRoute from '../src/containers/routes/GuestRoute'
 import UserRoute from '../src/containers/routes/UserRoute'
 import { verifyToken } from '../src/actions/auth'
@@ -22,7 +22,7 @@ import { getCompany } from '../src/actions/company'
 class App extends React.Component {
   componentWillMount() {
     this.props.verifyToken(localStorage.JWT)
-    // this.props.getCompany()
+    this.props.getCompany()
   }
   // TODO:add id in route
   render() {
@@ -38,7 +38,7 @@ class App extends React.Component {
           </GuestRoute>
           <UserRoute location={this.props.location} exact path="/home" component={Home} />
           <UserRoute location={this.props.location} exact path="/projects" component={Projects} />
-          <UserRoute location={this.props.location} exact path="/team/:teamName" component={Board} />
+          <UserRoute location={this.props.location} exact path="/team/:teamName/:dashboardId" component={Board} />
           <UserRoute location={this.props.location} exact path="/teams" component={TeamContent} />
           <UserRoute location={this.props.location} exact path="/users" component={ Members } />
           <UserRoute location={this.props.location} path="/settings" component={ Settings } />

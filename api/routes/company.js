@@ -39,11 +39,17 @@ router.post(
   validate.body(schemas.dashboard.bodyCreate),
   LaneCtrl.create,
 )
+router.post(
+  '/boards',
+  validate.body(schemas.dashboard.dashboardCreate),
+  LaneCtrl.createDashboard,
+)
 router.get(
-  '/team/:name/dashboard',
+  '/team/:name/dashboard/:idBoard',
   validate.params(schemas.dashboard.params),
   LaneCtrl.get,
 )
+router.get('/dashboards/:id', LaneCtrl.getDashboard)
 router.put(
   '/lane/:id',
   validate.body(schemas.dashboard.laneUpdate),
@@ -62,9 +68,6 @@ router.put(
   validate.body(schemas.card.cardCreate),
   LaneCtrl.updateCard,
 )
-router.delete(
-  '/card/:cardId',
-  LaneCtrl.deleteCard,
-)
+router.delete('/card/:cardId', LaneCtrl.deleteCard)
 
 module.exports = router

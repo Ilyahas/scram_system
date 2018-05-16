@@ -19,8 +19,9 @@ export default {
   },
   dashboard: {
     createLane: (teamName, body) => axios.post(`${host}/company/team/${teamName}/lane`, body, header()),
-    get: teamName => axios.get(`${host}/company/team/${teamName}/dashboard`, header()),
-    deleteLane: (companyId, teamName, laneId) => axios.delete(`${host}/company/${companyId}/team/${teamName}/lane/${laneId}`),
+    get: (teamName, dashboardId) => axios.get(`${host}/company/team/${teamName}/dashboard/${dashboardId}`, header()),
+    getCompanyTeamsDashboards: companyId => axios.get(`${host}/company/dashboards/${companyId}`, header()),
+    deleteLane: (companyId, teamName, laneId) => axios.delete(`${host}/company/${companyId}/team/${teamName}/lane/${laneId}`, header()),
     moveCard: (laneId, body) => axios.put(`${host}/company/lane/${laneId}`, { ...body }, header()),
     addCard: (laneId, body) => axios.post(`${host}/company/lane/${laneId}/card`, { ...body }, header()),
     updateCard: (cardId, body) => axios.put(`${host}/company/card/${cardId}`, { ...body }, header()),

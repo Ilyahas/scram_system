@@ -7,7 +7,7 @@ import api from '../../../utils/api'
 
 class TeamContent extends React.Component {
   list = data => api.user.list(data)
-  createTeam = (data) => {
+  createTeam = (data) => { 
     this.props.createTeam(this.props.companyId, data)
   }
   componentDidMount() {
