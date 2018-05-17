@@ -5,8 +5,8 @@
     flex-direction: row;
     align-items: center;
     margin-bottom: 10px; }
-    .BoardContainer .BoardSection .BoardHeader h {
-      background-color: #fff;
+    .BoardContainer .BoardSection .BoardHeader h1 {
+      color: #000;
       font-size: 16px;
       font-weight: 700; }
     .BoardContainer .BoardSection .BoardHeader .custom {
@@ -23,7 +23,7 @@
       display: block;
       background-color: #0aab20;
       border-radius: 5px; }
-      .BoardContainer .BoardSection .BoardSectionList .SectionItem h {
+      .BoardContainer .BoardSection .BoardSectionList .SectionItem h1 {
         font-size: 16px;
         font-weight: 700;
         display: inline-block;

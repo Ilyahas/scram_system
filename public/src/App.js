@@ -20,7 +20,7 @@ import { verifyToken } from '../src/actions/auth'
 import { getCompany } from '../src/actions/company'
 
 class App extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.verifyToken(localStorage.JWT)
     this.props.getCompany()
   }

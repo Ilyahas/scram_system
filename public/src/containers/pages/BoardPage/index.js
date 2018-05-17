@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Board from '../../../components/Board'
-import { getDashboard, lane, card, deleteCard, moveCard } from '../../../actions/dashboard'
+import { getDashboard, lane, card, deleteCard, moveCard, clearLane } from '../../../actions/dashboard'
 
 export class BoardPage extends React.Component {
   state = {
@@ -13,6 +13,9 @@ export class BoardPage extends React.Component {
   componentDidMount() {
     const { teamName, dashboardId } = this.props.match.params
     this.props.getDashboard(teamName, dashboardId)
+  }
+  componentWillUnmount() {
+    this.props.clearLane()
   }
   setEventBus = (eventBus) => {
     this.setState({ eventBus })
@@ -79,6 +82,7 @@ const mapDispatchToProps = {
   card,
   deleteCard,
   moveCard,
+  clearLane,
 }
 const mapStateToProps = state => ({
   lanes: state.dashboard.lanes,

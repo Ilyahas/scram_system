@@ -34,6 +34,7 @@ export default class BoardPan extends React.Component {
             labelName="New List Name:"
             name="Create New List"
             addNewList={this.props.addNewList}
+            showModal = {this.props.showModal}
           >
             <label htmlFor="usr">New List Name:</label>
             <input type="text" className="form-control" id="usr" onChange={this.props.handleInputChange} />

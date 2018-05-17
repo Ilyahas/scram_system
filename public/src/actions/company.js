@@ -25,6 +25,7 @@ export const getCompany = () => async (dispatch) => {
   try {
     dispatch(companyInfoRequest());
     const company = await api.company.get();
+    localStorage.companyId = company.data.requestResult._id
     dispatch(companyInfo(company.data.requestResult));
   } catch (error) {
     dispatch(companyInfoFailed());

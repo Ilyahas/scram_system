@@ -80,6 +80,9 @@ export const lane = (teamName, laneTitle) => async (dispatch) => {
     dispatch(createLaneFailed())
   }
 }
+export const clearLane = () => (dispatch) => {
+  dispatch({ type: 'CLEAR_LANES' })
+}
 export const card = (laneId, body) => async (dispatch) => {
   try {
     dispatch(createCardRequest())

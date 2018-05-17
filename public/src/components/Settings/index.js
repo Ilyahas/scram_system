@@ -1,12 +1,14 @@
 import React from 'react'
 import './Settings.css'
 
-export default ({ name, additionalInf, description, btnName, list }) => (
+export default ({
+  name, additionalInf, description, btnName, list,
+}) => (
   <div>
     <div className="SettingsHeader">
       <div className="PaneHeader">
         <div className="BcgCircle">
-          <i class="fa fa-users" aria-hidden="true" />
+          <i className="fa fa-users" aria-hidden="true" />
         </div>
         <div className="CurrentDetails">
           <h1>{name}</h1>

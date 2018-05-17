@@ -64,6 +64,9 @@ export function dashboard(state = INITIAL_STATE, action) {
       const newLanes = state.lanes.concat(action.data)
       return updateObject(state, { lanes: newLanes })
     }
+    case dashboardActions.CLEAR_LANES: {
+      return updateObject(state, { lanes: [] })
+    }
     default:
       return state
   }
@@ -90,7 +93,7 @@ export const card = createReducer(
     [createCardRequest]: state => requestStart(state),
     [createCardFailed]: state => requestFailed(state),
   },
-  INITIAL_STATE,
+  INITIAL_STATE
 )
 const DASHBOARDS_INITIAL_STATE = {
   lanes: [],
@@ -105,11 +108,14 @@ export const allDashboards = createReducer(
     [getAllDashboardsFailed]: state => requestFailed(state),
     [getAllDashboardsRequest]: state => requestStart(state),
   },
-  DASHBOARDS_INITIAL_STATE,
+  DASHBOARDS_INITIAL_STATE
 )
 
-export const deleteCard = createReducer({
-  [deleteCardAction]: state => requestSuccess(state),
-  [deleteCardFailed]: state => requestFailed(state),
-  [deleteCardRequest]: state => requestStart(state),
-}, INITIAL_STATE)
+export const deleteCard = createReducer(
+  {
+    [deleteCardAction]: state => requestSuccess(state),
+    [deleteCardFailed]: state => requestFailed(state),
+    [deleteCardRequest]: state => requestStart(state),
+  },
+  INITIAL_STATE
+)
