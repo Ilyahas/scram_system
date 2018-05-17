@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { BoardHeader, BoardItem, BoardSection, BoardContainer } from '../../../components/Project'
-import { getCompanyTeamsWithDashboards } from '../../../actions/dashboard'
+import { FlexContainer, BoardHeader, BoardItem, BoardSection, BoardContainer } from '../../../components/Project'
+import { getCompanyTeamsWithDashboards, createDashboard } from '../../../actions/dashboard'
 import { getCompany } from '../../../actions/company'
 import gif from '../../../assets/loading.gif'
 
@@ -23,14 +23,18 @@ class Projects extends React.Component {
     this.showModal()
   }
   addNewBoard = () => {
-    console.log(this.state.teamId)
+    const body = {}
+    body.name = this.state.value
+    body.teamId = this.state.teamSelected
+    this.props.createDashboard(body)
+    this.showModal()
   }
   componentDidMount() {
     this.props.getCompanyTeamsWithDashboards(localStorage.companyId)
   }
   render() {
     const { dashboards, isRequested, isError } = this.props
-    if (!isRequested) return <img src={gif} alt="loading" />
+    if (isRequested) return <FlexContainer><img src={gif} alt="loading" height="50" width="50"/></FlexContainer>
     if (isError) return null
     const board = dashboards.map((teamDashboards) => {
       const header = <BoardHeader headerName={teamDashboards.teamName} />
@@ -68,6 +72,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getCompanyTeamsWithDashboards,
   getCompany,
+  createDashboard,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Projects)

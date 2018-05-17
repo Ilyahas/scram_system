@@ -10,6 +10,9 @@ import {
   getAllDashboards,
   getAllDashboardsFailed,
   getAllDashboardsRequest,
+  createDashboardRequest,
+  createDashboardFailed,
+  createDashboardSucceed,
 } from '../actions/dashboard'
 
 const INITIAL_STATE = {
@@ -93,7 +96,7 @@ export const card = createReducer(
     [createCardRequest]: state => requestStart(state),
     [createCardFailed]: state => requestFailed(state),
   },
-  INITIAL_STATE
+  INITIAL_STATE,
 )
 const DASHBOARDS_INITIAL_STATE = {
   lanes: [],
@@ -104,11 +107,19 @@ const DASHBOARDS_INITIAL_STATE = {
 }
 export const allDashboards = createReducer(
   {
-    [getAllDashboards]: (state, payload) => ({ ...state, dashboards: payload }),
+    [getAllDashboards]: (state, payload) => ({ ...requestSuccess(state), dashboards: payload }),
     [getAllDashboardsFailed]: state => requestFailed(state),
     [getAllDashboardsRequest]: state => requestStart(state),
+    [createDashboardSucceed]: (state, payload) => {
+      const newDasnhoard = Object.assign([], state.dashboards)
+      const index = newDasnhoard.findIndex(item => item._id === payload.teamId)
+      const copySearcgeObj = Object.assign({}, newDasnhoard[index])
+      copySearcgeObj.dashboards = copySearcgeObj.dashboards.concat(payload)
+      newDasnhoard[index] = copySearcgeObj
+      return updateObject({ ...state, ...requestSuccess(state), dashboards: newDasnhoard })
+    },
   },
-  DASHBOARDS_INITIAL_STATE
+  DASHBOARDS_INITIAL_STATE,
 )
 
 export const deleteCard = createReducer(
@@ -117,5 +128,5 @@ export const deleteCard = createReducer(
     [deleteCardFailed]: state => requestFailed(state),
     [deleteCardRequest]: state => requestStart(state),
   },
-  INITIAL_STATE
+  INITIAL_STATE,
 )

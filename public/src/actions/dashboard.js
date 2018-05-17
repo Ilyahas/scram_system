@@ -45,6 +45,21 @@ export const getAllDashboards = createAction('get all company teams with dashboa
 export const getAllDashboardsRequest = createAction('get dashboards request')
 export const getAllDashboardsFailed = createAction('get company dashboards failed')
 
+export const createDashboardSucceed = createAction('dashboard create successfully')
+export const createDashboardRequest = createAction('dashboard request started')
+export const createDashboardFailed = createAction('dashboard craetion failed')
+
+export const createDashboard = body => async (dispatch) => {
+  try {
+    dispatch(getAllDashboardsRequest())
+    let data = await api.dashboard.createDashboard(body)
+    data = data.data.requestResult
+    dispatch(createDashboardSucceed(data))
+  } catch (error) {
+    dispatch(getAllDashboardsFailed())
+  }
+}
+
 export const getCompanyTeamsWithDashboards = companyId => async (dispatch) => {
   try {
     dispatch(getAllDashboardsRequest())
@@ -52,7 +67,6 @@ export const getCompanyTeamsWithDashboards = companyId => async (dispatch) => {
     data = data.data.requestResult
     dispatch(getAllDashboards(data))
   } catch (error) {
-    console.log(error)
     dispatch(getAllDashboardsFailed())
   }
 }

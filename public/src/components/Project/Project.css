@@ -1,3 +1,9 @@
+.FlexContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50vh; }
+
 .BoardContainer {
   padding: 15px; }
   .BoardContainer .BoardSection .BoardHeader {

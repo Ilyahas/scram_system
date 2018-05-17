@@ -26,5 +26,6 @@ export default {
     addCard: (laneId, body) => axios.post(`${host}/company/lane/${laneId}/card`, { ...body }, header()),
     updateCard: (cardId, body) => axios.put(`${host}/company/card/${cardId}`, { ...body }, header()),
     deleteCard: (cardId, body) => axios.delete(`${host}/company/card/${cardId}`, { ...body }, header()),
+    createDashboard: body => axios.post(`${host}/company/boards`, { ...body }, header()),
   },
 }

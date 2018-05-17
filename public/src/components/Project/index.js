@@ -31,7 +31,11 @@ export const BoardSection = ({header, listItems, teamId, teamChanged }) => (
     </ul>
   </div>
 )
-
+export const FlexContainer = ({ children }) => (
+  <div className="FlexContainer">
+    {children}
+  </div>
+)
 export const BoardContainer = ({
   boardSectionList,
   isShowModal,
