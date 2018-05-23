@@ -23,9 +23,9 @@ apiDocs(app)
 routes(app)
 
 app.get('/*', (req, res) => {
-  console.log('-----------------------------')
   res.sendFile(path.join(__dirname, 'public', 'build', 'index.html'))
 })
+
 app.use((err, req, res) => {
   if (err.code === 11000) {
     let [, field] = err.message.split('.$');
@@ -39,9 +39,6 @@ app.use((err, req, res) => {
       },
     })
   } else {
-    console.log('==============================')
-    console.log(err)
-    console.log('request', req)
     res.status(400).json({
       requestStatus: false,
       requestResult: {
