@@ -25,11 +25,11 @@ export default () => (
         </a>
       </div>
     </div>
-    <div className="FlexContainer OverrideCont">
+    {/* <div className="FlexContainer OverrideCont">
       <div className="TeamItem">My Cards</div>
       <div className="TeamItem">My Workspaces</div>
       <div className="TeamItem">My Workspaces in progress</div>
       <div className="TeamItem">Completed work history</div>
-    </div>
+    </div> */}
   </div>
 )
