@@ -1,14 +1,15 @@
 {
-  "main.css": "static/css/main.7b4f416c.css",
-  "main.css.map": "static/css/main.7b4f416c.css.map",
-  "main.js": "static/js/main.52c47f00.js",
-  "main.js.map": "static/js/main.52c47f00.js.map",
+  "main.css": "static/css/main.06f78ec8.css",
+  "main.css.map": "static/css/main.06f78ec8.css.map",
+  "main.js": "static/js/main.6f69d938.js",
+  "main.js.map": "static/js/main.6f69d938.js.map",
   "static/media/Signup.scss": "static/media/Signup.dca93b24.scss",
   "static/media/fontawesome-webfont.eot": "static/media/fontawesome-webfont.674f50d2.eot",
   "static/media/fontawesome-webfont.svg?v=4.7.0": "static/media/fontawesome-webfont.912ec66d.svg",
   "static/media/fontawesome-webfont.ttf?v=4.7.0": "static/media/fontawesome-webfont.b06871f2.ttf",
   "static/media/fontawesome-webfont.woff2?v=4.7.0": "static/media/fontawesome-webfont.af7ae505.woff2",
   "static/media/fontawesome-webfont.woff?v=4.7.0": "static/media/fontawesome-webfont.fee66e71.woff",
+  "static/media/loading.gif": "static/media/loading.1ac6a3f4.gif",
   "static/media/simple-codelines.svg": "static/media/simple-codelines.7561923a.svg",
   "static/media/style.scss": "static/media/style.55c31038.scss"
 }
