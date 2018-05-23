@@ -26,10 +26,31 @@ app.get('/*', (req, res) => {
   console.log('-----------------------------')
   res.sendFile(path.join(__dirname, 'public', 'build', 'index.html'))
 })
-app.get('/.*/', (req, res) => {
-  console.log('-----------------------------1232323232')
-  res.sendFile(path.join(__dirname, 'public', 'build', 'index.html'))
+app.use((err, req, res) => {
+  if (err.code === 11000) {
+    let [, field] = err.message.split('.$');
+    [field] = field.split(' dup key')
+    field = field.substring(0, field.lastIndexOf('_'))
+    res.status(400).json({
+      requestStatus: false,
+      requestResult: {
+        error: err.message,
+        duplicate: field,
+      },
+    })
+  } else {
+    console.log('==============================')
+    console.log(err)
+    console.log('request', req)
+    res.status(400).json({
+      requestStatus: false,
+      requestResult: {
+        err,
+      },
+    })
+  }
 })
+
 app.listen(() => {
   console.log(`server was started at ${process.env.PORT || '3030'} port`)
 })

@@ -13,7 +13,7 @@ function errHandler(err, req, res) {
   } else {
     console.log('==============================')
     console.log(err)
-    console.log('request',req)
+    console.log('request', req)
     res.status(400).json({
       requestStatus: false,
       requestResult: {

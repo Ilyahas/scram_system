@@ -9,5 +9,4 @@ module.exports = (app) => {
   app.use('/company', company)
   app.use('/task', task)
   app.use('/user', user)
-  app.use(errHandler.errHandler)
 }
