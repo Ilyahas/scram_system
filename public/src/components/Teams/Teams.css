@@ -3,7 +3,8 @@
   .backClr .FlexContainer {
     display: flex;
     align-items: center;
-    flex-direction: column; }
+    flex-direction: column;
+    height: unset; }
     .backClr .FlexContainer a {
       color: #000;
       width: 80%; }
@@ -49,7 +50,6 @@
       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
       cursor: pointer; }
     .backClr .FlexContainer .ButtonContainer {
-      display: flex;
       align-items: flex-start;
       width: 80%; }
       .backClr .FlexContainer .ButtonContainer .AddButton {

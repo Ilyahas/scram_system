@@ -1,0 +1,49 @@
+@import '../../../variables.scss';
+$avatarSize:50px;
+.Rows {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    .UserContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        border-radius: 5px;
+        box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        margin-bottom: 20px;
+        .avatar {
+            width: $avatarSize;
+            height: $avatarSize;
+            border-radius: $avatarSize;
+            background-color: $styleColor;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+        .UserData {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 20px;
+        }
+        .Role {
+            display: flex;
+            justify-content: flex-end;
+            flex: 1 1;
+        }
+    }
+}
+
+.Start {
+    display: flex;
+    justify-content: flex-start;
+    flex: 1 1;
+}
+
+.username {
+    margin-bottom: 3px;
+}

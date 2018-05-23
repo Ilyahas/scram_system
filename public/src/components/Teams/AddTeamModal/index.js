@@ -16,7 +16,7 @@ const AsyncItem = ({
         value={members}
         onChange={onChange}
         valueKey="_id"
-        labelKey="email"
+        labelKey="nickname"
         loadOptions={getUsers}
         backspaceRemoves={true}
       />

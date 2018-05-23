@@ -15,6 +15,7 @@ const User = new Schema({
   },
   nickname: {
     type: String,
+    required: true,
   },
   firstname: {
     type: String,

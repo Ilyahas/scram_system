@@ -12,6 +12,9 @@ class Signup extends React.Component {
         companyName: '',
         email: '',
         password: '',
+        firstname: '',
+        lastname: '',
+        nickname: '',
       },
       loading: false,
       errors: {},
@@ -51,6 +54,24 @@ class Signup extends React.Component {
                   id="name"
                   type="text"
                   placeholder="companyName"
+                  onChange={this.onChange}
+                />
+                 <Input
+                  id="name"
+                  type="text"
+                  placeholder="firstname"
+                  onChange={this.onChange}
+                />
+                 <Input
+                  id="name"
+                  type="text"
+                  placeholder="lastname"
+                  onChange={this.onChange}
+                />
+                 <Input
+                  id="name"
+                  type="text"
+                  placeholder="nickname"
                   onChange={this.onChange}
                 />
                 <Input

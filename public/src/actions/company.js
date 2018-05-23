@@ -4,8 +4,9 @@ import api from '../utils/api';
 export const newTeam = () => ({
   type: companyActions.CREATE_TEAM_REQUEST,
 });
-export const teamCreated = () => ({
+export const teamCreated = (data) => ({
   type: companyActions.CREATE_TEAM_SUCCESS,
+  data,
 });
 export const createTeamFailed = () => ({
   type: companyActions.CREATE_TEAM_FAILED,
@@ -34,8 +35,9 @@ export const getCompany = () => async (dispatch) => {
 export const createTeam = (id, data) => async (dispatch) => {
   try {
     dispatch(newTeam());
-    await api.company.createTeam(id, data);
-    dispatch(teamCreated());
+    let team = await api.company.createTeam(id, data);
+    team = team.data.requestResult
+    dispatch(teamCreated(team));
   } catch (error) {
     dispatch(createTeamFailed());
   }

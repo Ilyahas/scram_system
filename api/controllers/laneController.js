@@ -36,18 +36,34 @@ class LaneController extends BaseController {
       )
       return super.responseJSON(
         res,
-        teams ? 200 : 400,
-        !!teams,
-        teams,
+        dashboard ? 200 : 400,
+        !!dashboard,
+        dashboard,
       )
     } catch (error) {
       next(error)
     }
   }
   async getDashboard(req, res, next) {
+    const { teamName } = req.params
+    try {
+      const team = await Team.findOne(
+        { teamName },
+        'dashboards members teamName',
+      ).populate('dashboards')
+        .populate({ path: 'members' })
+      return super.responseJSON(res, team ? 200 : 404, !!team, team)
+    } catch (error) {
+      next(error)
+    }
+  }
+  async getDashboards(req, res, next) {
     const companyId = req.params.id
     try {
-      const teams = await Team.find({ companyId }, 'dashboards teamName').populate({
+      const teams = await Team.find(
+        { companyId },
+        'dashboards teamName',
+      ).populate({
         path: 'dashboards',
       })
       return super.responseJSON(res, teams ? 200 : 404, !!teams, teams)
@@ -143,5 +159,5 @@ class LaneController extends BaseController {
   }
 }
 const validObjectId = id =>
-  (ObjectId.isValid(id) ? { _id: id } : { customId: id })
+  ObjectId.isValid(id) ? { _id: id } : { customId: id }
 module.exports = LaneController

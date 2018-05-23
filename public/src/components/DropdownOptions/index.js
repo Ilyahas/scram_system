@@ -1,8 +1,9 @@
 // import Radium, { StyleRoot } from 'radium'
 // import { fadeInDown } from 'react-animations'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
 import React, { Component } from 'react'
 import './DropdownOptions.css'
-
 // const styles = {
 //   fadeInDown: {
 //     animation: 'x 1s',
@@ -11,10 +12,15 @@ import './DropdownOptions.css'
 // }
 
 class DropdownOptions extends Component {
+  logOut = () => {
+    localStorage.removeItem('JWT')
+    localStorage.removeItem('companyId')
+    window.location.reload()
+  }
   render() {
     return (
       <div className="DbContainer DbMain">
-        <div className="Nickname  DbSegment">
+        {/* <div className="Nickname  DbSegment">
           Signed as {this.props.nickname}
         </div>
         <div className="Links DbSegment">
@@ -24,11 +30,11 @@ class DropdownOptions extends Component {
             <li>Blabla</li>
             <li>Blabla</li>
           </ul>
-        </div>
+        </div> */}
         <div className="Links DbSegment">
           <ul>
-            <li>Settings</li>
-            <li>Sign out</li>
+            {/* <li>Settings</li> */}
+            <li onClick={() => this.logOut()}>Sign out</li>
           </ul>
         </div>
       </div>
@@ -36,4 +42,10 @@ class DropdownOptions extends Component {
   }
 }
 
-export default DropdownOptions
+const mapStateToProps = state => ({
+  isLoading: state.user.isLoading,
+  isSuccess: state.user.isSuccess,
+  errorMessage: state.user.errorMessage,
+});
+export default connect(mapStateToProps, {  })(DropdownOptions);
+

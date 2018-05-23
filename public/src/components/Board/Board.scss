@@ -80,7 +80,7 @@ $userLogoSmall:25px;
     }
     .Description {
         padding: 6px;
-        border-bottom: 1px solid #eee;
+        //border-bottom: 1px solid #eee;
     }
     .Small {
         width: $userLogoSmall !important;
@@ -101,6 +101,7 @@ $userLogoSmall:25px;
         display: flex;
         justify-content: center;
         align-items: center;
+        margin: 5px;
     }
 }
 
@@ -133,4 +134,12 @@ article {
     height: 1px;
     top: 4px;
     left: 2px;
+}
+
+.loadingImg {
+    position: absolute;
+    z-index: 5009;
+    top: 37%;
+    left: 44%;
+    transform: translate(-50%, -50%);
 }

@@ -16,10 +16,10 @@ const menuItems = [
     title: 'Team',
     url: '/teams',
   },
-  {
-    title: 'Members',
-    url: '/users',
-  },
+  // {
+  //   title: 'Members',
+  //   url: '/users',
+  // },
 ]
 
 class ListItems extends Component {
@@ -37,15 +37,6 @@ class ListItems extends Component {
 }
 
 export default class Header extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isShowUserOptions: false,
-    }
-  }
-  onClick =() => {
-    this.setState({ isShowUserOptions: !this.state.isShowUserOptions })
-  }
   render() {
     return (
       <div className="HeaderContainer">
@@ -53,11 +44,11 @@ export default class Header extends Component {
           <ListItems />
           <ul className="UserInfo">
             <li>
-              <div onClick={this.onClick} className="UserProf">
+              <div onClick={() => this.props.showDropdownMenu()} className="UserProf">
                 <i className="fa fa-cog" aria-hidden="true" />
               </div>
             </li>
-            {this.state.isShowUserOptions && <DropdownOptions />}
+            {this.props.isShowUserOptions && <DropdownOptions />}
           </ul>
         </header>
       </div>

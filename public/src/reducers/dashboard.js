@@ -10,9 +10,9 @@ import {
   getAllDashboards,
   getAllDashboardsFailed,
   getAllDashboardsRequest,
-  createDashboardRequest,
-  createDashboardFailed,
+  createTeamDashboardSucceed,
   createDashboardSucceed,
+  getTeamDashboardSuccees,
 } from '../actions/dashboard'
 
 const INITIAL_STATE = {
@@ -104,6 +104,7 @@ const DASHBOARDS_INITIAL_STATE = {
   isError: false,
   isRequested: false,
   dashboards: [],
+  teamDashboard: [],
 }
 export const allDashboards = createReducer(
   {
@@ -118,6 +119,12 @@ export const allDashboards = createReducer(
       newDasnhoard[index] = copySearcgeObj
       return updateObject({ ...state, ...requestSuccess(state), dashboards: newDasnhoard })
     },
+    [createTeamDashboardSucceed]: (state, payload) => {
+      const newTeam = Object.assign([], state.teamDashboard)
+      newTeam[0].dashboards = newTeam[0].dashboards.concat(payload)
+      return ({ ...state, ...requestSuccess(state), teamDashboard: newTeam })
+    },
+    [getTeamDashboardSuccees]: (state, payload) => ({ ...state, ...requestSuccess(state), teamDashboard: payload }),
   },
   DASHBOARDS_INITIAL_STATE,
 )

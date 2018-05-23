@@ -12,7 +12,7 @@ export const BoardHeader = ({ headerName }) => (
 
 export const BoardItem = ({ boardName, toLink }) => (
   <li>
-    <Link to={toLink} className="SectionItem">
+    <Link to={{ pathname: toLink }} className="SectionItem">
       <h1>{boardName}</h1>
     </Link>
   </li>

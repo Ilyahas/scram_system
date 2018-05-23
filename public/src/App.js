@@ -21,14 +21,25 @@ import { getCompany } from '../src/actions/company'
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.verifyToken(localStorage.JWT)
-    this.props.getCompany()
+    // this.props.verifyToken(localStorage.JWT)
+    if (!localStorage.companyId) {
+      this.props.getCompany()
+    }
   }
-  // TODO:add id in route
+  state = {
+    isShowUserOptions: false,
+  }
+  showDropdownMenu =() => {
+    this.setState({ isShowUserOptions: !this.state.isShowUserOptions })
+  }
+  hideDropDown = () => {
+    if (this.state.isShowUserOptions) this.setState({ isShowUserOptions: false })
+  }
   render() {
     return (
-      <div >
-        {this.props.isLogin && <Header />}
+      <div onClick={ () => this.hideDropDown()}>
+        {this.props.isLogin && <Header showDropdownMenu={ this.showDropdownMenu }
+        isShowUserOptions= {this.state.isShowUserOptions}/>}
         <Switch>
           <GuestRoute location={this.props.location} exact path="/" component={WelcomePage} />
           <GuestRoute location={this.props.location} exact path="/signup" component={SignupPage} />
@@ -37,11 +48,11 @@ class App extends React.Component {
             {' '}
           </GuestRoute>
           <UserRoute location={this.props.location} exact path="/home" component={Home} />
-          <UserRoute location={this.props.location} exact path="/projects" component={Projects} />
+          <UserRoute location={this.props.location} exact path="/projects" component={Projects}/>
           <UserRoute location={this.props.location} exact path="/team/:teamName/:dashboardId" component={Board} />
           <UserRoute location={this.props.location} exact path="/teams" component={TeamContent} />
           <UserRoute location={this.props.location} exact path="/users" component={ Members } />
-          <UserRoute location={this.props.location} path="/settings" component={ Settings } />
+          <UserRoute location={this.props.location} path="/settings/:teamName" component={ Settings } />
         </Switch>
       </div>
     )

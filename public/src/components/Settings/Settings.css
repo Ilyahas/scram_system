@@ -19,22 +19,24 @@
       justify-content: center; }
       .SettingsHeader .PaneHeader .BcgCircle .fa {
         font-size: 35px; }
-    .SettingsHeader .PaneHeader .CurrentDetails h1 {
-      color: #000;
-      margin-bottom: 8px;
-      font-weight: 600;
-      margin-right: 5px;
-      font-weight: 600;
-      display: inline-block; }
-    .SettingsHeader .PaneHeader .CurrentDetails label {
-      font-size: 8px; }
-    .SettingsHeader .PaneHeader .CurrentDetails p {
-      margin: 0 0 8px;
-      font-size: 10px; }
-    .SettingsHeader .PaneHeader .CurrentDetails .btn {
-      padding: 4px 5px;
-      font-size: 14px;
-      margin-top: 8px; }
+    .SettingsHeader .PaneHeader .CurrentDetails {
+      display: flex; }
+      .SettingsHeader .PaneHeader .CurrentDetails h1 {
+        color: #000;
+        margin-bottom: 8px;
+        font-weight: 600;
+        margin-right: 5px;
+        font-weight: 600;
+        display: inline-block; }
+      .SettingsHeader .PaneHeader .CurrentDetails label {
+        font-size: 8px; }
+      .SettingsHeader .PaneHeader .CurrentDetails p {
+        margin: 0 0 8px;
+        font-size: 10px; }
+      .SettingsHeader .PaneHeader .CurrentDetails .btn {
+        padding: 4px 5px;
+        font-size: 14px;
+        margin-top: 8px; }
 
 .NavPane ul {
   display: flex;

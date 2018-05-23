@@ -13,10 +13,10 @@ class UserController extends BaseController {
     // const isApproved = req.query.isApproved
 
     if (search) {
-      query.email = new RegExp(`^${search}`)
+      query.nickname = new RegExp(`^${search}`)
     }
 
-    const listUserPromise = User.find(query).select('email')
+    const listUserPromise = User.find(query).select('nickname')
     if (sortBy) {
       const sortQuery = {}
       sortQuery[sortBy] = sort

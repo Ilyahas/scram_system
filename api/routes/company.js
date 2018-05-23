@@ -49,12 +49,14 @@ router.get(
   validate.params(schemas.dashboard.params),
   LaneCtrl.get,
 )
-router.get('/dashboards/:id', LaneCtrl.getDashboard)
+router.get('/dashboard/:teamName', LaneCtrl.getDashboard)
+router.get('/dashboards/:id', LaneCtrl.getDashboards)
 router.put(
   '/lane/:id',
   validate.body(schemas.dashboard.laneUpdate),
   LaneCtrl.update,
 )
+// router.put('team', LaneCtrl.changeTeamName)
 router.delete('/:id/team/:name/lane/:laneId', LaneCtrl.delete)
 router.post(
   '/lane/:id/card',

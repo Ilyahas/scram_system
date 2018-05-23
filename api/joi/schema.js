@@ -15,6 +15,9 @@ module.exports = {
       companyName: Joi.string(),
       password: Joi.string().required(),
       email: Joi.string().email(),
+      nickname: Joi.string(),
+      firstname: Joi.string(),
+      lastname: Joi.string(),
     }),
   },
   company: {

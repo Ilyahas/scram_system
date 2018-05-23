@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Board from '../../../components/Board'
-import { getDashboard, lane, card, deleteCard, moveCard, clearLane } from '../../../actions/dashboard'
+import { getTeamDashboard, getDashboard, lane, card, deleteCard, moveCard, clearLane } from '../../../actions/dashboard'
 
 export class BoardPage extends React.Component {
   state = {
@@ -12,6 +12,7 @@ export class BoardPage extends React.Component {
   }
   componentDidMount() {
     const { teamName, dashboardId } = this.props.match.params
+    this.props.getTeamDashboard(teamName)
     this.props.getDashboard(teamName, dashboardId)
   }
   componentWillUnmount() {
@@ -55,8 +56,15 @@ export class BoardPage extends React.Component {
     this.props.moveCard(targetLaneId, moveObj)
   }
   render() {
+    const { teamDashboards } = this.props
+    const userItems = teamDashboards[0] ? teamDashboards[0].members.map(item => (
+      <div className="User">
+      <p>{item.firstname[0]}{item.lastname[0]}</p>
+    </div>
+    )) : (null)
     return (
       <Board
+      userItems={userItems}
         boardData={this.props.lanes}
         handleCardAdd={this.handleCardAdd}
         handleCardDelete={this.handleCardDelete}
@@ -78,6 +86,7 @@ export class BoardPage extends React.Component {
 
 const mapDispatchToProps = {
   getDashboard,
+  getTeamDashboard,
   lane,
   card,
   deleteCard,
@@ -86,7 +95,8 @@ const mapDispatchToProps = {
 }
 const mapStateToProps = state => ({
   lanes: state.dashboard.lanes,
-  isRequested: state.lane.isRequested,
+  isRequested: state.dashboard.isRequested,
+  teamDashboards: state.allDashboards.teamDashboard,
 })
 BoardPage.propTypes = {
   getDashboard: PropTypes.func.isRequired,

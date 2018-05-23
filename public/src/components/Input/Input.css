@@ -25,7 +25,8 @@
     font-family: FontAwesome;
     font-size: 13px;
     opacity: .1;
-    transition: opacity .5s ease; }
+    transition: opacity .5s ease;
+    padding-bottom: unset; }
     .Input label::before {
       align-items: center;
       color: #FFFCE8;

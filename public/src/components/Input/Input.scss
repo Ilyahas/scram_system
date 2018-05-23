@@ -57,7 +57,7 @@ $cosmiclatte: #FFFCE8;
         font-size: 13px;
         opacity: .1;
         transition: opacity .5s ease;
-        
+        padding-bottom: unset;
         &::before {
             align-items: center;
             color: $cosmiclatte;

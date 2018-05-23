@@ -14,7 +14,7 @@ export default ({
           <h1>{name}</h1>
           <label>{additionalInf}</label>
           <p> {description}</p>
-          <button className="btn"> {btnName}</button>
+          {/* <button className="btn"> {btnName}</button> */}
         </div>
       </div>
     </div>

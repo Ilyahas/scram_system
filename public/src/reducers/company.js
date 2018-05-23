@@ -22,6 +22,7 @@ export default function company(state = INITIAL_STATE, action) {
     case companyActions.CREATE_TEAM_SUCCESS: {
       return {
         ...state,
+        listOfTeams: state.listOfTeams.concat(action.data),
         isRequested: false,
         isSuccess: true,
         isError: false,

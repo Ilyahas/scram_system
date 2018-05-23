@@ -4,13 +4,26 @@ import Board from 'react-trello'
 import './Board.css'
 import Modal from '../Modal'
 import SideNav from './SideNav'
+import gif from '../../assets/loading.gif'
+import { FlexContainer } from '../Project'
 
 export default class BoardPan extends React.Component {
+  cardClick = (e, prop) => {
+    console.log(e, prop)
+  }
   render() {
     const onbj = {}
     onbj.lanes = this.props.lanes
     return (
       <div className="Container">
+      {this.props.isRequested && (<img
+          className="loadingImg"
+          src={gif}
+          alt="loading"
+          height="100"
+          width="100"
+        />)}
+
         <Board
           className="SideMenuActive"
           editable
@@ -25,16 +38,16 @@ export default class BoardPan extends React.Component {
           handleDragEnd={this.props.handleDragEnd}
           addCardLink={<button className="btn btn-block btn-success btn-card">Add card</button>}
         >
-          <CustomCard />
+          <CustomCard cardClick={this.cardClick} />
         </Board>
-        <SideNav showModal={this.props.showModal} isRequested={this.props.isRequested} />
+        <SideNav showModal={this.props.showModal} isRequested={this.props.isRequested}>{this.props.userItems}</SideNav>
         {this.props.isShowModal && (
           <Modal
             handleInputChange={this.props.handleInputChange}
             labelName="New List Name:"
             name="Create New List"
             addNewList={this.props.addNewList}
-            showModal = {this.props.showModal}
+            showModal={this.props.showModal}
           >
             <label htmlFor="usr">New List Name:</label>
             <input type="text" className="form-control" id="usr" onChange={this.props.handleInputChange} />
@@ -50,17 +63,17 @@ BoardPan.propTypes = {
 }
 const CustomCard = props => (
   <div className="Card">
-    <header className="card-header">
+    <header className="card-header" onClick={e => props.cardClick(e, props)}>
       <div className="title">{props.title}</div>
       <div className="time">{props.label}</div>
     </header>
     <div className="Description">
       <div>{props.description}</div>
     </div>
-    <div className="Participans ">
+    {/* <div className="Participans ">
       <div className="User Small">
         <p>YK</p>
       </div>
-    </div>
+    </div> */}
   </div>
 )

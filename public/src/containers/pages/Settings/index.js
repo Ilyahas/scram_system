@@ -1,31 +1,28 @@
-import { Route, NavLink } from 'react-router-dom'
+import { Route, NavLink, Switch, Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import SettingsPage from '../../../components/Settings'
-import Desks from '../../../components/Settings/Desks'
-import Members from '../../../components/Settings/Members'
+import Desks from './Desks'
+import Members from '../Members'
 
 const menuItems = [
   {
-    title: 'Home',
-    url: '/settings/rendering',
+    title: 'Desks',
+    url: 'desks',
   },
   {
-    title: 'Projects',
-    url: '/settings/components',
-  },
-  {
-    title: 'Team',
-    url: '/settings/props-v-state',
+    title: 'Members',
+    url: 'members',
   },
 ]
 class ListItems extends React.Component {
   render() {
+    const { teamName } = this.props
     const values = menuItems.slice(0, menuItems.length)
     const listItems = values.map((data, index) => (
       <li key={index}>
-        <NavLink to={data.url} activeClassName="ActiveSettings">
+        <NavLink to={`/settings/${teamName}/${data.url}`} activeClassName="ActiveSettings">
           {data.title}
         </NavLink>
       </li>
@@ -37,18 +34,24 @@ export class Settings extends Component {
   //   static propTypes = {
   //     prop: PropTypes,
   //   }
-
+  componentDidMount() {}
   render() {
+    const { teamName } = this.props.match.params
+    const { location } = this.props
+    const index = location.pathname.lastIndexOf('/') + 1
+    const dashId = location.pathname.slice(index)
     return (
       <div>
-        <SettingsPage name={'name'}
-         additionalInf={'some info'}
-         description={'description'}
-         btnName={'btnName'}
-         list={<ListItems /> }
-        />
-        <Route path={'/settings/rendering'} component = {Desks} />
-        <Route path={'/settings/components'} component = {Members} />
+        <SettingsPage
+          name={teamName}
+          btnName={'Change team profile'}
+          list={<ListItems teamName={teamName} />}
+          />
+        <Switch>
+          <Redirect from='/settings/:teamName/team/:teamName/:dashboardId' to={`/team/${teamName}/${dashId}`}/>
+          <Route path={'/settings/:teamName/desks'} component={Desks} />
+          <Route path={'/settings/:teamName/members'} component={Members} />
+        </Switch>
       </div>
     )
   }

@@ -33,22 +33,14 @@ class Projects extends React.Component {
     this.props.getCompanyTeamsWithDashboards(localStorage.companyId)
   }
   render() {
-    const { dashboards, isRequested, isError } = this.props
+    const { dashboards, isRequested } = this.props
     if (isRequested) return <FlexContainer><img src={gif} alt="loading" height="50" width="50"/></FlexContainer>
-    if (isError) return null
-    const board = dashboards.map((teamDashboards) => {
-      const header = <BoardHeader headerName={teamDashboards.teamName} />
-      const boardList = teamDashboards.dashboards.map(item => (
-        <BoardItem key={item._id} boardName={item.name} toLink={`team/${teamDashboards.teamName}/${item._id}`} />
-      ))
-      return <BoardSection key={teamDashboards._id}
-      header={header}
-      listItems={boardList}
-      teamId={teamDashboards._id}
-      teamChanged = {this.teamChanged}
-      />
-    })
-    return <BoardContainer boardSectionList={board}
+
+    return <BoardContainer
+    boardSectionList={<Board dashboards={dashboards}
+    isHeaderDisplay = {true}
+    teamChanged={this.teamChanged}/>}
+
     isShowModal={this.state.isShowModal}
     handleInputChange = {this.handleInputChange}
     addNewBoard = {this.addNewBoard}
@@ -56,7 +48,21 @@ class Projects extends React.Component {
     />
   }
 }
-
+export const Board = ({ dashboards, isHeaderDisplay, teamChanged }) => {
+  const board = dashboards.map((teamDashboards) => {
+    const header = <BoardHeader headerName={teamDashboards.teamName} />
+    const boardList = teamDashboards.dashboards.map(item => (
+      <BoardItem key={item._id} boardName={item.name} toLink={`team/${teamDashboards.teamName}/${item._id}`} />
+    ))
+    return <BoardSection key={teamDashboards._id}
+    header={ isHeaderDisplay ? header : null}
+    listItems={boardList}
+    teamId={teamDashboards._id}
+    teamChanged = {teamChanged}
+    />
+  })
+  return board
+}
 Projects.propTypes = {
   getCompanyTeamsWithDashboards: PropTypes.func.isRequired,
   dashboards: PropTypes.array.isRequired,

@@ -32,7 +32,7 @@ class CompanyController extends BaseController {
           path: 'listOfTeams',
           populate: {
             path: 'teamlead manager members',
-            select: 'email',
+            select: 'nickname',
             model: 'User',
           },
         })
@@ -51,7 +51,10 @@ class CompanyController extends BaseController {
       await Company.findByIdAndUpdate(companyId, {
         $push: { listOfTeams: team.id },
       })
-      super.responseJSON(res, 201, true, {})
+      const convTeam = await Team.findOne({ teamName: data.teamName }).populate({
+        path: 'teamlead manager members',
+      })
+      super.responseJSON(res, 201, true, convTeam)
     } catch (error) {
       next(error)
     }

@@ -18,7 +18,7 @@ const Button = ({ modal }) => {
   )
 }
 
-const TeamItem = ({ teamName, teamlead }) => (
+export const TeamItem = ({ teamName, teamlead }) => (
     <div className="TeamItem">
       <div className="TeamDetails">
         <h2>{teamName} </h2>
@@ -33,8 +33,8 @@ const TeamItem = ({ teamName, teamlead }) => (
 )
 
 const TeamItems = ({ listOfTeams }) => listOfTeams.map(elem => (
-    <Link key={elem._id} to={`/team/${elem.teamName}`}>
-      <TeamItem teamName={elem.teamName} teamlead={elem.teamlead.email} />
+    <Link key={elem._id} to={`/settings/${elem.teamName}/desks`}>
+      <TeamItem teamName={elem.teamName} teamlead={elem.teamlead.nickname} />
     </Link>
 ))
 
