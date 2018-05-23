@@ -23,9 +23,13 @@ apiDocs(app)
 routes(app)
 
 app.get('/*', (req, res) => {
+  console.log('-----------------------------')
   res.sendFile(path.join(__dirname, 'public', 'build', 'index.html'))
 })
-
+app.get('/.*/', (req, res) => {
+  console.log('-----------------------------1232323232')
+  res.sendFile(path.join(__dirname, 'public', 'build', 'index.html'))
+})
 app.listen(() => {
   console.log(`server was started at ${process.env.PORT || '3030'} port`)
 })
