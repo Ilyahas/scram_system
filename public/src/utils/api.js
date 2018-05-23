@@ -1,8 +1,8 @@
 import axios from 'axios'
 import header from '../utils/config'
 
-const host = 'https://secure-savannah-40186.herokuapp.com'
-// const host = 'http://localhost:3030'
+// const host = 'https://secure-savannah-40186.herokuapp.com'
+const host = 'http://localhost:3030'
 export default {
   user: {
     login: data => axios.post(`${host}/auth/login`, { ...data }),
