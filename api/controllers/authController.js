@@ -24,7 +24,7 @@ const hashPasswordSha512 = (password, salt) => {
     passwordHash: value,
   }
 }
-const saltHashPassword = (userPassword) => {
+const saltHashPassword = userPassword => {
   const salt = generateRandomString(stringLenght)
   return hashPasswordSha512(userPassword, salt)
 }
@@ -89,7 +89,7 @@ async function createUserToken(req, res) {
   try {
     const user = await User.findOne({ email })
     if (!user.confirmed) {
-      responseJSON(res, 400, false, { error: 'Confirm Email' })
+      return responseJSON(res, 400, false, { error: 'Confirm Email' })
     }
     const { salt } = user
     if (
@@ -113,7 +113,7 @@ async function createUserToken(req, res) {
         },
       })
     }
-    responseJSON(res, 403, false, {})
+    return responseJSON(res, 403, false, {})
   } catch (error) {
     responseJSON(res, 403, false, { error: 'Access denied' })
   }
@@ -128,7 +128,7 @@ function verifyToken(req, res, next) {
       select: 'nickname email role ',
     })
     .exec()
-    .then((data) => {
+    .then(data => {
       const connectionCredentials = getUserIpAndAgent(req)
       if (!data || !isTokenCredentialsValid(data, connectionCredentials)) {
         return responseJSON(res, 403, false, { error: 'access denied' })
@@ -136,7 +136,7 @@ function verifyToken(req, res, next) {
       req.user = data.userId
       next()
     })
-    .catch((err) => {
+    .catch(err => {
       next(err)
     })
 }

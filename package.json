@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "pretest": "eslint --ignore-path .gitignore ."
+    "test": "mocha --timeout 20000 ./tests "
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -30,10 +30,14 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-strongloop": "^2.1.0",
     "eslint-plugin-import": "^2.11.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3"
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1",
+    "mocha": "^5.2.0"
   }
 }

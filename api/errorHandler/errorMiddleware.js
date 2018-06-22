@@ -1,8 +1,8 @@
-function errHandler(err, req, res) {
+function errHandler(err, req, res, next) {
   if (err.code === 11000) {
-    let [, field] = err.message.split('.$');
+    let [, field] = err.message.split('index:');
     [field] = field.split(' dup key')
-    field = field.substring(0, field.lastIndexOf('_'))
+    field = field.substring(1, field.lastIndexOf('_'))
     res.status(400).json({
       requestStatus: false,
       requestResult: {
@@ -22,4 +22,4 @@ function errHandler(err, req, res) {
     })
   }
 }
-module.exports.errHandler = errHandler
+module.exports = errHandler

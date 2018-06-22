@@ -7,6 +7,7 @@ const expressSetup = require('./config/express')
 const routes = require('./config/routes')
 const apiDocs = require('./config/swagger')
 const mongooseSetup = require('./config/mongoose')
+const errHandler = require('./api/errorHandler/errorMiddleware')
 
 expressSetup(app)
 
@@ -26,27 +27,7 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'build', 'index.html'))
 })
 
-app.use((err, req, res) => {
-  if (err.code === 11000) {
-    let [, field] = err.message.split('.$');
-    [field] = field.split(' dup key')
-    field = field.substring(0, field.lastIndexOf('_'))
-    res.status(400).json({
-      requestStatus: false,
-      requestResult: {
-        error: err.message,
-        duplicate: field,
-      },
-    })
-  } else {
-    res.status(400).json({
-      requestStatus: false,
-      requestResult: {
-        err,
-      },
-    })
-  }
-})
+app.use(errHandler)
 
 app.listen(() => {
   console.log(`server was started at ${process.env.PORT || '3030'} port`)
