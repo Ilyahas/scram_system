@@ -18,17 +18,18 @@ describe('board operations for specific team', () => {
     await dashboard.remove({})
     await teams.remove({})
   })
-  describe('/get specific dashboard for specific team',  () => {
+  describe('/get specific dashboard for specific team', () => {
     it('successfully get', async () => {
       await testData.initData()
       const boardId = await testData.initDashboardForKanes()
       chai
         .request(server)
-        .get(`/company/dashboard/${boardId}`)
+        .get(`/company/team/teamName/dashboard/${boardId}`)
         .set('Authorization', 'Bearer ' + testData.getToken())
         .end((err, res) => {
-          console.log(res)
           res.should.have.status(200)
+          res.body.should.have.property('requestStatus').eq(true)
+          res.body.should.have.property('requestResult').be.an('array')
         })
     })
   })
@@ -36,7 +37,7 @@ describe('board operations for specific team', () => {
     it('failed get team not vali mongoose id',  (done) => {
       chai
         .request(server)
-        .get(`/company/dashboard/123`)
+        .get(`/company/team/teamName/dashboard/123]}`)
         .set('Authorization', 'Bearer ' + testData.getToken())
         .end((err, res) => {
           res.should.have.status(400)

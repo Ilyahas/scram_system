@@ -87,7 +87,7 @@ class LaneController extends BaseController {
     try {
       const lanes = await Lane.find({ teamName, idBoard })
       const cardsInfo = await Card.get(lanes)
-      return super.responseJSON(res, lanes ? 200 : 404, !!lanes, cardsInfo)
+      return super.responseJSON(res, lanes? 200 : 404, !!lanes, cardsInfo)
     } catch (error) {
       next(error)
     }
