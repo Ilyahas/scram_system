@@ -17,9 +17,7 @@ const teamObj = {
 describe('board operations for specific team', () => {
   describe('/get specific dashboard for specific team', () => {
     it('successfully get', async () => {
-      console.log('HERE123')
-      const toke = config.getToken()
-      console.log(toke)
+      
     })
   })
 })
