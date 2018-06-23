@@ -60,7 +60,7 @@ module.exports = {
       idBoard: Joi.objectId(),
     }),
     dashboardCreate: Joi.object({
-      name: Joi.string(),
+      name: Joi.string().required(),
       teamId: Joi.objectId().required(),
     }),
     deleteLane: Joi.object({

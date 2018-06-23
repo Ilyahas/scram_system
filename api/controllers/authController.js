@@ -130,6 +130,7 @@ function verifyToken(req, res, next) {
     .exec()
     .then(data => {
       const connectionCredentials = getUserIpAndAgent(req)
+      console.log('456')
       if (!data || !isTokenCredentialsValid(data, connectionCredentials)) {
         return responseJSON(res, 403, false, { error: 'access denied' })
       }
