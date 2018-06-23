@@ -7,24 +7,19 @@ const User = require('../api/models/user')
 const Companies = require('../api/models/company')
 chai.use(chaiHttp)
 chai.should()
-const { userBody, loginBody } = require('./configForTests')
+const data = require('./dataForTests')
 const server = require('../app')
 describe('usert auth flow', () => {
   before(done => {
     mongoose.connection.db.dropDatabase()
     done()
   })
-  // after(done => {
-  //   mongoose.connection.db.dropDatabase()
-  //   done()
-  // })
-
   describe('register user', () => {
     it('should register user', done => {
       chai
         .request(server)
         .post('/auth/signup')
-        .send(userBody)
+        .send(data.userBody)
         .end((err, res) => {
           res.should.have.status(200)
           res.body.should.have.property('requestStatus').eq(true)
@@ -37,7 +32,7 @@ describe('usert auth flow', () => {
       chai
         .request(server)
         .post('/auth/signup')
-        .send(userBody)
+        .send(data.userBody)
         .end((err, res) => {
           res.should.have.status(400)
           res.body.should.have.property('requestStatus').eq(false)
@@ -50,7 +45,7 @@ describe('usert auth flow', () => {
       chai
         .request(server)
         .post('/auth/signup')
-        .send({ ...userBody, email: 'email' })
+        .send({ ...data.userBody, email: 'email' })
         .end((err, res) => {
           res.should.have.status(400)
           done()
@@ -62,7 +57,7 @@ describe('usert auth flow', () => {
       chai
         .request(server)
         .post('/auth/login')
-        .send(loginBody)
+        .send(data.loginBody)
         .end((err, res) => {
           res.should.have.status(400)
           res.body.should.have.property('requestStatus').eq(false)
@@ -77,13 +72,13 @@ describe('usert auth flow', () => {
   describe('login user', () => {
     it('successfull login', async () => {
       await User.findOneAndUpdate(
-        { email: userBody.email },
+        { email: data.userBody.email },
         { $set: { confirmed: true } },
       )
       chai
         .request(server)
         .post('/auth/login')
-        .send(loginBody)
+        .send(data.loginBody)
         .end((err, res) => {
           res.should.have.status(200)
           res.body.should.have.property('requestStatus').eq(true)
@@ -97,7 +92,7 @@ describe('usert auth flow', () => {
       chai
         .request(server)
         .post('/auth/login')
-        .send({ ...loginBody, email: '' })
+        .send({ ...data.loginBody, email: '' })
         .end((err, res) => {
           res.should.have.status(400)
           done()
@@ -109,7 +104,7 @@ describe('usert auth flow', () => {
       chai
         .request(server)
         .post('/auth/login')
-        .send({ ...loginBody, password: '' })
+        .send({ ...data.loginBody, password: '' })
         .end((err, res) => {
           res.should.have.status(400)
           done()

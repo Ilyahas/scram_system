@@ -50,7 +50,7 @@ router.get(
   LaneCtrl.get,
 )
 router.get('/dashboard/:teamName', LaneCtrl.getDashboard)
-router.get('/dashboards/:id', LaneCtrl.getDashboards)
+router.get('/dashboards/:id',validate.params(schemas.id), LaneCtrl.getDashboards)
 router.put(
   '/lane/:id',
   validate.body(schemas.dashboard.laneUpdate),

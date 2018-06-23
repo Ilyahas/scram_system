@@ -2,18 +2,18 @@ process.env.NODE_ENV = 'test'
 const chai = require('chai')
 const chaiHttp = require('chai-http')
 const mongoose = require('mongoose')
-const config = require('./configForTests')
+const config = require('./dataForTests')
 chai.use(chaiHttp)
 chai.should()
-const testData = require('./')
+const testData = require('./dataForTests')
 const server = require('../app')
 describe('company operations', () => {
-   after(done => {
+  after(done => {
     mongoose.connection.db.dropDatabase()
     done()
   })
   describe('/POST create team', () => {
-    it('it should create specific team for user company',  async () => {
+    it('it should create specific team for user company', async () => {
       await testData.initData()
       chai
         .request(server)
@@ -95,7 +95,7 @@ describe('company operations', () => {
       })
     })
     describe('/get get list of all company teams', () => {
-      it('get all teams',  (done) => {
+      it('get all teams', done => {
         chai
           .request(server)
           .get('/company')
@@ -107,16 +107,16 @@ describe('company operations', () => {
             res.body.requestResult.should.have
               .property('listOfTeams')
               .be.an('array')
-              done()
+            done()
           })
       })
     })
 
     describe('/POST create new dashboard for specific team', () => {
-      it('should create new dashboard',  (done) => {
+      it('should create new dashboard', async () => {
         const teamObj = {
           name: testData.teamName,
-          teamId: testData.getTeamId(),
+          teamId: await testData.initTeamForBoards(),
         }
         chai
           .request(server)
@@ -129,12 +129,11 @@ describe('company operations', () => {
             res.body.requestResult.should.have.property('name')
             res.body.requestResult.should.have.property('_id')
             res.body.requestResult.should.have.property('teamId')
-            done()
           })
       })
     })
     describe('/POST create new dashboard for specific team', () => {
-      it('failed because where are no post body', (done) => {
+      it('failed because where are no post body', done => {
         chai
           .request(server)
           .post('/company/boards')
