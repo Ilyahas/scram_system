@@ -9,7 +9,6 @@ chai.use(chaiHttp)
 chai.should()
 const { userBody, loginBody } = require('./configForTests')
 const server = require('../app')
-
 describe('usert auth flow', () => {
   before(done => {
     mongoose.connection.db.dropDatabase()
@@ -19,6 +18,7 @@ describe('usert auth flow', () => {
   //   mongoose.connection.db.dropDatabase()
   //   done()
   // })
+
   describe('register user', () => {
     it('should register user', done => {
       chai

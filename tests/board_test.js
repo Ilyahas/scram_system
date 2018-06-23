@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 const Dashboard = require('../api/models/dashboard')
 chai.use(chaiHttp)
 chai.should()
-const config = require('./configForTests')
+const testData = require('./configForTests')
 const server = require('../app')
 
 const teamObj = {
@@ -14,11 +14,11 @@ const teamObj = {
   teamId: '',
 }
 
-describe('board operations for specific team', () => {
+describe('board operations for specific team', async () => {
   describe('/get specific dashboard for specific team', () => {
     it('successfully get', async () => {
       console.log('HERE123')
-      const toke = config.getToken()
+      const toke = testData.getToken()
       console.log(toke)
     })
   })
