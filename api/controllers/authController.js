@@ -48,7 +48,7 @@ async function signupUser(req, res, next) {
     const company = await createCompany(user._id, userCredentials.companyName)
     user.company = company._id
     await user.save()
-    emailSender.sendConfirmationEmail(user)
+   // emailSender.sendConfirmationEmail(user)
     responseJSON(res, 200, true, {})
   } catch (err) {
     next(err)

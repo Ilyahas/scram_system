@@ -8,6 +8,7 @@ let userId = ''
 let companyId = ''
 let teamId = ''
 let dashboardId = ''
+let laneId= ''
 module.exports = {
   userBody: {
     companyName: 'testCompany',
@@ -78,6 +79,14 @@ module.exports = {
     } catch (err) {
       throw new Error(err)
     }
+  },
+  setLaneId:(id) => {
+    console.log('1234')
+    console.log(id)
+    laneId = id
+  },
+  getLaneId:() => {
+    return laneId
   },
   getToken: () => {
     return token

@@ -52,7 +52,7 @@ class LaneController extends BaseController {
         'dashboards members teamName',
       ).populate('dashboards')
         .populate({ path: 'members' })
-      return super.responseJSON(res, team ? 200 : 404, !!team, team)
+      return super.responseJSON(res, team ? 200 : 400, !!team, team)
     } catch (error) {
       next(error)
     }
@@ -117,7 +117,8 @@ class LaneController extends BaseController {
     const cardData = req.body
     cardData.idLane = _id
     try {
-      const card = Lane.addCard(_id, cardData)
+      const card = await Lane.addCard(_id, cardData)
+
       super.responseJSON(res, card ? 200 : 400, !!card, card)
     } catch (error) {
       next(error)
