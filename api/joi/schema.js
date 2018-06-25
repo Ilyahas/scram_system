@@ -74,7 +74,7 @@ module.exports = {
     }),
     bodyCreate: Joi.object({
       slug: Joi.string(),
-      title: Joi.string(),
+      title: Joi.string().required(),
       idBoard: Joi.objectId().required(),
     }),
     bodyUpdate: Joi.object({

@@ -35,6 +35,7 @@ router.post(
 )
 router.post(
   '/team/:name/lane',
+  auth.verifyToken,
   validate.params(schemas.dashboard.params),
   validate.body(schemas.dashboard.bodyCreate),
   LaneCtrl.create,
@@ -50,7 +51,11 @@ router.get(
   LaneCtrl.get,
 )
 router.get('/dashboard/:teamName', LaneCtrl.getDashboard)
-router.get('/dashboards/:id', LaneCtrl.getDashboards)
+router.get(
+  '/dashboards/:id',
+  validate.params(schemas.id),
+  LaneCtrl.getDashboards,
+)
 router.put(
   '/lane/:id',
   validate.body(schemas.dashboard.laneUpdate),
