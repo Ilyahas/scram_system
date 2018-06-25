@@ -1,4 +1,4 @@
-process.env.NODE_ENV = 'test'
+
 const dashboard = require('../api/models/dashboard')
 const teams = require('../api/models/team')
 const chai = require('chai')
