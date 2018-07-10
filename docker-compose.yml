@@ -1,0 +1,23 @@
+version: '2.1'
+
+services:
+  node:
+    container_name: node
+    image: scram_system
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
+    depends_on:
+      - database
+  database:
+    container_name: db
+    image: mongo
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    image: reverseproxy
+    port: 80:80
+    depends_on: 
+      - node
