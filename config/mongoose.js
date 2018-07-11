@@ -2,9 +2,7 @@ const mongoose = require('mongoose')
 const config = require('./config')
 
 module.exports = () => {
-  mongoose.connect(
-    process.env.NODE_ENV === 'test' ? config.testMongo : config.mongoUrl,
-  )
+  mongoose.connect(config.mongoUrl)
 
   mongoose.connection.on('connected', () => {
     console.log(
